@@ -9,6 +9,6 @@ public class WelcomeBean {
 	}
 
 	public String getMessage() {
-		return "I'm alive!";
+		return "I'm alive llldddddddddddddllll!";
 	}
 }
