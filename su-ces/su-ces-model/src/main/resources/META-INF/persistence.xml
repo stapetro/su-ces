@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+<!-- 
+    <persistence-unit name="floydPU" transaction-type="RESOURCE_LOCAL">
+
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>org.pink.Artist</class>
+        <properties>
+            <property name="eclipselink.target-database" value="MYSQL"/>
+            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/floydDB"/>
+            <property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="eclipselink.jdbc.user" value="floydUser"/>
+            <property name="eclipselink.jdbc.password" value="floydPwd"/>
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
+            <property name="eclipselink.logging.level" value="SEVERE"/>
+        </properties>
+    </persistence-unit>-->
+</persistence>
