@@ -1,0 +1,8 @@
+﻿Meeting Minutes - 26 March 2012
+
+- We will use Maven for building the project
+- Database will be developed iteratively according to the tasks - not at once
+- create an entities package. All other projects will depend on it. Then the DB will be generated (Staskata to create and commit the package)
+- EclipseLink will be used
+- UI with PrimeFaces
+- tasks are added to google code
