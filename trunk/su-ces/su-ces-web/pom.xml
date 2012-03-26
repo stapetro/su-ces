@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>su-ces-web</groupId>
+  <artifactId>su-ces-web</artifactId>
+  <packaging>war</packaging>
+  <name>su-ces-web Maven Webapp</name>
+  <version>0.0.1-WEB-SNAPSHOT</version>
+  <dependencies>
+	<dependency>
+      <groupId>su-ces-model</groupId>
+      <artifactId>su-ces-model</artifactId>
+      <version>0.0.1-MODEL-SNAPSHOT</version>
+    </dependency>  
+	<dependency>
+		<groupId>org.primefaces</groupId>
+		<artifactId>primefaces</artifactId>
+		<version>3.2</version>
+	</dependency>
+	<dependency>
+		<groupId>com.sun.faces</groupId>
+		<artifactId>jsf-api</artifactId>
+		<version>2.0.3</version>
+	</dependency>
+	<dependency>
+		<groupId>com.sun.faces</groupId>
+		<artifactId>jsf-impl</artifactId>
+		<version>2.0.3</version>
+	</dependency>	
+    <!-- Option 2: Use if deploying to a servlet container (Tomcat, Jetty, etc) -->
+    <!--
+    <dependency>
+        <groupId>com.sun.faces</groupId>
+        <artifactId>jsf-api</artifactId>
+        <version>2.0.2</version>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.sun.faces</groupId>
+        <artifactId>jsf-impl</artifactId>
+        <version>2.0.2</version>
+        <scope>runtime</scope>
+    </dependency> 
+        -->
+  </dependencies>
+  <repositories>
+	<repository>  
+	    <id>prime-repo</id>  
+	    <name>PrimeFaces Maven Repository</name>  
+	    <url>http://repository.primefaces.org</url>  
+	    <layout>default</layout>  
+	</repository>   
+  </repositories> 
+  <build>
+    <finalName>su-ces-web</finalName>
+    <plugins>
+		<plugin>
+	        <groupId>org.codehaus.mojo</groupId>
+	        <artifactId>tomcat-maven-plugin</artifactId>
+	        <configuration>
+				<server>myserver</server>
+				<url>http://localhost:8080/manager/html</url>
+				<!-- Uncomment this when starting to use webapp context.xml from webapp/META-INF/context.xml -->
+				<!-- <mode>both</mode> -->
+	        </configuration>
+		</plugin>
+    </plugins>
+  </build>
+  <parent>
+  	<groupId>su-ces</groupId>
+  	<artifactId>su-ces</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<relativePath>..</relativePath>
+  </parent>
+</project>
