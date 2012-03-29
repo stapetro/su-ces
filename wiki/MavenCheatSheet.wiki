@@ -1,0 +1,17 @@
+#labels Phase-Implementation
+Maven Cheat Sheet
+
+= Introduction =
+
+List of *commands* used during project _development_.
+
+= Generic Commands =
+
+_mvn install_ - installs artifact to your local repo
+_mvn tomcat7:deploy_ - deploys to tomcat7, executed from webapp directory
+_mvn tomcat7:undeploy_ - undeploy
+_mvn compile_ - compiles project
+_mvn clean_ - cleans _target_ dir
+_mvn package_ - build the project
+
+= Specific scenarios =
