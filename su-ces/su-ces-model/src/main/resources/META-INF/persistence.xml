@@ -7,13 +7,14 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <!-- <class>org.pink.Artist</class> -->
         <properties>
-            <property name="eclipselink.target-database" value="MYSQL"/>
+            <property name="eclipselink.target-database" value="suces"/>
             <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/suces"/>
             <property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="eclipselink.jdbc.user" value="suces"/>
             <property name="eclipselink.jdbc.password" value="suces"/>
             <property name="eclipselink.ddl-generation" value="create-tables"/>
             <property name="eclipselink.logging.level" value="SEVERE"/>
+            <property name="eclipselink.ddl-generation.output-mode">sql-script</property>
         </properties>
     </persistence-unit>   
 </persistence>

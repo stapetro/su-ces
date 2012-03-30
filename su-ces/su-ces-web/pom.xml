@@ -115,6 +115,6 @@
   	<groupId>su-ces</groupId>
   	<artifactId>su-ces</artifactId>
   	<version>0.0.1-SNAPSHOT</version>
-  	<relativePath>..</relativePath>
+  	<!-- <relativePath>..</relativePath> -->
   </parent>
 </project>
