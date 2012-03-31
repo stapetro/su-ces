@@ -1,71 +1,74 @@
 package bg.sofia.uni.fmi.ces.model.user;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.io.Serializable;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
- * Represents user role.
- * @author Staskata
- *
+ * The persistent class for the roles database table.
+ * 
  */
 @Entity
-@Table(
-		name="roles",
-        uniqueConstraints=
-            @UniqueConstraint(columnNames={"role_name"})
-    )
-public class Role {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="role_id")
-	private Long id;
-	@Column(name="role_name", length=128)
-	private String name;
+@Table(name="roles")
+public class Role implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private int roleId;
 	private String description;
-	@ManyToMany(mappedBy="roles")
-	private Collection<User> users;
-	
-	public Role() {
-		this.users = new ArrayList<>();
+	private String roleName;
+	private List<User> users;
+
+    public Role() {
+    	this.users = new ArrayList<>();
+    }
+
+    public Role(String roleName, String desc) {
+    	this();
+    	this.roleName = roleName;
+    	this.description = desc;
+    }
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="role_id", unique=true, nullable=false)
+	public int getRoleId() {
+		return this.roleId;
 	}
-	
-	public Role(String name, String desc) {
-		this();
-		this.name = name;
-		this.description = desc;
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
+
+	@Column(length=256)
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Collection<User> getUsers() {
-		return users;
+
+
+	@Column(name="role_name", unique=true, nullable=false, length=64)
+	public String getRoleName() {
+		return this.roleName;
 	}
-	public void setUsers(Collection<User> users) {
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+
+	//bi-directional many-to-many association to User
+	@ManyToMany(mappedBy="roles")
+	public List<User> getUsers() {
+		return this.users;
+	}
+
+	public void setUsers(List<User> users) {
 		this.users = users;
 	}
 	
@@ -73,9 +76,14 @@ public class Role {
 		if(this.users.contains(user) == false) {
 			this.users.add(user);
 		}
-		Collection<Role> userRoles = user.getRoles();
-		if(userRoles.contains(this) == false) {
-			userRoles.add(this);
+		List<Role> roles = user.getRoles();
+		if(roles.contains(this) == false) {
+			roles.add(this);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("{\"name\" : \"%s\"}", this.roleName);
 	}
 }
