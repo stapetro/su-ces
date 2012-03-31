@@ -15,4 +15,4 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --><!-- The contents of this file will be loaded for each web application -->
-<Context path="/su-ces" docBase="webapps/su-ces.war" reloadable="true" debug="0" privileged="true" />         
+<Context path="/su-ces" docBase="webapps/su-ces.war" reloadable="true" privileged="true" />         
