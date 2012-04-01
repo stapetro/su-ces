@@ -17,7 +17,7 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 DROP SCHEMA IF EXISTS `suces` ;
-CREATE SCHEMA IF NOT EXISTS `suces` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+CREATE SCHEMA IF NOT EXISTS `suces` DEFAULT CHARACTER SET utf8 ;
 SHOW WARNINGS;
 USE `suces` ;
 
@@ -28,16 +28,12 @@ DROP TABLE IF EXISTS `suces`.`users` ;
 
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`users` (
-  `user_id` INT NOT NULL AUTO_INCREMENT COMMENT 'user id' ,
-  `email` VARCHAR(64) NULL COMMENT 'used for login name' ,
+  `user_email` VARCHAR(64) NOT NULL COMMENT 'used for login name' ,
   `password` VARCHAR(128) NOT NULL COMMENT 'hash value of password' ,
   `create_date` DATETIME NOT NULL ,
-  `last_login_date` DATETIME NOT NULL ,
-  PRIMARY KEY (`user_id`) )
+  `last_login_date` DATETIME NULL ,
+  PRIMARY KEY (`user_email`) )
 ENGINE = InnoDB;
-
-SHOW WARNINGS;
-CREATE UNIQUE INDEX `log_name_U` ON `suces`.`users` (`email` ASC) ;
 
 SHOW WARNINGS;
 
@@ -48,14 +44,10 @@ DROP TABLE IF EXISTS `suces`.`roles` ;
 
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`roles` (
-  `role_id` INT NOT NULL ,
-  `role_name` VARCHAR(64) NULL COMMENT 'user role name' ,
+  `role_name` VARCHAR(64) NOT NULL COMMENT 'user role name' ,
   `description` VARCHAR(256) NULL ,
-  PRIMARY KEY (`role_id`) )
+  PRIMARY KEY (`role_name`) )
 ENGINE = InnoDB;
-
-SHOW WARNINGS;
-CREATE UNIQUE INDEX `role_name_U` ON `suces`.`roles` (`role_name` ASC) ;
 
 SHOW WARNINGS;
 
@@ -66,26 +58,26 @@ DROP TABLE IF EXISTS `suces`.`users_roles` ;
 
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`users_roles` (
-  `user_id` INT NOT NULL ,
-  `role_id` INT NOT NULL ,
-  PRIMARY KEY (`role_id`, `user_id`) ,
-  CONSTRAINT `fk_users_roles_users`
-    FOREIGN KEY (`user_id` )
-    REFERENCES `suces`.`users` (`user_id` )
+  `user_email` VARCHAR(64) NOT NULL ,
+  `role_name` VARCHAR(64) NOT NULL ,
+  PRIMARY KEY (`user_email`, `role_name`) ,
+  CONSTRAINT `fk_urole_users`
+    FOREIGN KEY (`user_email` )
+    REFERENCES `suces`.`users` (`user_email` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_users_roles_roles`
-    FOREIGN KEY (`role_id` )
-    REFERENCES `suces`.`roles` (`role_id` )
+  CONSTRAINT `fk_urole_roles`
+    FOREIGN KEY (`role_name` )
+    REFERENCES `suces`.`roles` (`role_name` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_uroles_users` ON `suces`.`users_roles` (`user_id` ASC) ;
+CREATE INDEX `fk_urole_users` ON `suces`.`users_roles` (`user_email` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_uroles_roles` ON `suces`.`users_roles` (`role_id` ASC) ;
+CREATE INDEX `fk_urole_roles` ON `suces`.`users_roles` (`role_name` ASC) ;
 
 SHOW WARNINGS;
 
