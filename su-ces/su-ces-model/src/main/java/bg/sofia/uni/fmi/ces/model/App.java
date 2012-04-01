@@ -19,6 +19,7 @@ public class App
 {
     public static void main( String[] args )
     {
+//    	testAddUserRoles();
     	String users = getUsers();
     	System.out.println(users);
     }
@@ -55,7 +56,7 @@ public class App
         List<User> users = (List<User>) entityMgr.createQuery("SELECT u FROM User u").getResultList();
         StringBuilder output = new StringBuilder("------ Suces Users ------<br/>");
         for(User user : users) {
-        	String email = user.getEmail();
+        	String email = user.getUserEmail();
         	List<Role> roles = user.getRoles();
         	output.append(String.format("{\"user\": \"%s\", \"roles\": \"%s\"}<br/>", 
         			email, Arrays.toString(roles.toArray())));

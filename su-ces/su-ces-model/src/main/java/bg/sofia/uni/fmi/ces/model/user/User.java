@@ -2,6 +2,7 @@ package bg.sofia.uni.fmi.ces.model.user;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,9 +17,8 @@ import java.util.List;
 @Table(name="users")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int userId;
+	private String userEmail;
 	private Timestamp createDate;
-	private String email;
 	private Timestamp lastLoginDate;
 	private String password;
 	private List<Role> roles;
@@ -29,20 +29,19 @@ public class User implements Serializable {
     
     public User(String email, String password) {
     	this();
-    	this.email = email;
+    	this.userEmail = email;
     	this.password = password;
     	this.createDate = new Timestamp(Calendar.getInstance().getTimeInMillis());
     }
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="user_id", unique=true, nullable=false)
-	public int getUserId() {
-		return this.userId;
+	@Column(name="user_email", unique=true, nullable=false, length=64)
+	public String getUserEmail() {
+		return this.userEmail;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 
@@ -53,16 +52,6 @@ public class User implements Serializable {
 
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
-	}
-
-
-	@Column(unique=true, nullable=false, length=64)
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 
@@ -83,18 +72,17 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
+	}    
 
 	//bi-directional many-to-many association to Role
     @ManyToMany
 	@JoinTable(
 		name="users_roles"
 		, joinColumns={
-			@JoinColumn(name="user_id", nullable=false)
+			@JoinColumn(name="user_email", nullable=false)
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="role_id", nullable=false)
+			@JoinColumn(name="role_name", nullable=false)
 			}
 		)
 	public List<Role> getRoles() {
@@ -118,6 +106,6 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return String.format("{\"name\" : \"%s\", \"created\" : \"%s\"}", 
-				this.email, this.createDate);
+				this.userEmail, this.createDate);
 	}
 }

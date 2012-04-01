@@ -1,10 +1,14 @@
 package bg.sofia.uni.fmi.ces.model.user;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -15,9 +19,8 @@ import java.util.List;
 @Table(name="roles")
 public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int roleId;
-	private String description;
 	private String roleName;
+	private String description;
 	private List<User> users;
 
     public Role() {
@@ -30,18 +33,6 @@ public class Role implements Serializable {
     	this.description = desc;
     }
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="role_id", unique=true, nullable=false)
-	public int getRoleId() {
-		return this.roleId;
-	}
-
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
-	}
-
-
 	@Column(length=256)
 	public String getDescription() {
 		return this.description;
@@ -52,6 +43,7 @@ public class Role implements Serializable {
 	}
 
 
+	@Id
 	@Column(name="role_name", unique=true, nullable=false, length=64)
 	public String getRoleName() {
 		return this.roleName;
