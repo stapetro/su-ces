@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+	<h:panelGrid columns="3" >
+		<h:outputText value="#{msg.name}" />
+		<p:selectOneButton value="#{feedbackForm.presentationSkills}">
+			<f:selectItem itemLabel="ÐœÐ½Ð¾Ð³Ð¾ Ð—Ð»Ðµ" itemValue="1" />
+			<f:selectItem itemLabel="Ð—Ð»Ðµ" itemValue="2" />
+			<f:selectItem itemLabel="Ð�Ð¾Ñ€Ð¼Ð°Ð»Ð½Ð¾" itemValue="3" />
+			<f:selectItem itemLabel="Ð”Ð¾Ð±Ñ€Ðµ" itemValue="4" />
+			<f:selectItem itemLabel="ÐžÑ‚Ð»Ð¸Ñ‡Ð½Ð¾" itemValue="5" />
+		</p:selectOneButton>
+
+		<h:outputText value="Ð Ð°Ð·Ð±Ð¸Ñ€Ð°Ð½Ðµ Ð½Ð° Ð¼Ð°Ñ‚ÐµÑ€Ð¸Ð°Ð»Ð° : " />
+		<p:selectOneButton value="#{feedbackForm.presentationSkills}">
+			<f:selectItem itemLabel="ÐœÐ½Ð¾Ð³Ð¾ Ð—Ð»Ðµ" itemValue="1" />
+			<f:selectItem itemLabel="Ð—Ð»Ðµ" itemValue="2" />
+			<f:selectItem itemLabel="Ð�Ð¾Ñ€Ð¼Ð°Ð»Ð½Ð¾" itemValue="3" />
+			<f:selectItem itemLabel="Ð”Ð¾Ð±Ñ€Ðµ" itemValue="4" />
+			<f:selectItem itemLabel="ÐžÑ‚Ð»Ð¸Ñ‡Ð½Ð¾" itemValue="5" />
+		</p:selectOneButton>
+
+		<h:outputText value="ÐžÑ‚Ð½Ð¾ÑˆÐµÐ½Ð¸Ðµ ÐºÑŠÐ¼ Ð¿Ñ€ÐµÐ´Ð¼ÐµÑ‚Ð° : " />
+		<p:selectOneButton value="#{feedbackForm.presentationSkills}">
+			<f:selectItem itemLabel="ÐœÐ½Ð¾Ð³Ð¾ Ð—Ð»Ðµ" itemValue="1" />
+			<f:selectItem itemLabel="Ð—Ð»Ðµ" itemValue="2" />
+			<f:selectItem itemLabel="Ð�Ð¾Ñ€Ð¼Ð°Ð»Ð½Ð¾" itemValue="3" />
+			<f:selectItem itemLabel="Ð”Ð¾Ð±Ñ€Ðµ" itemValue="4" />
+			<f:selectItem itemLabel="ÐžÑ‚Ð»Ð¸Ñ‡Ð½Ð¾" itemValue="5" />
+		</p:selectOneButton>
+
+		<h:outputText value="ÐžÑ‚Ð½Ð¾ÑˆÐµÐ½Ð¸Ðµ ÐºÑŠÐ¼ Ñ�Ñ‚ÑƒÐ´ÐµÐ½Ð¸Ñ‚Ðµ : " />
+		<p:selectOneButton value="#{feedbackForm.presentationSkills}">
+			<f:selectItem itemLabel="ÐœÐ½Ð¾Ð³Ð¾ Ð—Ð»Ðµ" itemValue="1" />
+			<f:selectItem itemLabel="Ð—Ð»Ðµ" itemValue="2" />
+			<f:selectItem itemLabel="Ð�Ð¾Ñ€Ð¼Ð°Ð»Ð½Ð¾" itemValue="3" />
+			<f:selectItem itemLabel="Ð”Ð¾Ð±Ñ€Ðµ" itemValue="4" />
+			<f:selectItem itemLabel="ÐžÑ‚Ð»Ð¸Ñ‡Ð½Ð¾" itemValue="5" />
+		</p:selectOneButton>
+
+	</h:panelGrid>
+
+</ui:composition>
