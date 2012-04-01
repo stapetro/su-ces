@@ -1,4 +1,4 @@
-package bg.sofia.uni.fmi.ces.jsf;
+package bg.sofia.uni.fmi.ces.jsf.beans;
 
 import javax.faces.bean.ManagedBean;
 
