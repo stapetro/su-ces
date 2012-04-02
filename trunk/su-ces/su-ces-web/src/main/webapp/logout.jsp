@@ -20,7 +20,7 @@ if(session != null) {
 }
 </jsp:scriptlet>
 	<p>Successful logout</p>
-	<a href="login.jsp">Go to login page</a>
+	<a href="index.jsp">Go to home page</a>
 </body>
 </html>
 </jsp:root>
