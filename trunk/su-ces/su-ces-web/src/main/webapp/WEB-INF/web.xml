@@ -20,4 +20,32 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
+    
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Wildcard means whole app requires authentication</web-resource-name>
+			<url-pattern>/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+<!-- 	
+		<auth-constraint>
+			<role-name>admin</role-name>
+			<role-name>student</role-name>
+		</auth-constraint>
+ -->
+<!-- 	
+		<user-data-constraint> -->
+			<!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE -->
+			<!-- <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>-->
+	</security-constraint>    
+    
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/login.jsp</form-login-page>
+			<form-error-page>/loginfailed.jsp</form-error-page>
+		</form-login-config>
+	</login-config>    
 </web-app>

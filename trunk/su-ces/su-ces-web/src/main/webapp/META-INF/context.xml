@@ -15,4 +15,10 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --><!-- The contents of this file will be loaded for each web application -->
-<Context path="/su-ces" docBase="webapps/su-ces.war" reloadable="true" privileged="true" />         
+<Context path="/su-ces" docBase="webapps/su-ces.war" reloadable="true" privileged="true" >
+	<Realm className="org.apache.catalina.realm.JDBCRealm"
+	      driverName="com.mysql.jdbc.Driver"
+	   connectionURL="jdbc:mysql://localhost:3306/suces?user=suces&amp;password=suces"
+	       userTable="users" userNameCol="user_email" userCredCol="password"
+	   userRoleTable="users_roles" roleNameCol="role_name"/>
+</Context>         
