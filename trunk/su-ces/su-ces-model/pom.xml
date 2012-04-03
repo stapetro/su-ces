@@ -6,8 +6,8 @@
     <artifactId>su-ces</artifactId>
     <groupId>su-ces</groupId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>..</relativePath>
   </parent>
-  <groupId>su-ces-model</groupId>
   <artifactId>su-ces-model</artifactId>
   <packaging>jar</packaging>
   <version>0.0.1-MODEL-SNAPSHOT</version>
