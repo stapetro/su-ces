@@ -1,7 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>su-ces-web</groupId>
   <artifactId>su-ces-web</artifactId>
   <packaging>war</packaging>
   <name>su-ces-web Maven Webapp</name>
@@ -81,7 +80,7 @@
     </pluginRepository>
   </pluginRepositories>
   <build>
-    <finalName>su-ces-web</finalName>
+    <!-- <finalName>su-ces-web</finalName> -->
     <plugins>
 		<!-- <plugin>
 	        <groupId>org.codehaus.mojo</groupId>
@@ -121,6 +120,6 @@
   	<groupId>su-ces</groupId>
   	<artifactId>su-ces</artifactId>
   	<version>0.0.1-SNAPSHOT</version>
-  	<!-- <relativePath>..</relativePath> -->
+  	<relativePath>..</relativePath>
   </parent>
 </project>
