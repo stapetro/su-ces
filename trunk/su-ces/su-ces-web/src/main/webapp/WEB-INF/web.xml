@@ -28,12 +28,10 @@
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 		</web-resource-collection>
-<!-- 	
 		<auth-constraint>
 			<role-name>admin</role-name>
 			<role-name>student</role-name>
 		</auth-constraint>
- -->
 <!-- 	
 		<user-data-constraint> -->
 			<!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE -->
