@@ -10,7 +10,7 @@
 			<default-locale>en</default-locale>
 		</locale-config>
 		<resource-bundle>
-			<base-name>bg.sofia.uni.fmi.ces.resources.Messages</base-name>
+			<base-name>internationalization.Messages</base-name>
 			<var>msg</var>
 		</resource-bundle>
 	</application>
