@@ -9,18 +9,31 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
-       
+	<context-param>
+	    <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+	    <param-value>true</param-value>
+	</context-param>    
+<!-- If you want to use a different theme, configure it like this  
+	<context-param>  
+	 <param-name>primefaces.THEME</param-name>  
+	 <param-value>aristo</param-value>  
+	</context-param>  
+-->  	
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
-    
+    <session-config>
+    	<session-timeout>30</session-timeout>
+    </session-config>
+    <welcome-file-list>
+    	<welcome-file>pages/home.jsf</welcome-file>
+    </welcome-file-list>
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Wildcard means whole app requires authentication</web-resource-name>
@@ -28,10 +41,12 @@
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 		</web-resource-collection>
+		<!-- 
 		<auth-constraint>
 			<role-name>admin</role-name>
 			<role-name>student</role-name>
 		</auth-constraint>
+		 -->
 <!-- 	
 		<user-data-constraint> -->
 			<!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE -->
@@ -42,8 +57,8 @@
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>
-			<form-login-page>/login.jsp</form-login-page>
-			<form-error-page>/loginfailed.jsp</form-error-page>
+			<form-login-page>/pages/login.jsp</form-login-page>
+			<form-error-page>/pages/loginfailed.jsp</form-error-page>
 		</form-login-config>
 	</login-config>    
 </web-app>
