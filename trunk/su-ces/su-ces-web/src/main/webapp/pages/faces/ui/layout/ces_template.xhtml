@@ -10,6 +10,7 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="resources/styles/suces.css" rel="stylesheet" type="text/css" />
+	<title><ui:insert name="pageTitle" /></title>
 </h:head>
 
 <h:body>
@@ -20,8 +21,8 @@
                     Suces Home Page
                 </h1>
             </div>
-            <div class="loginDisplay">                
-				                                                        
+            <div class="loginDisplay">   
+            	<h:commandLink title="Login" action="login" />             
             </div>       
             <div class="clear hideSkiplink">
 				<!-- Here is the menu -->

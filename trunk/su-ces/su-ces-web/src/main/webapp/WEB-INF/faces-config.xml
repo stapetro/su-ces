@@ -14,5 +14,11 @@
 			<var>msg</var>
 		</resource-bundle>
 	</application>
-
+	<navigation-rule>
+		<from-view-id>/pages/faces/home.jsf</from-view-id>
+		<navigation-case>
+			<from-action>login</from-action>
+			<to-view-id>/pages/login.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>
