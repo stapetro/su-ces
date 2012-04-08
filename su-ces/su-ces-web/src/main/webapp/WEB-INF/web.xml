@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" >
-	
     <context-param>
         <param-name>primefaces.skin</param-name>
         <param-value>none</param-value>
@@ -12,7 +11,7 @@
 	<context-param>
 	    <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
 	    <param-value>true</param-value>
-	</context-param>    
+	</context-param>
 <!-- If you want to use a different theme, configure it like this  
 	<context-param>  
 	 <param-name>primefaces.THEME</param-name>  
@@ -32,7 +31,7 @@
     	<session-timeout>30</session-timeout>
     </session-config>
     <welcome-file-list>
-    	<welcome-file>pages/home.jsf</welcome-file>
+    	<welcome-file>/pages/faces/home.jsf</welcome-file>
     </welcome-file-list>
 	<security-constraint>
 		<web-resource-collection>

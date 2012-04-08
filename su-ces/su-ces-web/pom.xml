@@ -42,6 +42,11 @@
     </dependency> 
         -->
 	<dependency>
+		<groupId>jstl</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.2</version>
+	</dependency>
+	<dependency>
 	        <groupId>javax.servlet</groupId>
 	        <artifactId>javax.servlet-api</artifactId>
 	        <version>3.0.1</version>
@@ -110,8 +115,9 @@
           <configuration>
 				<server>myserver</server>
 				<url>http://localhost:8080/manager/text</url> 
-				<path>/su-ces</path>    
-				<update>true</update>     
+				<path>/su-ces</path>
+				<!-- <contextReloadable>true</contextReloadable> -->				
+				<update>true</update>
           </configuration>
         </plugin>		
     </plugins>
