@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
+    <groupId>bg.sofia.uni.fmi.ces</groupId>
     <artifactId>su-ces</artifactId>
-    <groupId>su-ces</groupId>
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
