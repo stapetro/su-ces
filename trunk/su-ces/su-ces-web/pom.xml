@@ -7,7 +7,7 @@
   <version>0.0.1-WEB-SNAPSHOT</version>
   <dependencies>
 	<dependency>
-      <groupId>su-ces-model</groupId>
+      <groupId>bg.sofia.uni.fmi.ces</groupId>
       <artifactId>su-ces-model</artifactId>
       <version>0.0.1-MODEL-SNAPSHOT</version>
     </dependency>  
@@ -116,14 +116,14 @@
 				<server>myserver</server>
 				<url>http://localhost:8080/manager/text</url> 
 				<path>/su-ces</path>
-				<!-- <contextReloadable>true</contextReloadable> -->				
+				<contextReloadable>true</contextReloadable>				
 				<update>true</update>
           </configuration>
         </plugin>		
     </plugins>
   </build>
   <parent>
-  	<groupId>su-ces</groupId>
+  	<groupId>bg.sofia.uni.fmi.ces</groupId>
   	<artifactId>su-ces</artifactId>
   	<version>0.0.1-SNAPSHOT</version>
   	<relativePath>..</relativePath>
