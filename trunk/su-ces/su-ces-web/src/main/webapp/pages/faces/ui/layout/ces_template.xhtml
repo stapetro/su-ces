@@ -21,15 +21,18 @@
                     Suces Home Page
                 </h1>
             </div>
-            <div class="loginDisplay">   
-            	<h:commandLink title="Login" action="login" />             
+            <div class="loginDisplay">
+            	<h:form>
+            		<p:commandLink value="Login" ajax="false" action="login" rendered="#{!sessionBean.loggedIn}" />
+            		<p:commandLink value="Logout" ajax="false" action="#{sessionBean.logout}" rendered="#{sessionBean.loggedIn}" />
+            	</h:form>             
             </div>       
             <div class="clear hideSkiplink">
 				<!-- Here is the menu -->
             </div>
         </div>
         <div class="nav-path">			
-            <!-- Here are threadcrumbs -->            
+            <!-- Here are breadcrumbs -->            
 		</div>        
 
         <div class="main">

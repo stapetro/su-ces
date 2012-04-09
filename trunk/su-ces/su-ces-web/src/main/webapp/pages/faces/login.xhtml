@@ -1,0 +1,47 @@
+<ui:composition template="/pages/faces/ui/layout/ces_template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+	<ui:define name="pageTitle">
+		<h:outputText value="Suces Login Page" />
+	</ui:define>
+
+	<ui:define name="pageBody">
+	<form method="POST" action="j_security_check">
+		<table>
+			<tr>
+				<td colspan="2">Login to the Suces application:</td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td><input type="text" name="j_username" /></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type="password" name="j_password" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Login" /></td>
+			</tr>
+		</table>
+	</form>	
+<!--  	
+		<h:form id="login" onsubmit="document.#{p:component('login')}.action='j_security_check';">
+			<h:panelGrid columns="2" cellpadding="5">  
+	            <h:outputLabel id="userNameLbl" for="j_username" value="Username:" />  
+	            <p:inputText id="j_username"  required="true" label="username" />  
+	              
+	            <h:outputLabel id="passwordLbl" for="j_password" value="Password:" />  
+	            <h:inputSecret id="j_password" required="true" label="password" autocomplete="off" />  
+	              
+                <p:commandButton id="loginButton" value="Login" ajax="false" />  
+	        </h:panelGrid>  
+        </h:form>
+-->        
+	</ui:define>
+
+</ui:composition>

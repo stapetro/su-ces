@@ -36,16 +36,14 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Wildcard means whole app requires authentication</web-resource-name>
-			<url-pattern>/*</url-pattern>
+			<url-pattern>/pages/faces/*</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 		</web-resource-collection>
-		<!-- 
 		<auth-constraint>
 			<role-name>admin</role-name>
 			<role-name>student</role-name>
 		</auth-constraint>
-		 -->
 <!-- 	
 		<user-data-constraint> -->
 			<!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE -->
@@ -56,8 +54,8 @@
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>
-			<form-login-page>/pages/login.jsp</form-login-page>
-			<form-error-page>/pages/loginfailed.jsp</form-error-page>
+			<form-login-page>/pages/faces/login.jsf</form-login-page>
+			<form-error-page>/pages/faces/loginfailed.jsf</form-error-page>
 		</form-login-config>
 	</login-config>    
 </web-app>
