@@ -82,6 +82,55 @@ CREATE INDEX `fk_urole_roles` ON `suces`.`users_roles` (`role_name` ASC) ;
 SHOW WARNINGS;
 
 
+-- -----------------------------------------------------
+-- Table `suces`.`courses`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `suces`.`courses` (
+  `course_id` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`course_id`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `suces`.`course_assessment`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `suces`.`course_assessment` (
+  `course_assessment_id` INT NOT NULL AUTO_INCREMENT ,
+  `course_presentation` INT NULL DEFAULT NULL ,
+  `course_inderstanding` INT NULL DEFAULT NULL ,
+  `course_attitude` INT NULL DEFAULT NULL ,
+  `students_attitude` INT NULL DEFAULT NULL ,
+  `assessment_correctness` INT NULL DEFAULT NULL ,
+  `course_organization` INT NULL DEFAULT NULL ,
+  `couse_usefullness` INT NULL DEFAULT NULL ,
+  `course_in_plan` INT NULL DEFAULT NULL ,
+  `course_difficulty` INT NULL DEFAULT NULL ,
+  `course_engagements` INT NULL DEFAULT NULL ,
+  `courses_course_id` INT NOT NULL ,
+  `users_user_email` VARCHAR(64) NOT NULL ,
+  PRIMARY KEY (`course_assessment_id`) ,
+  CONSTRAINT `fk_course_assessment_courses1`
+    FOREIGN KEY (`courses_course_id` )
+    REFERENCES `suces`.`courses` (`course_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_course_assessment_users1`
+    FOREIGN KEY (`users_user_email` )
+    REFERENCES `suces`.`users` (`user_email` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+CREATE INDEX `fk_course_assessment_courses1` ON `suces`.`course_assessment` (`courses_course_id` ASC) ;
+
+SHOW WARNINGS;
+CREATE INDEX `fk_course_assessment_users1` ON `suces`.`course_assessment` (`users_user_email` ASC) ;
+
+SHOW WARNINGS;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
