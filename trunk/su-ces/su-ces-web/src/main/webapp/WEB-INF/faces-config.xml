@@ -21,6 +21,7 @@
 			<redirect/>
 		</navigation-case>
 	</navigation-rule>
+<!-- 	
 	<navigation-rule>
 		<navigation-case>
 			<from-action>#{SessionBean.logout}</from-action>		
@@ -29,5 +30,5 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>	
-	
+ -->	
 </faces-config>

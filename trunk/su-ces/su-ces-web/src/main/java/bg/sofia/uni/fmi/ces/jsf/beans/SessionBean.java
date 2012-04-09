@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.ces.jsf.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.security.Principal;
 
@@ -8,9 +9,14 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 @ManagedBean
 @SessionScoped
 public class SessionBean implements Serializable {
+	
+	private static Logger logger;
 
 	/**
 	 * 
@@ -38,6 +44,12 @@ public class SessionBean implements Serializable {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         externalContext.invalidateSession();
+        try {
+        	String reqContextPath = externalContext.getRequestContextPath();
+			externalContext.redirect(reqContextPath);
+		} catch (IOException e) {
+			getLogger().error(e);
+		}
 		return "logout";
 	}
 	
@@ -52,6 +64,13 @@ public class SessionBean implements Serializable {
         	}
         }				
         return null;
+	}
+	
+	private Logger getLogger() {
+		if(this.logger == null) {
+			this.logger = LogManager.getLogger(SessionBean.class);
+		}
+		return this.logger;
 	}
 
 }
