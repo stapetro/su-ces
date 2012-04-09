@@ -7,6 +7,8 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>bg.sofia.uni.fmi.ces.model.user.Role</class>
         <class>bg.sofia.uni.fmi.ces.model.user.User</class>
+        <class>bg.sofia.uni.fmi.ces.model.course.CourseAssessment</class>
+        <class>bg.sofia.uni.fmi.ces.model.course.Course</class>
         <!-- <class>org.pink.Artist</class> -->
         <properties>
             <property name="eclipselink.target-database" value="MYSQL"/>
