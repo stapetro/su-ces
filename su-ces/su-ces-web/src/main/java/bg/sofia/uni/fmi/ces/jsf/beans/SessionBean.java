@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 @SessionScoped
 public class SessionBean implements Serializable {
 	
-	private static Logger logger;
+	private Logger logger;
 
 	/**
 	 * 
