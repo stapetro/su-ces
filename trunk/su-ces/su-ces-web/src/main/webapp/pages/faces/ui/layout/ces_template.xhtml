@@ -9,7 +9,7 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="${facesContext.externalContext.requestContextPath}/resources/styles/suces.css" rel="stylesheet" type="text/css" />
+	<h:outputStylesheet library="styles" name="suces.css"  />
 	<title><ui:insert name="pageTitle" /></title>
 </h:head>
 
@@ -17,14 +17,20 @@
  	<div class="page">
         <div class="header">
             <div class="title">
-                <h1>
-                    Suces Home Page
-                </h1>
+                <h1>Suces</h1>
             </div>
             <div class="loginDisplay">
             	<h:form>
-            		<p:commandLink value="Login" ajax="false" action="login" rendered="#{!sessionBean.loggedIn}" />
-            		<p:commandLink value="Logout" ajax="false" action="#{sessionBean.logout}" rendered="#{sessionBean.loggedIn}" />
+            		<h:outputLink value="pages/faces/home.xhtml" rendered="#{!sessionBean.loggedIn}">
+            			<h:outputText value="#{msg.login}" />
+            		</h:outputLink>
+            		<h:outputLabel rendered="#{sessionBean.loggedIn}">
+	            		<h:outputFormat value="#{msg.welcome}">
+	            			<f:param value="#{sessionBean.userName}" />
+	            		</h:outputFormat>
+	            		<h:outputText value=" " escape="false" />
+	            		<p:commandLink value="#{msg.logout}" ajax="false" action="#{sessionBean.logout}" />
+            		</h:outputLabel>
             	</h:form>             
             </div>       
             <div class="clear hideSkiplink">
