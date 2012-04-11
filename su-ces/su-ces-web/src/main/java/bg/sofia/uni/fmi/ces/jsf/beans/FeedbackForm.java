@@ -5,6 +5,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import bg.sofia.uni.fmi.ces.model.course.Course;
+import bg.sofia.uni.fmi.ces.model.course.CourseAssessment;
 
 @ManagedBean(name = "feedbackForm")
 @ViewScoped
@@ -30,8 +31,8 @@ public class FeedbackForm {
 	 * @param event
 	 */
 	public void saveCourseFeedbackForm(ActionEvent event) {
-		Course course = null;
-		course.getCourseId();
+		CourseAssessment courseAssessment = new CourseAssessment();
+		System.out.println("----------------------------");
 	}
 
 	public int getCourse_assessment_id() {

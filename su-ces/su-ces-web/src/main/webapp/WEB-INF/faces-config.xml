@@ -7,13 +7,14 @@
 
 	<application>
 		<locale-config>
-			<default-locale>en</default-locale>
+			<default-locale>bg</default-locale>
 		</locale-config>
 		<resource-bundle>
 			<base-name>internationalization.Messages</base-name>
 			<var>msg</var>
 		</resource-bundle>
 	</application>
+	
 	<navigation-rule>
 		<navigation-case>
 			<from-outcome>login</from-outcome>
