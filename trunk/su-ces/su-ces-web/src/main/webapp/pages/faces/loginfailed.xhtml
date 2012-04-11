@@ -7,14 +7,14 @@
 	xmlns:composite="http://java.sun.com/jsf/composite">
 
 	<ui:define name="pageTitle">
-		<h:outputText value="Suces Login Error Hardcoded" />
+		<h:outputText value="#{msg.loginfailed_page_title}" />
 	</ui:define>
 
 	<ui:define name="pageBody">
 		<h:outputText value="${msg.loginfailed}" />
 		<h:form>
 			<h:outputLink value="home">
-				<h:outputText value="${msg.redirect-to-login}" />
+				<h:outputText value="#{msg.redirect_to_login}" />
 			</h:outputLink>
 		</h:form>
 	</ui:define>
