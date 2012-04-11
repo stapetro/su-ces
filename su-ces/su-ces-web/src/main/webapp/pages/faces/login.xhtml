@@ -14,18 +14,18 @@
 	<form method="POST" action="j_security_check">
 		<table>
 			<tr>
-				<td colspan="2">Login to the Suces application:</td>
+				<td colspan="2"><h:outputText value="#{msg.login_form_title}" /></td>
 			</tr>
 			<tr>
-				<td>Email:</td>
+				<td><h:outputText value="#{msg.login_username}" /></td>
 				<td><input type="text" name="j_username" /></td>
 			</tr>
 			<tr>
-				<td>Password:</td>
+				<td><h:outputText value="#{msg.login_password}" /></td>
 				<td><input type="password" name="j_password" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="Login" /></td>
+				<td colspan="2"><input type="submit" value="#{msg.login_action}" /></td>
 			</tr>
 		</table>
 	</form>	
