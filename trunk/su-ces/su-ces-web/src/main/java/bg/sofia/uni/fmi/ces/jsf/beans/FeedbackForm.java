@@ -6,12 +6,15 @@ import javax.faces.event.ActionEvent;
 
 import bg.sofia.uni.fmi.ces.model.course.Course;
 import bg.sofia.uni.fmi.ces.model.course.CourseAssessment;
+import bg.sofia.uni.fmi.ces.model.facade.ModelFacade;
+import bg.sofia.uni.fmi.ces.session.utils.SessionUtils;
 
+/**
+ * This is the backing bean of the FeedbackForm. It provided the basic
+ * functionality to operate with course assessment.F
+ */
 @ManagedBean(name = "feedbackForm")
 @ViewScoped
-/**
- * This is the backing bean of the FeedbackForm. It provided the basic functionality to operate with course assessment.F
- */
 public class FeedbackForm {
 	private int course_assessment_id;
 	private int course_presentation;
@@ -32,7 +35,30 @@ public class FeedbackForm {
 	 */
 	public void saveCourseFeedbackForm(ActionEvent event) {
 		CourseAssessment courseAssessment = new CourseAssessment();
-		System.out.println("----------------------------");
+		courseAssessment.setAssessmentCorrectness(assessment_correctness);
+
+		// TODO should be set when the course page is implemented. the Course
+		// Object will be access through the session
+		Course course = new Course();
+		course.setCourseId(1);
+		courseAssessment.setCours(course);
+
+		// course assessment ID is auto-incremented therefore not set
+		courseAssessment.setCourseAttitude(course_attitude);
+		courseAssessment.setCourseDifficulty(course_difficulty);
+		courseAssessment.setCourseEngagements(course_engagements);
+		courseAssessment.setCourseInderstanding(course_inderstanding);
+		courseAssessment.setCourseInPlan(course_in_plan);
+		courseAssessment.setCourseOrganization(course_organization);
+		courseAssessment.setCoursePresentation(course_presentation);
+		courseAssessment.setCouseUsefullness(couse_usefullness);
+		courseAssessment.setStudentsAttitude(students_attitude);
+
+		String userName = SessionUtils.getLoggedUserName();
+		courseAssessment.setUsersUserEmail(userName);
+
+		ModelFacade modelFacade = new ModelFacade();
+		modelFacade.persist(courseAssessment);
 	}
 
 	public int getCourse_assessment_id() {
