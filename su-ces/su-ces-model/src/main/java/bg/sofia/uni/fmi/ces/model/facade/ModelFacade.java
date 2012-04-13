@@ -26,5 +26,4 @@ public class ModelFacade {
 		entityMgr.close();
 		emFactory.close();
 	}
-
 }
