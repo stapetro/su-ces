@@ -1,13 +1,20 @@
-#summary This wiki provides information regarding the coding standards that are applied across the SUCES application
+#summary coding standards
 
 = Introduction =
 
-Add your content here.
+This wiki provides and overview of the coding standards applied across the SUCES application
 
 
-= Details =
+= JAVA =
+  * Use the Eclipse built in formatter and the general code conventions for the Java language (http://www.oracle.com/technetwork/java/codeconv-138413.html)
+  * To apply the formatting use the Ctrl+Shift+F command in Eclipse
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+= Database =
+  * user lower case letters
+  * user underscore as separator ("_")
+  * use the MySql Workbench standard for naming foreign key columns <source_table><primary_key_column>_id
+  * use the "id" suffix for ID columns
+
+
+= Note =
+  * Additional conventions may be applied as identified.
