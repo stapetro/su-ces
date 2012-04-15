@@ -33,7 +33,8 @@ Jelastic PaaS (http://jelastic.com/)
 			* [docs/]		
 			* [scripts/]		
 				* [dev/]
-				* [prod/]		
+				* [prod/]
+				* [shared/]
 			* [su-ces/]		
 				* [su-ces-model/]		
 				* [su-ces-web/]		
@@ -50,6 +51,7 @@ Jelastic PaaS (http://jelastic.com/)
 	* _scripts_ - automation scripts
 	* _scripts/dev_ - automation scripts for development
 	* _scripts/prod_ - automation scripts for production
+	* _scripts/shared_ - same valid automation scripts for both production and development
 	* _su-ces_ - parent maven project
 	* _su-ces/su-ces-model_ - maven module for data model
 	* _su-ces/su-ces-model_ - maven module for webapp
