@@ -1,0 +1,36 @@
+<ui:composition template="/pages/faces/ui/layout/ces_template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+	<ui:define name="pageTitle">
+		<h:outputText value="#{msg.register_page_title}" />
+	</ui:define>
+
+	<ui:define name="pageBody">
+		<h:panelGroup styleClass="accountInfo">
+			<p:fieldset legend="#{msg.register_account_info_lbl}">
+				<h:panelGroup layout="block" styleClass="accountInfo">
+					<h:outputLabel for="email" value="#{msg.register_email_lbl}" />
+					<h:inputText id="email" required="true" />
+				</h:panelGroup>
+				<h:panelGroup layout="block" styleClass="accountInfo">
+					<h:outputLabel for="password" value="#{msg.register_password_lbl}" />
+					<h:inputText id="password" required="true" />
+				</h:panelGroup>				
+				<h:panelGroup layout="block" styleClass="accountInfo">
+					<h:outputLabel for="confirmPassword" value="#{msg.register_confirm_password_lbl}" />
+					<h:inputText id="confirmPassword" required="true" />
+				</h:panelGroup>
+				<h:panelGroup layout="block" styleClass="submitButton">
+					<h:commandButton value="#{msg.register_cancel_lbl}" action="#{registrationBean.cancel}" />
+					<h:commandButton value="#{msg.register_submit_lbl}" action="#{registrationBean.register}" />
+				</h:panelGroup>
+			</p:fieldset>
+		</h:panelGroup>
+	</ui:define>
+
+</ui:composition>
