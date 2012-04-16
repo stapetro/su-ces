@@ -5,25 +5,51 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class ModelFacade {
+public abstract class ModelFacade implements IModelFacade {
+	
+	private static final String PERSISTANCE_UNIT_NAME = "sucesPU";
 
+	protected EntityManagerFactory entityManagerFactory;
+	protected EntityManager entityManager;
+
+	public ModelFacade() {
+		entityManagerFactory = Persistence
+				.createEntityManagerFactory(PERSISTANCE_UNIT_NAME);
+		entityManager = entityManagerFactory.createEntityManager();
+	}
+
+	@Override
 	public void persist(Object object) {
 		if (object == null) {
 			return;
 		}
 
-		EntityManagerFactory emFactory = Persistence
-				.createEntityManagerFactory("sucesPU");
-		EntityManager entityMgr = emFactory.createEntityManager();
-		EntityTransaction transaction = entityMgr.getTransaction();
-		transaction.begin();
+		// EntityTransaction transaction = entityManager.getTransaction();
+		// transaction.begin();
 
-		entityMgr.persist(object);
+		entityManager.persist(object);
 
-		entityMgr.flush();
-
-		transaction.commit();
-		entityMgr.close();
-		emFactory.close();
+		// entityManager.flush();
+		// transaction.commit();
 	}
+
+	@Override
+	public void close() {
+		entityManager.close();
+		entityManagerFactory.close();
+
+	}
+
+	@Override
+	public void beginTransaction() {
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+	}
+
+	@Override
+	public void commitTransaction() {
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.commit();
+	}
+
 }

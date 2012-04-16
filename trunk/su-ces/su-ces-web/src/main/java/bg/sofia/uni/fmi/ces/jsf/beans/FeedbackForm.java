@@ -1,5 +1,7 @@
 package bg.sofia.uni.fmi.ces.jsf.beans;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
@@ -7,7 +9,6 @@ import javax.faces.event.ActionEvent;
 import bg.sofia.uni.fmi.ces.model.course.Course;
 import bg.sofia.uni.fmi.ces.model.course.CourseAssessment;
 import bg.sofia.uni.fmi.ces.model.facade.CourseAssessmentFacade;
-import bg.sofia.uni.fmi.ces.model.facade.ModelFacade;
 import bg.sofia.uni.fmi.ces.session.utils.SessionUtils;
 
 /**
@@ -16,18 +17,29 @@ import bg.sofia.uni.fmi.ces.session.utils.SessionUtils;
  */
 @ManagedBean(name = "feedbackForm")
 @ViewScoped
-public class FeedbackForm {
+public class FeedbackForm implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9168652297544014276L;
 	/**
 	 * For internal use only!!! Determine if the local
 	 * <code>courseAssessment</code> is an existing record in the database or a
 	 * newly created one
 	 */
 	private boolean isNewCourseAssessment;
-
 	private CourseAssessment courseAssessment;
 
+	private CourseAssessmentFacade courseAssessmentFacade;
+
 	public FeedbackForm() {
-		isNewCourseAssessment = true;
+		courseAssessmentFacade = new CourseAssessmentFacade();
+		courseAssessmentFacade.beginTransaction();
+		initCourseAssessment();
+	}
+
+	private void initCourseAssessment() {
+		isNewCourseAssessment = false;
 
 		// TODO should be set when the course page is implemented. the Course
 		// Object will be access through the session
@@ -35,16 +47,16 @@ public class FeedbackForm {
 		course.setCourseId(1);
 
 		String userName = SessionUtils.getLoggedUserName();
-
-		CourseAssessmentFacade courseAssessmentFacade = new CourseAssessmentFacade();
 		courseAssessment = courseAssessmentFacade.getCourseAssassment(userName,
 				course);
 
 		if (courseAssessment == null) {
 			courseAssessment = new CourseAssessment();
 			courseAssessment.setCours(course);
-			
-			isNewCourseAssessment = false;
+
+			courseAssessment.setUsersUserEmail(userName);
+
+			isNewCourseAssessment = true;
 		}
 	}
 
@@ -67,13 +79,24 @@ public class FeedbackForm {
 	 * @param event
 	 */
 	public void saveCourseFeedbackForm(ActionEvent event) {
-		String userName = SessionUtils.getLoggedUserName();
-		courseAssessment.setUsersUserEmail(userName);
+		System.out.println("is new _________________________"
+				+ isNewCourseAssessment);
 
-		System.out.println("---> ");
+		if (isNewCourseAssessment == true) {
+			courseAssessmentFacade.persist(courseAssessment);
+			initCourseAssessment();
+			
+			System.out.println("-- ID -> "
+					+ courseAssessment.getCourseAssessmentId());
+			System.out
+					.println("-- mail -> " + courseAssessment.getUsersUserEmail());
+			System.out.println("-- course ID -> "
+					+ courseAssessment.getCours().getCourseId());
+		}
 
-		ModelFacade modelFacade = new ModelFacade();
-		modelFacade.persist(courseAssessment);
+		courseAssessmentFacade.commitTransaction();
+		// start a new transaction in case of further changes
+		courseAssessmentFacade.beginTransaction();
 	}
 
 }
