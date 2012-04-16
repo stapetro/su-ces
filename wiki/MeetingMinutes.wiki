@@ -1,0 +1,13 @@
+#summary Meeting minutes
+
+= Introduction =
+
+This wiki provides a log of all developer activities. As the team is "distributed" team members are required to update their status regularly
+
+
+= 16 Jan 2012 =
+
+Krasi:
+  * We need to close the iteration. Make a retrospective meeting tomorrow. 
+Plan the next iteration.
+  * Courses feedback form finished in its initial form. To be a subject of further changes
