@@ -14,7 +14,7 @@ import bg.sofia.uni.fmi.ces.model.course.CourseAssessment;
  * Provide a common interface for working with course assessment specific
  * operations.
  */
-public class CourseAssessmentFacade {
+public class CourseAssessmentFacade extends ModelFacade {
 
 	/**
 	 * Query for selecting the course assessment results.
@@ -23,6 +23,10 @@ public class CourseAssessmentFacade {
 			+ "FROM CourseAssessment ca "
 			+ "WHERE ca.usersUserEmail = :userName "
 			+ "AND ca.cours.courseId = :courseId";
+
+	public CourseAssessmentFacade() {
+		super();
+	}
 
 	/**
 	 * Find the course assessment records based on the provided user name and
@@ -40,11 +44,7 @@ public class CourseAssessmentFacade {
 			return null;
 		}
 
-		EntityManagerFactory emFactory = Persistence
-				.createEntityManagerFactory("sucesPU");
-		EntityManager entityMgr = emFactory.createEntityManager();
-
-		Query query = entityMgr
+		Query query = entityManager
 				.createQuery(SELECT_COURSE_ASSESSMENT_BY_USER_AND_COURSE_ID);
 		int courseId = course.getCourseId();
 		query.setParameter("userName", userName);
@@ -58,13 +58,10 @@ public class CourseAssessmentFacade {
 			// the result set is expected to contain a single record or no
 			// records at all
 			// otherwise something wrong has happened with the DB restrictions
+			//entityManager.getTransaction().begin();
 			courseAssessment = resultList.get(0);
 		}
 
-		entityMgr.close();
-		emFactory.close();
-
 		return courseAssessment;
 	}
-
 }
