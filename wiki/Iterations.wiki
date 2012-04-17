@@ -1,0 +1,15 @@
+#summary Interations log
+
+= Introduction =
+
+This wiki provides general information regarding interations
+
+
+= Iteration 1 =
+
+Start date: 26 Mar 2012
+End date: 16 Apr 2012
+
+= Iteration 2 =
+Start date:
+End date
