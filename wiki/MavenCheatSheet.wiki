@@ -19,8 +19,10 @@ _mvn clean_ - cleans _target_ dir
 
 _mvn package_ - build the project
 
-_mvn dependency:dependency_ - attempt to download source code for each of the dependencies in your pom file
-
 _mvn dependency:resolve -Dclassifier=javadoc_ - attempt to download the Javadocs
 
 = Specific scenarios =
+
+== Attach source & javadoc to artifacts (jars) ==
+
+Configure m2eclipse Maven plugin for Eclipse with the following steps: Window > Preferences > Maven and checking the "_Download Artifact Sources_" and "_Download Artifact JavaDoc_" options
