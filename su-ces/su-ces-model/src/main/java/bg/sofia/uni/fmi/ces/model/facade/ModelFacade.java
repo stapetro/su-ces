@@ -5,10 +5,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 public abstract class ModelFacade implements IModelFacade {
-	
+
 	private static final String PERSISTANCE_UNIT_NAME = "sucesPU";
 
+	private Logger logger;
 	protected EntityManagerFactory entityManagerFactory;
 	protected EntityManager entityManager;
 
@@ -35,9 +39,12 @@ public abstract class ModelFacade implements IModelFacade {
 
 	@Override
 	public void close() {
-		entityManager.close();
-		entityManagerFactory.close();
-
+		if(entityManager.isOpen()) {
+			entityManager.close();
+		}
+		if(entityManagerFactory.isOpen()) {
+			entityManagerFactory.close();
+		}
 	}
 
 	@Override
@@ -50,6 +57,19 @@ public abstract class ModelFacade implements IModelFacade {
 	public void commitTransaction() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.commit();
+	}
+	
+	@Override
+	public void rollbackTransaction() {
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.rollback();
+	}
+
+	protected Logger getLogger() {
+		if (logger == null) {
+			logger = LogManager.getLogger(this.getClass());
+		}
+		return logger;
 	}
 
 }
