@@ -51,6 +51,14 @@
 			<!-- <transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>-->
 	</security-constraint>    
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Registration form is accessible by anonymous</web-resource-name>
+			<url-pattern>/pages/faces/register.xhtml</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+	</security-constraint>    
     
 	<login-config>
 		<auth-method>FORM</auth-method>

@@ -13,22 +13,24 @@
 	<ui:define name="pageBody">
 		<h:panelGroup styleClass="accountInfo">
 			<p:fieldset legend="#{msg.register_account_info_lbl}">
+			<h:form>
 				<h:panelGroup layout="block" styleClass="accountInfo">
 					<h:outputLabel for="email" value="#{msg.register_email_lbl}" />
-					<h:inputText id="email" required="true" />
+					<h:inputText id="email" value="#{registrationBean.email}" required="true" />
 				</h:panelGroup>
 				<h:panelGroup layout="block" styleClass="accountInfo">
 					<h:outputLabel for="password" value="#{msg.register_password_lbl}" />
-					<h:inputText id="password" required="true" />
+					<h:inputText id="password" value="#{registrationBean.password}" required="true" />
 				</h:panelGroup>				
 				<h:panelGroup layout="block" styleClass="accountInfo">
 					<h:outputLabel for="confirmPassword" value="#{msg.register_confirm_password_lbl}" />
-					<h:inputText id="confirmPassword" required="true" />
+					<h:inputText id="confirmPassword" value="#{registrationBean.confirmPassword}" required="true" />
 				</h:panelGroup>
 				<h:panelGroup layout="block" styleClass="submitButton">
 					<h:commandButton value="#{msg.register_cancel_lbl}" action="#{registrationBean.cancel}" />
-					<h:commandButton value="#{msg.register_submit_lbl}" action="#{registrationBean.register}" />
+					<h:commandButton value="#{msg.register_submit_lbl}" type="submit" action="#{registrationBean.register}" />
 				</h:panelGroup>
+			</h:form>
 			</p:fieldset>
 		</h:panelGroup>
 	</ui:define>

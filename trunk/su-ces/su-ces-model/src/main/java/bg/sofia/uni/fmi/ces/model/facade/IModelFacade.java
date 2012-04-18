@@ -9,4 +9,6 @@ public interface IModelFacade {
 	public void beginTransaction();
 	
 	public void commitTransaction();
+	
+	public void rollbackTransaction();
 }
