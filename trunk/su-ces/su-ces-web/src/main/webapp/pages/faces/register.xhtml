@@ -16,15 +16,21 @@
 			<h:form>
 				<h:panelGroup layout="block" styleClass="accountInfo">
 					<h:outputLabel for="email" value="#{msg.register_email_lbl}" />
-					<h:inputText id="email" value="#{registrationBean.email}" required="true" />
+					<h:inputText id="email" value="#{registrationBean.email}" 
+						required="true" requiredMessage="#{msg.reg_email_required_msg}" />
+					<h:message for="email" styleClass="negativeMsg" />
 				</h:panelGroup>
 				<h:panelGroup layout="block" styleClass="accountInfo">
 					<h:outputLabel for="password" value="#{msg.register_password_lbl}" />
-					<h:inputText id="password" value="#{registrationBean.password}" required="true" />
+					<h:inputText id="password" value="#{registrationBean.password}" 
+						required="true" requiredMessage="#{msg.reg_pass_required_msg}" />
+					<h:message for="password" styleClass="negativeMsg" />
 				</h:panelGroup>				
 				<h:panelGroup layout="block" styleClass="accountInfo">
 					<h:outputLabel for="confirmPassword" value="#{msg.register_confirm_password_lbl}" />
-					<h:inputText id="confirmPassword" value="#{registrationBean.confirmPassword}" required="true" />
+					<h:inputText id="confirmPassword" value="#{registrationBean.confirmPassword}" 
+					required="true" requiredMessage="#{msg.reg_confirmpass_required_msg}" />
+					<h:message for="confirmPassword" styleClass="negativeMsg" />
 				</h:panelGroup>
 				<h:panelGroup layout="block" styleClass="submitButton">
 					<h:commandButton value="#{msg.register_cancel_lbl}" action="#{registrationBean.cancel}" />
