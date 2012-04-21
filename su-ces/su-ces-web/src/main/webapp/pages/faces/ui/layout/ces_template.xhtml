@@ -21,9 +21,13 @@
             </div>
             <div class="loginDisplay">
             	<h:form>
-            		<h:outputLink value="pages/faces/home.xhtml" rendered="#{!sessionBean.loggedIn}">
+            		<h:link outcome="home" rendered="#{!sessionBean.loggedIn}">
             			<h:outputText value="#{msg.login}" />
-            		</h:outputLink>
+            		</h:link>
+            		<h:outputText value="&nbsp;/&nbsp;" rendered="#{!sessionBean.loggedIn}" />
+            		<h:link outcome="register" rendered="#{!sessionBean.loggedIn}">
+            			<h:outputText value="#{msg.register}" />
+            		</h:link>            		
             		<h:outputLabel rendered="#{sessionBean.loggedIn}">
 	            		<h:outputFormat value="#{msg.welcome}">
 	            			<f:param value="#{sessionBean.userName}" />
@@ -39,7 +43,7 @@
         </div>
         <div class="nav-path">			
             <!-- Here are breadcrumbs -->            
-		</div>        
+		</div>
 
         <div class="main">
     		<ui:insert name="pageBody" />        
