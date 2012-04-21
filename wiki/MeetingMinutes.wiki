@@ -16,3 +16,8 @@ Plan the next iteration.
 Krasi:
   * create initial skeleton page for course information
   * put the course information items in wiki
+  
+= 22 Apr 2012 =
+Staskata:
+	* Registration form - required validators with custom messages are added. 
+	* Link to register page is added on top right corner in UI.
