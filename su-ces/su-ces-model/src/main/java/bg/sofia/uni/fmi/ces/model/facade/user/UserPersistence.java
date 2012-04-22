@@ -1,9 +1,16 @@
 package bg.sofia.uni.fmi.ces.model.facade.user;
 
+import java.io.Serializable;
+
 import bg.sofia.uni.fmi.ces.model.facade.ModelFacade;
 import bg.sofia.uni.fmi.ces.model.user.User;
 
-public class UserPersistence extends ModelFacade {
+public class UserPersistence extends ModelFacade implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6537504030117485331L;
 
 	public UserPersistence() {
 		super();

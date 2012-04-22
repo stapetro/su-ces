@@ -7,6 +7,8 @@ import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 
 import org.apache.log4j.LogManager;
@@ -75,17 +77,37 @@ public class RegistrationBean implements Serializable {
 			user.setCreateDate(today);
 			user.addRole(studentRole);
 			user = userPersistence.save(user);
-			if(user != null) {
+			if (user != null) {
 				return "login";
 			}
 		}
-		//TODO Issue error msg when registration fails.
+		// TODO Issue error msg when registration fails.
 		return null;
 	}
 
 	public String cancel() {
 		// TODO To be implemented
 		return null;
+	}
+
+	public void validateEmail(FacesContext context,
+			UIComponent toValidateEmail, Object value) {
+		String message = "";
+		if (value != null) {
+			String email = value.toString();
+			if(email.contains("@") == false) {
+				if(toValidateEmail instanceof UIInput) {
+					UIInput emailInput = (UIInput)toValidateEmail;
+//					emailInput.setValid(false);
+					//Sample code for retrieving error message.
+//					message = CoffeeBreakBean.loadErrorMessage(context,
+//							CoffeeBreakBean.CB_RESOURCE_BUNDLE_NAME,
+//							"EMailError");
+//					context.addMessage(toValidate.getClientId(context),
+//							new FacesMessage(message));					
+				}
+			}
+		}
 	}
 
 	private Logger getLogger() {

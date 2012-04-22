@@ -1,5 +1,7 @@
 package bg.sofia.uni.fmi.ces.model.facade.user;
 
+import java.io.Serializable;
+
 import bg.sofia.uni.fmi.ces.model.facade.ModelFacade;
 import bg.sofia.uni.fmi.ces.model.user.Role;
 
@@ -8,8 +10,12 @@ import bg.sofia.uni.fmi.ces.model.user.Role;
  * @author Staskata
  *
  */
-public class RolePersistence extends ModelFacade {
+public class RolePersistence extends ModelFacade implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7836918311975717937L;
 	public static final String STUDENT_ROLE_NAME = "student";
 	public static final String ADMIN_ROLE_NAME = "admin";
 
