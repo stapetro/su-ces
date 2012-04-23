@@ -1,4 +1,4 @@
-package bg.sofia.uni.fmi.ces.session.utils;
+package bg.sofia.uni.fmi.ces.utils.session;
 
 import java.util.Map;
 

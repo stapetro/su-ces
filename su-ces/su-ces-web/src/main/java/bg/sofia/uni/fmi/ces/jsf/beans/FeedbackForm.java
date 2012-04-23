@@ -9,7 +9,7 @@ import javax.faces.event.ActionEvent;
 import bg.sofia.uni.fmi.ces.model.course.Course;
 import bg.sofia.uni.fmi.ces.model.course.CourseAssessment;
 import bg.sofia.uni.fmi.ces.model.facade.CourseAssessmentFacade;
-import bg.sofia.uni.fmi.ces.session.utils.SessionUtils;
+import bg.sofia.uni.fmi.ces.utils.session.SessionUtils;
 
 /**
  * This is the backing bean of the FeedbackForm. It provided the basic
