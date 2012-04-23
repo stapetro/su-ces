@@ -18,9 +18,7 @@
 					<h:outputLabel for="email" value="#{msg.register_email_lbl}" />
 					<p:inputText id="email" label="#{msg.register_email_lbl}" 
 						value="#{registrationBean.email}" required="true" 
-						requiredMessage="#{msg.reg_email_required_msg}" validator="#{registrationBean.validateEmail}" >
-						<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})" />
-					</p:inputText>
+						requiredMessage="#{msg.reg_email_required_msg}" validator="#{registrationBean.validateEmail}" />
 					<h:message for="email" styleClass="negativeMsg" />
 				</h:panelGroup>
 				<h:panelGroup layout="block" styleClass="accountInfo">

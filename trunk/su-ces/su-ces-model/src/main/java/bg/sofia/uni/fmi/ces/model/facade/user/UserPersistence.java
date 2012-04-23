@@ -10,7 +10,7 @@ public class UserPersistence extends ModelFacade implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6537504030117485331L;
+	private static final long serialVersionUID = 5823604968128009655L;
 
 	public UserPersistence() {
 		super();
@@ -18,15 +18,16 @@ public class UserPersistence extends ModelFacade implements Serializable {
 
 	/**
 	 * Add or updates user.
-	 * @param user New or existing user to be specified.
+	 * 
+	 * @param user
+	 *            New or existing user to be specified.
 	 * @return Persisted user.
 	 */
 	public User save(User user) {
 		if (user == null) {
 			return user;
 		}
-		User existingUser = this.entityManager.find(user.getClass(),
-				user.getUserEmail());
+		User existingUser = getUser(user.getClass(), user.getUserEmail());
 		if (existingUser == null) {
 			existingUser = user;
 		} else {
@@ -44,6 +45,23 @@ public class UserPersistence extends ModelFacade implements Serializable {
 			close();
 		}
 		return existingUser;
+	}
+
+	public boolean isUserExists(String email) {
+		if (email == null || email.isEmpty()) {
+			getLogger().error("Email is NULL or empty");
+			return false;
+		}
+		User existingUser = getUser(User.class, email);
+		if (existingUser != null) {
+			return true;
+		}
+		return false;
+	}
+
+	private User getUser(Class<? extends User> entityClass, String email) {
+		User user = this.entityManager.find(entityClass, email);
+		return user;
 	}
 
 }
