@@ -81,14 +81,72 @@ CREATE INDEX `fk_urole_roles` ON `suces`.`users_roles` (`role_name` ASC) ;
 
 SHOW WARNINGS;
 
+-- -----------------------------------------------------
+-- Table `suces`.`semester`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `suces`.`semester` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `suces`.`semester` (
+  `semester_id` INT NOT NULL AUTO_INCREMENT ,
+  `semester_name` VARCHAR(255) NOT NULL ,
+  PRIMARY KEY (`semester_id`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `semester_name_UNIQUE` ON `suces`.`semester` (`semester_name` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `suces`.`lecturer`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `suces`.`lecturer` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `suces`.`lecturer` (
+  `lecturer_id` INT NOT NULL AUTO_INCREMENT ,
+  `lecturer_name` VARCHAR(255) NOT NULL ,
+  PRIMARY KEY (`lecturer_id`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `suces`.`courses`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `suces`.`courses` ;
+
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`courses` (
   `course_id` INT NOT NULL AUTO_INCREMENT ,
-  PRIMARY KEY (`course_id`) )
+  `year` INT NULL ,
+  `semester_semester_id` INT NOT NULL ,
+  `workload` INT NULL ,
+  `lecturer_lecturer_id` INT NOT NULL ,
+  `course_annotation` MEDIUMTEXT NULL ,
+  `preliminary_requirements` MEDIUMTEXT NULL ,
+  `examination_form` MEDIUMTEXT NULL ,
+  `summary` MEDIUMTEXT NULL ,
+  `literature` MEDIUMTEXT NULL ,
+  PRIMARY KEY (`course_id`) ,
+  CONSTRAINT `fk_courses_semester1`
+    FOREIGN KEY (`semester_semester_id` )
+    REFERENCES `suces`.`semester` (`semester_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_courses_lecturer1`
+    FOREIGN KEY (`lecturer_lecturer_id` )
+    REFERENCES `suces`.`lecturer` (`lecturer_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+SHOW WARNINGS;
+CREATE INDEX `fk_courses_semester1` ON `suces`.`courses` (`semester_semester_id` ASC) ;
+
+SHOW WARNINGS;
+CREATE INDEX `fk_courses_lecturer1` ON `suces`.`courses` (`lecturer_lecturer_id` ASC) ;
 
 SHOW WARNINGS;
 
@@ -127,6 +185,94 @@ CREATE INDEX `fk_course_assessment_courses1` ON `suces`.`course_assessment` (`co
 
 SHOW WARNINGS;
 CREATE INDEX `fk_course_assessment_users1` ON `suces`.`course_assessment` (`users_user_email` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `suces`.`specialty`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `suces`.`specialty` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `suces`.`specialty` (
+  `specialty_id` INT NOT NULL AUTO_INCREMENT ,
+  `specialty_name` VARCHAR(255) NOT NULL ,
+  PRIMARY KEY (`specialty_id`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `suces`.`courses_specialty`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `suces`.`courses_specialty` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `suces`.`courses_specialty` (
+  `courses_course_id` INT NOT NULL ,
+  `specialty_specialty_id` INT NOT NULL ,
+  PRIMARY KEY (`courses_course_id`, `specialty_specialty_id`) ,
+  CONSTRAINT `fk_courses_has_specialty_courses1`
+    FOREIGN KEY (`courses_course_id` )
+    REFERENCES `suces`.`courses` (`course_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_courses_has_specialty_specialty1`
+    FOREIGN KEY (`specialty_specialty_id` )
+    REFERENCES `suces`.`specialty` (`specialty_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+CREATE INDEX `fk_courses_has_specialty_specialty1` ON `suces`.`courses_specialty` (`specialty_specialty_id` ASC) ;
+
+SHOW WARNINGS;
+CREATE INDEX `fk_courses_has_specialty_courses1` ON `suces`.`courses_specialty` (`courses_course_id` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `suces`.`grade`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `suces`.`grade` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `suces`.`grade` (
+  `grade_id` INT NOT NULL AUTO_INCREMENT ,
+  `grade_number` INT NOT NULL ,
+  PRIMARY KEY (`grade_id`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `suces`.`courses_grade`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `suces`.`courses_grade` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `suces`.`courses_grade` (
+  `courses_course_id` INT NOT NULL ,
+  `grade_grade_id` INT NOT NULL ,
+  PRIMARY KEY (`courses_course_id`, `grade_grade_id`) ,
+  CONSTRAINT `fk_courses_has_grade_courses1`
+    FOREIGN KEY (`courses_course_id` )
+    REFERENCES `suces`.`courses` (`course_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_courses_has_grade_grade1`
+    FOREIGN KEY (`grade_grade_id` )
+    REFERENCES `suces`.`grade` (`grade_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+CREATE INDEX `fk_courses_has_grade_grade1` ON `suces`.`courses_grade` (`grade_grade_id` ASC) ;
+
+SHOW WARNINGS;
+CREATE INDEX `fk_courses_has_grade_courses1` ON `suces`.`courses_grade` (`courses_course_id` ASC) ;
 
 SHOW WARNINGS;
 
