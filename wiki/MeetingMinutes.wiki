@@ -25,3 +25,6 @@ Staskata:
 = 23 Apr 2012 =
 Krasi:
   * created the model for courses - when executing the DDLs there are some strange messages with the index names...need to investigate it...however tables are created successfully
+Staskata:
+  * Registration form - custom email validator implemented - regex and uniqueness validation
+  * No time left for DDL and cyrillic issue with DB
