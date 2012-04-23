@@ -21,3 +21,7 @@ Krasi:
 Staskata:
 	* Registration form - required validators with custom messages are added. 
 	* Link to register page is added on top right corner in UI.
+
+= 23 Apr 2012 =
+Krasi:
+  * created the model for courses - when executing the DDLs there are some strange messages with the index names...need to investigate it...however tables are created successfully
