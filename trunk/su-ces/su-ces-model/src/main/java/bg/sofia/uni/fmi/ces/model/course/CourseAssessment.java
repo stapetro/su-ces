@@ -24,7 +24,7 @@ public class CourseAssessment implements Serializable {
 	private int couseUsefullness;
 	private int studentsAttitude;
 	private String usersUserEmail;
-	private Course cours;
+	private Course course;
 
     public CourseAssessment() {
     }
@@ -153,15 +153,15 @@ public class CourseAssessment implements Serializable {
 	}
 
 
-	//bi-directional many-to-one association to Cours
+	//bi-directional many-to-one association to Course
     @ManyToOne
 	@JoinColumn(name="courses_course_id", nullable=false)
-	public Course getCours() {
-		return this.cours;
+	public Course getCourse() {
+		return this.course;
 	}
 
-	public void setCours(Course cours) {
-		this.cours = cours;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 	
 }
