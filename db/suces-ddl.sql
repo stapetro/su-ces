@@ -21,10 +21,22 @@ CREATE SCHEMA IF NOT EXISTS `suces` DEFAULT CHARACTER SET utf8 ;
 SHOW WARNINGS;
 USE `suces` ;
 
+
+DROP TABLE IF EXISTS `suces`.`courses_grade` ;
+DROP TABLE IF EXISTS `suces`.`grade` ;
+DROP TABLE IF EXISTS `suces`.`courses_specialty` ;
+DROP TABLE IF EXISTS `suces`.`specialty` ;
+DROP TABLE IF EXISTS `suces`.`course_assessment` ;
+DROP TABLE IF EXISTS `suces`.`courses` ;
+DROP TABLE IF EXISTS `suces`.`lecturer` ;
+DROP TABLE IF EXISTS `suces`.`semester` ;
+DROP TABLE IF EXISTS `suces`.`user_roles` ;
+DROP TABLE IF EXISTS `suces`.`roles` ;
+DROP TABLE IF EXISTS `suces`.`users` ;
+
 -- -----------------------------------------------------
 -- Table `suces`.`users`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `suces`.`users` ;
 
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`users` (
@@ -40,7 +52,6 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `suces`.`roles`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `suces`.`roles` ;
 
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`roles` (
@@ -54,7 +65,6 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `suces`.`users_roles`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `suces`.`users_roles` ;
 
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`users_roles` (
@@ -84,7 +94,6 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `suces`.`semester`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `suces`.`semester` ;
 
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`semester` (
@@ -101,7 +110,6 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `suces`.`lecturer`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `suces`.`lecturer` ;
 
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`lecturer` (
@@ -115,7 +123,6 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `suces`.`courses`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `suces`.`courses` ;
 
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`courses` (
@@ -191,7 +198,6 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `suces`.`specialty`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `suces`.`specialty` ;
 
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`specialty` (
@@ -205,7 +211,6 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `suces`.`courses_specialty`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `suces`.`courses_specialty` ;
 
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`courses_specialty` (
@@ -235,7 +240,6 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `suces`.`grade`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `suces`.`grade` ;
 
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`grade` (
@@ -249,7 +253,6 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `suces`.`courses_grade`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `suces`.`courses_grade` ;
 
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `suces`.`courses_grade` (
@@ -275,7 +278,6 @@ SHOW WARNINGS;
 CREATE INDEX `fk_courses_has_grade_courses1` ON `suces`.`courses_grade` (`courses_course_id` ASC) ;
 
 SHOW WARNINGS;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
