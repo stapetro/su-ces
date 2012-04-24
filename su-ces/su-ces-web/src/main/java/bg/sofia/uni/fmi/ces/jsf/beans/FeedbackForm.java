@@ -52,7 +52,7 @@ public class FeedbackForm implements Serializable {
 
 		if (courseAssessment == null) {
 			courseAssessment = new CourseAssessment();
-			courseAssessment.setCours(course);
+			courseAssessment.setCourse(course);
 
 			courseAssessment.setUsersUserEmail(userName);
 
@@ -70,7 +70,7 @@ public class FeedbackForm implements Serializable {
 		// TODO fix when course form is implemented
 		Course course = new Course();
 		course.setCourseId(1);
-		courseAssessment.setCours(course);
+		courseAssessment.setCourse(course);
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class FeedbackForm implements Serializable {
 			System.out
 					.println("-- mail -> " + courseAssessment.getUsersUserEmail());
 			System.out.println("-- course ID -> "
-					+ courseAssessment.getCours().getCourseId());
+					+ courseAssessment.getCourse().getCourseId());
 		}
 
 		courseAssessmentFacade.commitTransaction();
