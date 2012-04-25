@@ -28,3 +28,9 @@ Krasi:
 Staskata:
   * Registration form - custom email validator implemented - regex and uniqueness validation
   * No time left for DDL and cyrillic issue with DB
+
+= 25 Apr 2012 =
+Staskata:
+  * Registration form - Custom validator for confirm password UI component added. 
+  * Registration status page added. 
+  * TODO - Look how to preserve view state when some validation fails.
