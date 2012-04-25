@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.ces.jsf.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -13,6 +14,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
+import javax.swing.text.AbstractDocument.Content;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -22,6 +24,7 @@ import bg.sofia.uni.fmi.ces.model.facade.user.RolePersistence;
 import bg.sofia.uni.fmi.ces.model.facade.user.UserPersistence;
 import bg.sofia.uni.fmi.ces.model.user.Role;
 import bg.sofia.uni.fmi.ces.model.user.User;
+import bg.sofia.uni.fmi.ces.utils.faces.FacesContextUtil;
 import bg.sofia.uni.fmi.ces.utils.msg.MessageUtil;
 
 @ManagedBean(name = "registrationBean")
@@ -32,8 +35,9 @@ public class RegistrationBean implements Serializable {
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 	private static final String EMAIL_PATTERN_MATCH_ERROR_MSG = "reg_email_format_error";
 	private static final String EMAIL_UNIQUE_ERROR_MSG = "reg_email_unique_error";
+	private static final String PASSWORD_MATCH_ERROR_MSG = "reg_password_match_error";
 
-	private Logger logger;
+	private transient Logger logger;
 	private RolePersistence rolePersistence;
 	private UserPersistence userPersistence;
 	private Pattern pattern;
@@ -79,7 +83,8 @@ public class RegistrationBean implements Serializable {
 		Role studentRole = rolePersistence
 				.getRole(RolePersistence.STUDENT_ROLE_NAME);
 		rolePersistence.close();
-		getLogger().debug("Student role: " + studentRole);
+		final String registerStatusUrl = "registerStatus.xhtml?status=%s";
+		String url = ""; 
 		if (studentRole != null) {
 			User user = new User();
 			user.setUserEmail(getEmail());
@@ -92,10 +97,20 @@ public class RegistrationBean implements Serializable {
 			user.addRole(studentRole);
 			user = userPersistence.save(user);
 			if (user != null) {
-				return "login";
+				url = String.format(registerStatusUrl, "ok");
+//				return "registerStatus?status=ok";
 			}
+		} else {
+			getLogger().error("Student role is not found in DB");
+			url = String.format(registerStatusUrl, "fail");
 		}
-		// TODO Issue error msg when registration fails.
+//		return "registerStatus.?status=fail";
+		FacesContext currContext = FacesContext.getCurrentInstance();
+		try {
+			currContext.getExternalContext().redirect(url);
+		} catch (IOException e) {
+			getLogger().error(e);
+		}
 		return null;
 	}
 
@@ -141,9 +156,73 @@ public class RegistrationBean implements Serializable {
 			}
 		} else {
 			getLogger().error(
-					"Email UI control is of type '" + toValidateEmail.getClass()
-							+ "'");
+					"Email UI control is of type '"
+							+ toValidateEmail.getClass() + "'");
 		}
+	}
+
+	public void validateConfirmPassword(FacesContext context,
+			UIComponent toValidateConfirmPasswod, Object value) {
+		if (toValidateConfirmPasswod instanceof UIInput) {
+			UIInput confirmPassInput = (UIInput) toValidateConfirmPasswod;
+			String clientId = confirmPassInput.getClientId(context);
+			if (value != null) {
+				String confirmPassword = value.toString();
+				String passwordValue = getUIPasswordValue(context);
+				if (confirmPassword.equals(passwordValue) == false) {
+					String msgValue = MessageUtil.loadMessage(context,
+							PASSWORD_MATCH_ERROR_MSG);
+					if (msgValue != null && msgValue.isEmpty() == false) {
+						String passLbl = MessageUtil.loadMessage(context,
+								Messages.REG_PASS_LABEL_KEY);
+						if (passLbl == null) {
+							passLbl = "";
+						}
+						String confirmPassLbl = MessageUtil.loadMessage(
+								context, Messages.REG_CONFIRM_PASS_LABEL_KEY);
+						if (confirmPassLbl == null) {
+							confirmPassLbl = "";
+						}
+						try {
+							String msgValueFormatted = String.format(msgValue,
+									confirmPassLbl, passLbl);
+							msgValue = msgValueFormatted;
+						} catch (Exception ex) {
+							getLogger().error(ex);
+						}
+					} else {
+						msgValue = MessageUtil.loadMessage(context,
+								Messages.SYSTEM_ERROR_MSG_KEY);
+					}
+					MessageUtil
+							.addMessageToContext(context, clientId, msgValue);
+					confirmPassInput.setValid(false);
+					return;
+				}
+			} else {
+				String msgValue = MessageUtil.loadMessage(context,
+						Messages.SYSTEM_ERROR_MSG_KEY);
+				MessageUtil.addMessageToContext(context, clientId, msgValue);
+				confirmPassInput.setValid(false);
+				return;
+			}
+		} else {
+			getLogger().error(
+					"Confirm Password UI control is of type '"
+							+ toValidateConfirmPasswod.getClass() + "'");
+		}
+	}
+	
+	private String getUIPasswordValue(FacesContext context) {
+		String passwordValue = "";
+		UIComponent passwordComponent = FacesContextUtil.findComponent(context.getViewRoot(), "password");
+		if(passwordComponent != null && passwordComponent instanceof UIInput) {
+			Object passwordObject = ((UIInput) passwordComponent).getValue();
+			if(passwordObject != null) {
+				passwordValue = passwordObject.toString();
+			}
+		}
+		return passwordValue;
 	}
 
 	private Logger getLogger() {
