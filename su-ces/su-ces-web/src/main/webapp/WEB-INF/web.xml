@@ -55,6 +55,7 @@
 		<web-resource-collection>
 			<web-resource-name>Registration form is accessible by anonymous</web-resource-name>
 			<url-pattern>/pages/faces/register.xhtml</url-pattern>
+			<url-pattern>/pages/faces/registerStatus.xhtml</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 		</web-resource-collection>

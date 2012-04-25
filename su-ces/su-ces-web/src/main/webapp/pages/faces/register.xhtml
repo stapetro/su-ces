@@ -24,20 +24,24 @@
 				<h:panelGroup layout="block" styleClass="accountInfo">
 					<h:outputLabel for="password" value="#{msg.register_password_lbl}" />
 					<p:password id="password" label="#{msg.register_password_lbl}" 
-						value="#{registrationBean.password}" feedback="true"
-						required="true" requiredMessage="#{msg.reg_pass_required_msg}" match="confirmPassword" /> 
+						value="#{registrationBean.password}" feedback="true" promptLabel="#{msg.reg_enter_pass_msg}"
+						weakLabel="#{msg.reg_pass_weak_lbl}" goodLabel="#{msg.reg_pass_good_lbl}"
+						strongLabel="#{msg.reg_pass_strong_lbl}"
+						required="true" requiredMessage="#{msg.reg_pass_required_msg}" /> 
 					<h:message for="password" styleClass="negativeMsg" />
 				</h:panelGroup>				
 				<h:panelGroup layout="block" styleClass="accountInfo">
 					<h:outputLabel for="confirmPassword" value="#{msg.register_confirm_password_lbl}" />
 					<p:password id="confirmPassword" label="#{msg.register_confirm_password_lbl}" 
-						value="#{registrationBean.confirmPassword}" feedback="true"
-						required="true" requiredMessage="#{msg.reg_confirmpass_required_msg}" />
+						value="#{registrationBean.confirmPassword}" feedback="true" promptLabel="#{msg.reg_enter_pass_msg}"
+						weakLabel="#{msg.reg_pass_weak_lbl}" goodLabel="#{msg.reg_pass_good_lbl}"
+						strongLabel="#{msg.reg_pass_strong_lbl}"
+						required="true" requiredMessage="#{msg.reg_confirmpass_required_msg}" validator="#{registrationBean.validateConfirmPassword}" />
 					<h:message for="confirmPassword" styleClass="negativeMsg" />
 				</h:panelGroup>
 				<h:panelGroup layout="block" styleClass="submitButton">
-					<h:commandButton value="#{msg.register_cancel_lbl}" action="#{registrationBean.cancel}" />
-					<h:commandButton value="#{msg.register_submit_lbl}" type="submit" action="#{registrationBean.register}" />
+					<h:link value="#{msg.register_cancel_lbl}" outcome="home" />
+					<p:commandButton value="#{msg.register_submit_lbl}" type="submit" action="#{registrationBean.register}" ajax="false" />
 				</h:panelGroup>
 			</h:form>
 			</p:fieldset>
