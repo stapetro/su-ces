@@ -34,3 +34,9 @@ Staskata:
   * Registration form - Custom validator for confirm password UI component added. 
   * Registration status page added. 
   * TODO - Look how to preserve view state when some validation fails.
+
+= 26 Apr 2012 =
+Staskata:
+  * DDL & DML SQL scripts are corrected for suces DB.
+  * Two cmd scripts are added for creating suces DB.
+  * registration form - UI components are ordered in table.
