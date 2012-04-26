@@ -356,6 +356,7 @@ div.accountInfo
     border:0;
 }
 
+/*
 table, th, td
 {
         border: 1px solid black;
@@ -369,7 +370,7 @@ th
         background-color: #B7B67A;
         font-weight: bold;
 }
-
+*/
 h4.table-caption {
   background: transparent; 
   /*color: #3333cc; */
