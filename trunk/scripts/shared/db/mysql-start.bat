@@ -1,2 +1,2 @@
 REM Starts mysql server
-mysqld --console
+mysqld --console --verbose

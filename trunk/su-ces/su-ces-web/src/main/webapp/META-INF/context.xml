@@ -20,5 +20,5 @@
 	      driverName="com.mysql.jdbc.Driver"
 	   connectionURL="jdbc:mysql://localhost:3306/suces?user=suces&amp;password=suces"
 	       userTable="users" userNameCol="user_email" userCredCol="password"
-	   userRoleTable="users_roles" roleNameCol="role_name"/>
-</Context>         
+	   userRoleTable="users_roles" roleNameCol="role_name" digest="SHA" digestEncoding="UTF-8" />
+</Context>
