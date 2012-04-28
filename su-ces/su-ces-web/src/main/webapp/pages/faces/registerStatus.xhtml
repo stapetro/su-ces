@@ -11,8 +11,8 @@
 	</ui:define>
 
 	<ui:define name="pageBody">
-		<h:outputText value="${msg.registerOK_msg}" rendered="#{param.status == 'ok'}" />
-		<h:outputText value="${msg.registerFailed_msg}" rendered="#{param.status == 'fail'}" />
+		<h:outputText styleClass="positiveMsg" value="${msg.registerOK_msg}" rendered="#{param.status == 'ok'}" />
+		<h:outputText styleClass="negativeMsg" value="${msg.registerFailed_msg}" rendered="#{param.status == 'fail'}" />
 		<h:form>
 			<h:link outcome="home">
 				<h:outputText value="#{msg.redirect_to_login}" />
