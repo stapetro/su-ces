@@ -33,3 +33,10 @@ Staskata:
   * DDL & DML SQL scripts are corrected for suces DB.
   * Two cmd scripts are added for creating suces DB.
   * registration form - UI components are ordered in table.
+
+= 28 Apr 2012 =
+Staskata:
+  * Scrum mastering - clean obsolete issues, create Release Plan, Knowledge Base wikis, assign issues to owners
+  * Login and registration work with password digests
+  * issue 6 done
+  * Start research for unit testing and mocking approaches

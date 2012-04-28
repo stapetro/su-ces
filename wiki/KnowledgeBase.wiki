@@ -1,0 +1,9 @@
+#summary Knowledge base for project - resources, tips, tricks
+
+= Introduction =
+
+The wiki's goal is to provide reference to useful resources.
+
+== Unit testing ==
+
+Unit testing database code - http://www.javaranch.com/journal/2003/12/UnitTestingDatabaseCode.html

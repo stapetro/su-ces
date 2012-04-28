@@ -32,4 +32,6 @@ Start date: 17 Apr 2012
 End date: 8 May 2012
 
 || *Task name* || *Status* ||
+|| issue 10 || todo ||
 || issue 11 || todo ||
+|| issue 6 || done ||
