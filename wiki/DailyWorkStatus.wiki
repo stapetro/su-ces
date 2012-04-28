@@ -1,0 +1,35 @@
+#labels Phase-Implementation
+#summary Reporting for work status on daily basis
+
+= Introduction =
+
+This wiki provides a log of all developer activities. As the team is "distributed" team members are required to update their status regularly
+
+= 20 Apr 2012 =
+Krasi:
+  * create initial skeleton page for course information
+  * put the course information items in wiki
+  
+= 22 Apr 2012 =
+Staskata:
+	* Registration form - required validators with custom messages are added. 
+	* Link to register page is added on top right corner in UI.
+
+= 23 Apr 2012 =
+Krasi:
+  * created the model for courses - when executing the DDLs there are some strange messages with the index names...need to investigate it...however tables are created successfully
+Staskata:
+  * Registration form - custom email validator implemented - regex and uniqueness validation
+  * No time left for DDL and cyrillic issue with DB
+
+= 25 Apr 2012 =
+Staskata:
+  * Registration form - Custom validator for confirm password UI component added. 
+  * Registration status page added. 
+  * TODO - Look how to preserve view state when some validation fails.
+
+= 26 Apr 2012 =
+Staskata:
+  * DDL & DML SQL scripts are corrected for suces DB.
+  * Two cmd scripts are added for creating suces DB.
+  * registration form - UI components are ordered in table.
