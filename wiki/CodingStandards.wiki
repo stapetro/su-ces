@@ -15,6 +15,8 @@ This wiki provides and overview of the coding standards applied across the SUCES
   * use the MySql Workbench standard for naming foreign key columns <source_table><primary_key_column>_id
   * use the "id" suffix for ID columns
 
+= User Interface =
+  * web page files (e.g. *.xhtml) to be named *camelCase* style
 
 = Note =
   * Additional conventions may be applied as identified.
