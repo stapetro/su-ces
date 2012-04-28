@@ -16,7 +16,7 @@ This wiki provides and overview of the coding standards applied across the SUCES
   * use the "id" suffix for ID columns
 
 = User Interface =
-  * web page files (e.g. *.xhtml) to be named *camelCase* style
+  * web page files (e.g. `*`.xhtml) to be named *camelCase* style
 
 = Note =
   * Additional conventions may be applied as identified.
