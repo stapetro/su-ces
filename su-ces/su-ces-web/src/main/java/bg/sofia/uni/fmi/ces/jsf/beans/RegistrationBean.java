@@ -2,6 +2,7 @@ package bg.sofia.uni.fmi.ces.jsf.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Locale;
@@ -14,8 +15,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
-import javax.swing.text.AbstractDocument.Content;
 
+import org.apache.catalina.realm.RealmBase;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -84,11 +85,14 @@ public class RegistrationBean implements Serializable {
 				.getRole(RolePersistence.STUDENT_ROLE_NAME);
 		rolePersistence.close();
 		final String registerStatusUrl = "registerStatus.xhtml?status=%s";
-		String url = ""; 
+		String url = "";
 		if (studentRole != null) {
 			User user = new User();
 			user.setUserEmail(getEmail());
-			user.setPassword(getPassword());
+			String password = getPassword();
+			String digestedPass = RealmBase.Digest(password, "SHA",
+					StandardCharsets.UTF_8.toString());
+			user.setPassword(digestedPass);
 			Locale currentLocale = FacesContext.getCurrentInstance()
 					.getViewRoot().getLocale();
 			Calendar todayCal = Calendar.getInstance(currentLocale);
@@ -98,13 +102,13 @@ public class RegistrationBean implements Serializable {
 			user = userPersistence.save(user);
 			if (user != null) {
 				url = String.format(registerStatusUrl, "ok");
-//				return "registerStatus?status=ok";
+				// return "registerStatus?status=ok";
 			}
 		} else {
 			getLogger().error("Student role is not found in DB");
 			url = String.format(registerStatusUrl, "fail");
 		}
-//		return "registerStatus.?status=fail";
+		// return "registerStatus.?status=fail";
 		FacesContext currContext = FacesContext.getCurrentInstance();
 		try {
 			currContext.getExternalContext().redirect(url);
@@ -212,13 +216,14 @@ public class RegistrationBean implements Serializable {
 							+ toValidateConfirmPasswod.getClass() + "'");
 		}
 	}
-	
+
 	private String getUIPasswordValue(FacesContext context) {
 		String passwordValue = "";
-		UIComponent passwordComponent = FacesContextUtil.findComponent(context.getViewRoot(), "password");
-		if(passwordComponent != null && passwordComponent instanceof UIInput) {
+		UIComponent passwordComponent = FacesContextUtil.findComponent(
+				context.getViewRoot(), "password");
+		if (passwordComponent != null && passwordComponent instanceof UIInput) {
 			Object passwordObject = ((UIInput) passwordComponent).getValue();
-			if(passwordObject != null) {
+			if (passwordObject != null) {
 				passwordValue = passwordObject.toString();
 			}
 		}
