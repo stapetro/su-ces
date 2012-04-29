@@ -43,5 +43,5 @@ Staskata:
   
 = 29 Apr 2012 =
 Staskata:
-  * issue 30 done
+  * issue 29 done
   * Scrum mastering - create issues for implementing unit tests for all done user stories.
