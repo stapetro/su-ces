@@ -40,3 +40,8 @@ Staskata:
   * Login and registration work with password digests
   * issue 6 done
   * Start research for unit testing and mocking approaches
+  
+= 29 Apr 2012 =
+Staskata:
+  * issue 30 done
+  * Scrum mastering - create issues for implementing unit tests for all done user stories.

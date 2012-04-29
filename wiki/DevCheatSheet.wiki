@@ -22,6 +22,10 @@ _mvn package_ - build the project
 
 _mvn dependency:resolve -Dclassifier=javadoc_ - attempt to download the Javadocs
 
+_mvn clean test_ - run unit tests
+
+_mvn clean test-compile_ - only compile test sources
+
 == Attach source & javadoc to artifacts (jars) ==
 
 Configure m2eclipse Maven plugin for Eclipse with the following steps: Window > Preferences > Maven and checking the "_Download Artifact Sources_" and "_Download Artifact JavaDoc_" options

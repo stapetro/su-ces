@@ -2,6 +2,8 @@ package bg.sofia.uni.fmi.ces.model.facade.user;
 
 import java.io.Serializable;
 
+import javax.persistence.EntityManagerFactory;
+
 import bg.sofia.uni.fmi.ces.model.facade.ModelFacade;
 import bg.sofia.uni.fmi.ces.model.user.User;
 
@@ -14,6 +16,16 @@ public class UserPersistence extends ModelFacade implements Serializable {
 
 	public UserPersistence() {
 		super();
+	}
+
+	/**
+	 * Makes user persistence testable.
+	 * 
+	 * @param entityManagerFactory
+	 *            Entity manager factory to be specified.
+	 */
+	public UserPersistence(EntityManagerFactory entityManagerFactory) {
+		super(entityManagerFactory);
 	}
 
 	/**

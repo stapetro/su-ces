@@ -4,8 +4,15 @@
 
 This wiki provides a log from all team meetings
 
+= 26 March 2012 =
+  * We will use Maven for building the project
+  * Database will be developed iteratively according to the tasks   *not at once
+  * create an entities package. All other projects will depend on it. Then the DB will be generated (Staskata to create and commit the package)
+  * EclipseLink will be used
+  * UI with PrimeFaces
+  * tasks are added to google code
+  
 = 16 Apr 2012 =
-
 Krasi:
   * We need to close the iteration. Make a retrospective meeting tomorrow. 
 Plan the next iteration.
@@ -14,3 +21,4 @@ Plan the next iteration.
 = 23 Apr 2012 =
   * Participants: Krasi, Stas, Product Owners
   * Performing Sprint 1 demo
+

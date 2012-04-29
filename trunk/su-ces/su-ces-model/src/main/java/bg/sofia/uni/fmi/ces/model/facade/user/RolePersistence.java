@@ -2,13 +2,16 @@ package bg.sofia.uni.fmi.ces.model.facade.user;
 
 import java.io.Serializable;
 
+import javax.persistence.EntityManagerFactory;
+
 import bg.sofia.uni.fmi.ces.model.facade.ModelFacade;
 import bg.sofia.uni.fmi.ces.model.user.Role;
 
 /**
  * User roles perstistence facade.
+ * 
  * @author Staskata
- *
+ * 
  */
 public class RolePersistence extends ModelFacade implements Serializable {
 
@@ -21,6 +24,14 @@ public class RolePersistence extends ModelFacade implements Serializable {
 
 	public RolePersistence() {
 		super();
+	}
+
+	/**
+	 * Makes role persistence testable.
+	 * @param entityManagerFactory Entity manager factory to be specified.
+	 */
+	public RolePersistence(EntityManagerFactory entityManagerFactory) {
+		super(entityManagerFactory);
 	}
 
 	/**
