@@ -118,11 +118,6 @@ public class RegistrationBean implements Serializable {
 		return null;
 	}
 
-	public String cancel() {
-		// TODO To be implemented
-		return null;
-	}
-
 	public void validateEmail(FacesContext context,
 			UIComponent toValidateEmail, Object value) {
 		if (toValidateEmail instanceof UIInput) {

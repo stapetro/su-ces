@@ -17,9 +17,12 @@ public abstract class ModelFacade implements IModelFacade {
 	protected EntityManager entityManager;
 
 	public ModelFacade() {
-		entityManagerFactory = Persistence
-				.createEntityManagerFactory(PERSISTANCE_UNIT_NAME);
-		entityManager = entityManagerFactory.createEntityManager();
+		this(Persistence.createEntityManagerFactory(PERSISTANCE_UNIT_NAME));
+	}
+
+	public ModelFacade(EntityManagerFactory entityManagerFactory) {
+		this.entityManagerFactory = entityManagerFactory;
+		this.entityManager = entityManagerFactory.createEntityManager();
 	}
 
 	@Override
@@ -39,10 +42,10 @@ public abstract class ModelFacade implements IModelFacade {
 
 	@Override
 	public void close() {
-		if(entityManager.isOpen()) {
+		if (entityManager.isOpen()) {
 			entityManager.close();
 		}
-		if(entityManagerFactory.isOpen()) {
+		if (entityManagerFactory.isOpen()) {
 			entityManagerFactory.close();
 		}
 	}
@@ -58,7 +61,7 @@ public abstract class ModelFacade implements IModelFacade {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.commit();
 	}
-	
+
 	@Override
 	public void rollbackTransaction() {
 		EntityTransaction transaction = entityManager.getTransaction();
