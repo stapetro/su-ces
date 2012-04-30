@@ -66,6 +66,16 @@ public class SessionBean implements Serializable {
         return null;
 	}
 	
+	public boolean isUserStudent(){
+		//TODO VERY IMPORTANT need to implement it when users log in is fixed
+		return false;
+	}
+	
+	public boolean isUserAdmin(){
+		//TODO VERY IMPORTANT need to implement it when users log in is fixed
+		return true;
+	}
+	
 	private Logger getLogger() {
 		if(this.logger == null) {
 			this.logger = LogManager.getLogger(SessionBean.class);

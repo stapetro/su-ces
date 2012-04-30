@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Query;
 
 import bg.sofia.uni.fmi.ces.model.course.Course;
+import bg.sofia.uni.fmi.ces.model.course.Semester;
+import bg.sofia.uni.fmi.ces.model.course.Specialty;
 import bg.sofia.uni.fmi.ces.model.facade.ModelFacade;
 
 /**
@@ -19,8 +21,13 @@ public class CoursePersistence extends ModelFacade implements Serializable {
 	 * Select statement for obtaining the <code>Course</code> object by its ID
 	 */
 	private static final String SELECT_COURSE_BY_COURSE_ID = "SELECT c "
-			+ "FROM Course c " + 
-			"WHERE c.courseId = :courseId";
+			+ "FROM Course c " + "WHERE c.courseId = :courseId";
+
+	private static final String SELECT_SEMESTERS = "SELECT s "
+			+ "FROM Semester s ";
+
+	private static final String SELECT_SPECIALTIES = "SELECT s "
+			+ "FROM Specialty s";
 
 	public CoursePersistence() {
 		super();
@@ -50,6 +57,20 @@ public class CoursePersistence extends ModelFacade implements Serializable {
 		}
 
 		return course;
+	}
+
+	public List<Semester> getSemesters() {
+		Query query = entityManager.createQuery(SELECT_SEMESTERS);
+		List<Semester> semestersList = (List<Semester>) query.getResultList();
+
+		return semestersList;
+	}
+
+	public List<Specialty> getSpecialties() {
+		Query query = entityManager.createQuery(SELECT_SPECIALTIES);
+		List<Specialty> specialtyList = (List<Specialty>) query.getResultList();
+
+		return specialtyList;
 	}
 
 }
