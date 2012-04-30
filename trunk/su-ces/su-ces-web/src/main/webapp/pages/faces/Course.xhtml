@@ -11,53 +11,95 @@
 	</ui:define>
 
 	<ui:define name="pageBody">
-		<h:panelGrid columns="2">
+		<h:form>
+			<h:panelGrid columns="2">
 
-			<h:outputText value="#{msg.course_name}" />
-			<h:outputText value="#{msg.course_name}" />
+				<h:outputText value="#{msg.course_name}" />
+				<h:outputText value="#{msg.course_name}"
+					rendered="#{sessionBean.userStudent}" />
+				<p:inputText rendered="#{sessionBean.userAdmin}" />
 
-			<h:outputText value="#{msg.year}" />
-			<h:outputText value="#{courseBean.course.year}" />
+				<h:outputText value="#{msg.year}" />
+				<h:outputText value="#{courseBean.course.year}"
+					rendered="#{sessionBean.userStudent}" />
+				<p:inputText rendered="#{sessionBean.userAdmin}" />
 
-			<h:outputText value="#{msg.semester}" />
-			<h:outputText value="#{courseBean.course.semester.semesterName}" />
+				<h:outputText value="#{msg.semester}" />
+				<h:outputText value="#{courseBean.course.semester.semesterName}"
+					rendered="#{sessionBean.userStudent}" />
+				<p:selectOneButton value="#{courseBean.course.semester.semesterId}" rendered="#{sessionBean.userAdmin}">
+					<f:selectItems value="#{courseBean.semesterList}"
+						var="semester"
+						itemValue="#{semester.semesterId}"
+						itemLabel="#{semester.semesterName}">
+					</f:selectItems>
+				</p:selectOneButton>
 
-			<h:outputText value="#{msg.workload}" />
-			<h:outputText value="#{courseBean.course.workload}" />
+				<h:outputText value="#{msg.workload}" />
+				<h:outputText value="#{courseBean.course.workload}"
+					rendered="#{sessionBean.userStudent}" />
+				<p:inputText rendered="#{sessionBean.userAdmin}" />
 
-			<h:outputText value="#{msg.specialty}" />
-			<h:dataTable value="#{courseBean.course.specialties}" var="specialty">
-				<h:column>
-					<h:outputText value="#{specialty.specialtyName}"></h:outputText>
-				</h:column>
-			</h:dataTable>
+				<h:outputText value="#{msg.specialty}" />
+				<h:dataTable value="#{courseBean.course.specialties}"
+					var="specialty" rendered="#{sessionBean.userStudent}">
+					<h:column>
+						<h:outputText value="#{specialty.specialtyName}"></h:outputText>
+					</h:column>
+				</h:dataTable>
+				<p:selectManyButton value="#{courseBean.course.specialties}" rendered="#{sessionBean.userAdmin}" >
+					<f:selectItems value="#{courseBean.specialtyList}"
+						var="specialty"
+						itemValue="#{specialty.specialtyId}"
+						itemLabel="#{specialty.specialtyName}">
+					</f:selectItems>
+				</p:selectManyButton>
 
-			<h:outputText value="#{msg.courses}" />
-			<h:dataTable value="#{courseBean.course.grades}" var="grade">
-				<h:column>
-					<h:outputText value="#{grade.gradeNumber}" />
-				</h:column>
-			</h:dataTable>
+				<h:outputText value="#{msg.courses}" />
+				<h:dataTable value="#{courseBean.course.grades}" var="grade"
+					rendered="#{sessionBean.userStudent}">
+					<h:column>
+						<h:outputText value="#{grade.gradeNumber}" />
+					</h:column>
+				</h:dataTable>
+				<p:inputText rendered="#{sessionBean.userAdmin}" />
 
-			<h:outputText value="#{msg.lecturer_name}" />
-			<h:outputText value="#{courseBean.course.lecturer.lecturerName}" />
+				<h:outputText value="#{msg.lecturer_name}" />
+				<h:outputText value="#{courseBean.course.lecturer.lecturerName}"
+					rendered="#{sessionBean.userStudent}" />
+				<p:inputText rendered="#{sessionBean.userAdmin}" />
 
-			<h:outputText value="#{msg.course_annotation}" />
-			<h:outputText value="#{msg.course_annotation}" />
+				<h:outputText value="#{msg.course_annotation}" />
+				<h:outputText value="#{courseBean.course.courseAnnotation}"
+					rendered="#{sessionBean.userStudent}" />
+				<p:inputText rendered="#{sessionBean.userAdmin}" />
 
-			<h:outputText value="#{msg.preliminary_requirements}" />
-			<h:outputText value="#{msg.preliminary_requirements}" />
+				<h:outputText value="#{msg.preliminary_requirements}" />
+				<h:outputText value="#{courseBean.course.preliminaryRequirements}"
+					rendered="#{sessionBean.userStudent}" />
+				<p:inputText rendered="#{sessionBean.userAdmin}" />
 
-			<h:outputText value="#{msg.examination_form}" />
-			<h:outputText value="#{msg.examination_form}" />
+				<h:outputText value="#{msg.examination_form}" />
+				<h:outputText value="#{courseBean.course.examinationForm}"
+					rendered="#{sessionBean.userStudent}" />
+				<p:inputText rendered="#{sessionBean.userAdmin}" />
 
-			<h:outputText value="#{msg.summary}" />
-			<h:outputText value="#{msg.summary}" />
+				<h:outputText value="#{msg.summary}" />
+				<h:outputText value="#{courseBean.course.summary}"
+					rendered="#{sessionBean.userStudent}" />
+				<p:inputText rendered="#{sessionBean.userAdmin}" />
 
-			<h:outputText value="#{msg.literature}" />
-			<h:outputText value="#{msg.literature}" />
+				<h:outputText value="#{msg.literature}" />
+				<h:outputText value="#{courseBean.course.literature}"
+					rendered="#{sessionBean.userStudent}" />
+				<p:inputText rendered="#{sessionBean.userAdmin}" />
 
-		</h:panelGrid>
+			</h:panelGrid>
+
+			<p:commandButton value="#{msg.submit}"
+				actionListener="#{courseBean.saveCourse}" />
+
+		</h:form>
 	</ui:define>
 
 </ui:composition>
