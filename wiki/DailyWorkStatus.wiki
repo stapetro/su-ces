@@ -1,5 +1,5 @@
-#labels Phase-Implementation
 #summary Reporting for work status on daily basis
+#labels Phase-Implementation
 
 = Introduction =
 
@@ -45,3 +45,8 @@ Staskata:
 Staskata:
   * issue 29 done
   * Scrum mastering - create issues for implementing unit tests for all done user stories.
+
+=30 Apr 2012 =
+Krasi:
+  * implement course preview view
+  * started admin view for courses
