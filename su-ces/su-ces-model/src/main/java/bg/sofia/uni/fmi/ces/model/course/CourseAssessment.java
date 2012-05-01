@@ -1,15 +1,23 @@
 package bg.sofia.uni.fmi.ces.model.course;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the course_assessment database table.
  * 
  */
 @Entity
-@Table(name="course_assessment")
+@Table(name = "course_assessment")
 public class CourseAssessment implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int courseAssessmentId;
@@ -26,14 +34,13 @@ public class CourseAssessment implements Serializable {
 	private String usersUserEmail;
 	private Course course;
 
-    public CourseAssessment() {
-    }
-
+	public CourseAssessment() {
+	}
 
 	@Id
-	@SequenceGenerator(name="COURSE_ASSESSMENT_COURSEASSESSMENTID_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="COURSE_ASSESSMENT_COURSEASSESSMENTID_GENERATOR")
-	@Column(name="course_assessment_id", unique=true, nullable=false)
+	@SequenceGenerator(name = "COURSE_ASSESSMENT_COURSEASSESSMENTID_GENERATOR")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COURSE_ASSESSMENT_COURSEASSESSMENTID_GENERATOR")
+	@Column(name = "course_assessment_id", unique = true, nullable = false)
 	public int getCourseAssessmentId() {
 		return this.courseAssessmentId;
 	}
@@ -42,8 +49,7 @@ public class CourseAssessment implements Serializable {
 		this.courseAssessmentId = courseAssessmentId;
 	}
 
-
-	@Column(name="assessment_correctness")
+	@Column(name = "assessment_correctness")
 	public int getAssessmentCorrectness() {
 		return this.assessmentCorrectness;
 	}
@@ -52,8 +58,7 @@ public class CourseAssessment implements Serializable {
 		this.assessmentCorrectness = assessmentCorrectness;
 	}
 
-
-	@Column(name="course_attitude")
+	@Column(name = "course_attitude")
 	public int getCourseAttitude() {
 		return this.courseAttitude;
 	}
@@ -62,8 +67,7 @@ public class CourseAssessment implements Serializable {
 		this.courseAttitude = courseAttitude;
 	}
 
-
-	@Column(name="course_difficulty")
+	@Column(name = "course_difficulty")
 	public int getCourseDifficulty() {
 		return this.courseDifficulty;
 	}
@@ -72,8 +76,7 @@ public class CourseAssessment implements Serializable {
 		this.courseDifficulty = courseDifficulty;
 	}
 
-
-	@Column(name="course_engagements")
+	@Column(name = "course_engagements")
 	public int getCourseEngagements() {
 		return this.courseEngagements;
 	}
@@ -82,8 +85,7 @@ public class CourseAssessment implements Serializable {
 		this.courseEngagements = courseEngagements;
 	}
 
-
-	@Column(name="course_in_plan")
+	@Column(name = "course_in_plan")
 	public int getCourseInPlan() {
 		return this.courseInPlan;
 	}
@@ -92,8 +94,7 @@ public class CourseAssessment implements Serializable {
 		this.courseInPlan = courseInPlan;
 	}
 
-
-	@Column(name="course_inderstanding")
+	@Column(name = "course_inderstanding")
 	public int getCourseInderstanding() {
 		return this.courseInderstanding;
 	}
@@ -102,8 +103,7 @@ public class CourseAssessment implements Serializable {
 		this.courseInderstanding = courseInderstanding;
 	}
 
-
-	@Column(name="course_organization")
+	@Column(name = "course_organization")
 	public int getCourseOrganization() {
 		return this.courseOrganization;
 	}
@@ -112,8 +112,7 @@ public class CourseAssessment implements Serializable {
 		this.courseOrganization = courseOrganization;
 	}
 
-
-	@Column(name="course_presentation")
+	@Column(name = "course_presentation")
 	public int getCoursePresentation() {
 		return this.coursePresentation;
 	}
@@ -122,8 +121,7 @@ public class CourseAssessment implements Serializable {
 		this.coursePresentation = coursePresentation;
 	}
 
-
-	@Column(name="couse_usefullness")
+	@Column(name = "couse_usefullness")
 	public int getCouseUsefullness() {
 		return this.couseUsefullness;
 	}
@@ -132,8 +130,7 @@ public class CourseAssessment implements Serializable {
 		this.couseUsefullness = couseUsefullness;
 	}
 
-
-	@Column(name="students_attitude")
+	@Column(name = "students_attitude")
 	public int getStudentsAttitude() {
 		return this.studentsAttitude;
 	}
@@ -142,8 +139,7 @@ public class CourseAssessment implements Serializable {
 		this.studentsAttitude = studentsAttitude;
 	}
 
-
-	@Column(name="users_user_email", nullable=false, length=64)
+	@Column(name = "users_user_email", nullable = false, length = 64)
 	public String getUsersUserEmail() {
 		return this.usersUserEmail;
 	}
@@ -152,10 +148,9 @@ public class CourseAssessment implements Serializable {
 		this.usersUserEmail = usersUserEmail;
 	}
 
-
-	//bi-directional many-to-one association to Course
-    @ManyToOne
-	@JoinColumn(name="courses_course_id", nullable=false)
+	// bi-directional many-to-one association to Course
+	@ManyToOne
+	@JoinColumn(name = "courses_course_id", nullable = false)
 	public Course getCourse() {
 		return this.course;
 	}
@@ -163,5 +158,5 @@ public class CourseAssessment implements Serializable {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-	
+
 }

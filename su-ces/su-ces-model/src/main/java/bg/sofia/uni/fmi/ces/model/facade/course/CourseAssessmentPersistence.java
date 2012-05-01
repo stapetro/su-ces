@@ -1,31 +1,38 @@
-package bg.sofia.uni.fmi.ces.model.facade;
+package bg.sofia.uni.fmi.ces.model.facade.course;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import bg.sofia.uni.fmi.ces.model.course.Course;
 import bg.sofia.uni.fmi.ces.model.course.CourseAssessment;
+import bg.sofia.uni.fmi.ces.model.facade.ModelFacade;
 
 /**
  * Provide a common interface for working with course assessment specific
  * operations.
  */
-public class CourseAssessmentFacade extends ModelFacade {
+public class CourseAssessmentPersistence extends ModelFacade {
 
 	/**
 	 * Query for selecting the course assessment results.
 	 */
-	private static final String SELECT_COURSE_ASSESSMENT_BY_USER_AND_COURSE_ID = "SELECT ca "
+	public static final String SELECT_COURSE_ASSESSMENT_BY_USER_AND_COURSE_ID = "SELECT ca "
 			+ "FROM CourseAssessment ca "
 			+ "WHERE ca.usersUserEmail = :userName "
-			+ "AND ca.cours.courseId = :courseId";
+			+ "AND ca.course.courseId = :courseId";
 
-	public CourseAssessmentFacade() {
+	public CourseAssessmentPersistence() {
 		super();
+	}
+	
+	/**
+	 * Makes role persistence testable.
+	 * @param entityManagerFactory Entity manager factory to be specified.
+	 */
+	public CourseAssessmentPersistence(EntityManagerFactory entityManagerFactory) {
+		super(entityManagerFactory);
 	}
 
 	/**
@@ -39,14 +46,13 @@ public class CourseAssessmentFacade extends ModelFacade {
 	 * @return the corresponding records. NULL if the input parameters are
 	 *         invalid or no record is found
 	 */
-	public CourseAssessment getCourseAssassment(String userName, Course course) {
-		if (userName == null || userName.trim().length() == 0 || course == null) {
+	public CourseAssessment getCourseAssassment(String userName, int courseId) {
+		if (userName == null || userName.trim().length() == 0) {
 			return null;
 		}
 
 		Query query = entityManager
 				.createQuery(SELECT_COURSE_ASSESSMENT_BY_USER_AND_COURSE_ID);
-		int courseId = course.getCourseId();
 		query.setParameter("userName", userName);
 		query.setParameter("courseId", courseId);
 
