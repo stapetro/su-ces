@@ -8,7 +8,7 @@ import javax.faces.event.ActionEvent;
 
 import bg.sofia.uni.fmi.ces.model.course.Course;
 import bg.sofia.uni.fmi.ces.model.course.CourseAssessment;
-import bg.sofia.uni.fmi.ces.model.facade.CourseAssessmentFacade;
+import bg.sofia.uni.fmi.ces.model.facade.course.CourseAssessmentPersistence;
 import bg.sofia.uni.fmi.ces.utils.session.SessionUtils;
 
 /**
@@ -30,10 +30,10 @@ public class FeedbackForm implements Serializable {
 	private boolean isNewCourseAssessment;
 	private CourseAssessment courseAssessment;
 
-	private CourseAssessmentFacade courseAssessmentFacade;
+	private CourseAssessmentPersistence courseAssessmentFacade;
 
 	public FeedbackForm() {
-		courseAssessmentFacade = new CourseAssessmentFacade();
+		courseAssessmentFacade = new CourseAssessmentPersistence();
 		courseAssessmentFacade.beginTransaction();
 		initCourseAssessment();
 	}
@@ -48,7 +48,7 @@ public class FeedbackForm implements Serializable {
 
 		String userName = SessionUtils.getLoggedUserName();
 		courseAssessment = courseAssessmentFacade.getCourseAssassment(userName,
-				course);
+				course.getCourseId());
 
 		if (courseAssessment == null) {
 			courseAssessment = new CourseAssessment();
@@ -79,19 +79,9 @@ public class FeedbackForm implements Serializable {
 	 * @param event
 	 */
 	public void saveCourseFeedbackForm(ActionEvent event) {
-		System.out.println("is new _________________________"
-				+ isNewCourseAssessment);
-
 		if (isNewCourseAssessment == true) {
 			courseAssessmentFacade.persist(courseAssessment);
 			initCourseAssessment();
-			
-			System.out.println("-- ID -> "
-					+ courseAssessment.getCourseAssessmentId());
-			System.out
-					.println("-- mail -> " + courseAssessment.getUsersUserEmail());
-			System.out.println("-- course ID -> "
-					+ courseAssessment.getCourse().getCourseId());
 		}
 
 		courseAssessmentFacade.commitTransaction();
