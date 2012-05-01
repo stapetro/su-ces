@@ -26,6 +26,10 @@ _mvn clean test_ - run unit tests
 
 _mvn clean test-compile_ - only compile test sources
 
+_mvn `<goal>` -DskipTests_ - skip the tests via command line
+
+_mvn `<goal>` -Dmaven.test.skip=true_ - If you absolutely must, you can also use the maven.test.skip property to skip compiling the tests. maven.test.skip is honored by Surefire, Failsafe and the Compiler Plugin.
+
 == Attach source & javadoc to artifacts (jars) ==
 
 Configure m2eclipse Maven plugin for Eclipse with the following steps: Window > Preferences > Maven and checking the "_Download Artifact Sources_" and "_Download Artifact JavaDoc_" options
@@ -44,3 +48,8 @@ _mysqldump --skip-triggers --compact --no-create-info --databases `<db_name>`_ -
 
 _mysqldump --routines --no-data --databases `<db_name>`_ - dumps only DDL
 
+= References =
+
+== Maven ==
+
+[http://maven.apache.org/plugins/maven-surefire-plugin/examples/skipping-test.html Skipping Test]

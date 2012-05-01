@@ -50,3 +50,7 @@ Staskata:
 Krasi:
   * implement course preview view
   * started admin view for courses
+
+= 1 May 2012 =  
+Staskata:
+  * DevCheatSheet wiki updated - Mvn command properties added for skipping unit tests.
