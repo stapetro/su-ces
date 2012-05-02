@@ -26,15 +26,30 @@ public class CourseAssessment implements Serializable {
 	private int courseDifficulty;
 	private int courseEngagements;
 	private int courseInPlan;
-	private int courseInderstanding;
+	private int courseUnderstanding;
 	private int courseOrganization;
 	private int coursePresentation;
-	private int couseUsefullness;
+	private int courseUsefullness;
 	private int studentsAttitude;
 	private String usersUserEmail;
 	private Course course;
 
 	public CourseAssessment() {
+	}
+
+	public CourseAssessment(CourseAssessment otherCourseAssessment) {
+		this.assessmentCorrectness = otherCourseAssessment.assessmentCorrectness;
+		this.courseAttitude = otherCourseAssessment.courseAttitude;
+		this.courseDifficulty = otherCourseAssessment.courseDifficulty;
+		this.courseEngagements = otherCourseAssessment.courseEngagements;
+		this.courseInPlan = otherCourseAssessment.courseInPlan;
+		this.courseUnderstanding = otherCourseAssessment.courseUnderstanding;
+		this.courseOrganization = otherCourseAssessment.courseOrganization;
+		this.coursePresentation = otherCourseAssessment.coursePresentation;
+		this.courseUsefullness = otherCourseAssessment.courseUsefullness;
+		this.studentsAttitude = otherCourseAssessment.studentsAttitude;
+		this.usersUserEmail = otherCourseAssessment.usersUserEmail;
+		this.course = otherCourseAssessment.course;
 	}
 
 	@Id
@@ -94,13 +109,13 @@ public class CourseAssessment implements Serializable {
 		this.courseInPlan = courseInPlan;
 	}
 
-	@Column(name = "course_inderstanding")
-	public int getCourseInderstanding() {
-		return this.courseInderstanding;
+	@Column(name = "course_understanding")
+	public int getCourseUnderstanding() {
+		return this.courseUnderstanding;
 	}
 
-	public void setCourseInderstanding(int courseInderstanding) {
-		this.courseInderstanding = courseInderstanding;
+	public void setCourseUnderstanding(int courseUnderstanding) {
+		this.courseUnderstanding = courseUnderstanding;
 	}
 
 	@Column(name = "course_organization")
@@ -121,13 +136,13 @@ public class CourseAssessment implements Serializable {
 		this.coursePresentation = coursePresentation;
 	}
 
-	@Column(name = "couse_usefullness")
-	public int getCouseUsefullness() {
-		return this.couseUsefullness;
+	@Column(name = "course_usefullness")
+	public int getCourseUsefullness() {
+		return this.courseUsefullness;
 	}
 
-	public void setCouseUsefullness(int couseUsefullness) {
-		this.couseUsefullness = couseUsefullness;
+	public void setCourseUsefullness(int courseUsefullness) {
+		this.courseUsefullness = courseUsefullness;
 	}
 
 	@Column(name = "students_attitude")
@@ -159,4 +174,43 @@ public class CourseAssessment implements Serializable {
 		this.course = course;
 	}
 
+	@Override
+	public boolean equals(Object courseAssessmentObj) {
+		if (courseAssessmentObj == null) {
+			return false;
+		}
+		if (courseAssessmentObj instanceof CourseAssessment) {
+			CourseAssessment courseAssessment = (CourseAssessment) courseAssessmentObj;
+			return this.courseAssessmentId == courseAssessment.courseAssessmentId
+					&& this.assessmentCorrectness == courseAssessment.assessmentCorrectness
+					&& this.courseAttitude == courseAssessment.courseAttitude
+					&& this.courseDifficulty == courseAssessment.courseDifficulty
+					&& this.courseEngagements == courseAssessment.courseEngagements
+					&& this.courseUnderstanding == courseAssessment.courseUnderstanding
+					&& this.courseInPlan == courseAssessment.courseInPlan
+					&& this.courseOrganization == courseAssessment.courseOrganization
+					&& this.coursePresentation == courseAssessment.coursePresentation
+					&& this.courseUsefullness == courseAssessment.courseUsefullness
+					&& this.studentsAttitude == courseAssessment.studentsAttitude
+					&& ((this.usersUserEmail == null && courseAssessment.usersUserEmail == null) || (this.usersUserEmail != null
+							&& courseAssessment.usersUserEmail != null && this.usersUserEmail
+								.equals(courseAssessment.usersUserEmail)))
+					&& ((this.course == null && courseAssessment.course == null) || (this.course != null
+							&& courseAssessment.course != null && this.course
+								.equals(courseAssessment.course)));
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		int hashCode = courseAssessmentId ^ assessmentCorrectness
+				^ courseAttitude ^ courseDifficulty ^ courseEngagements
+				^ courseUnderstanding ^ courseInPlan ^ courseOrganization
+				^ coursePresentation ^ courseUsefullness ^ studentsAttitude;
+		if (usersUserEmail != null && usersUserEmail.isEmpty() == false) {
+			hashCode &= usersUserEmail.hashCode();
+		}
+		return hashCode;
+	}
 }

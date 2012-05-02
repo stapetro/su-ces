@@ -41,6 +41,7 @@ public class Course implements Serializable {
 
 	public Course() {
 	}
+		
 
 	@Id
 	@SequenceGenerator(name = "COURSES_COURSEID_GENERATOR")
@@ -170,6 +171,56 @@ public class Course implements Serializable {
 
 	public void setCourseAssessments(List<CourseAssessment> courseAssessments) {
 		this.courseAssessments = courseAssessments;
+	}
+
+	@Override
+	public boolean equals(Object courseObj) {
+		if (courseObj == null) {
+			return false;
+		}
+		if (courseObj instanceof Course) {
+			Course course = (Course) courseObj;
+			return this.courseId == course.courseId
+					&& this.year == course.year
+					&& this.workload == course.workload
+					&& ((this.summary == null && course.summary == null) || (this.summary != null
+							&& course.summary != null && this.summary
+								.equals(course.summary)))
+					&& ((this.examinationForm == null && course.examinationForm == null) || (this.examinationForm != null
+							&& course.examinationForm != null && this.examinationForm
+								.equals(course.examinationForm)))
+					&& ((this.courseAnnotation == null && course.courseAnnotation == null) || (this.courseAnnotation != null
+							&& course.courseAnnotation != null && this.courseAnnotation
+								.equals(course.courseAnnotation)))
+					&& ((this.preliminaryRequirements == null && course.preliminaryRequirements == null) || (this.preliminaryRequirements != null
+							&& course.preliminaryRequirements != null && this.preliminaryRequirements
+								.equals(course.preliminaryRequirements)))
+					&& ((this.literature == null && course.literature == null) || (this.literature != null
+							&& course.literature != null && this.literature
+								.equals(course.literature)));
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		int hashCode = this.courseId^this.year^this.workload;
+		if(this.summary != null && this.summary.isEmpty() == false) {
+			hashCode &= this.summary.hashCode();
+		}
+		if(this.examinationForm != null && this.examinationForm.isEmpty() == false) {
+			hashCode &= this.examinationForm.hashCode();
+		}
+		if(this.courseAnnotation != null && this.courseAnnotation.isEmpty() == false) {
+			hashCode &= this.courseAnnotation.hashCode();
+		}
+		if(this.preliminaryRequirements != null && this.preliminaryRequirements.isEmpty() == false) {
+			hashCode &= this.preliminaryRequirements.hashCode();
+		}
+		if(this.literature != null && this.literature.isEmpty() == false) {
+			hashCode &= this.literature.hashCode();
+		}		
+		return hashCode;
 	}
 
 }

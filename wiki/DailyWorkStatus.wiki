@@ -54,3 +54,7 @@ Krasi:
 = 1 May 2012 =  
 Staskata:
   * DevCheatSheet wiki updated - Mvn command properties added for skipping unit tests.
+  
+= 2 May 2012 =  
+Staskata:
+  * issue 32 done
