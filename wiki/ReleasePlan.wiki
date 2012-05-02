@@ -37,3 +37,4 @@ End date: 8 May 2012
 || issue 33 || todo ||
 || issue 6 || done ||
 || issue 29 || done ||
+|| issue 32 || done ||
