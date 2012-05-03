@@ -58,3 +58,9 @@ Staskata:
 = 2 May 2012 =  
 Staskata:
   * issue 32 done
+
+= 3 May 2012 =
+Krasi:
+  * Fix feedback form after applied refactoring to the entities
+  * recreated the local dev DB. Scripts are OK. Still have the problem with Cyrilic letters
+  * I'll prepare DML scripts for the rest of the tables for the next time
