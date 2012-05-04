@@ -64,3 +64,7 @@ Krasi:
   * Fix feedback form after applied refactoring to the entities
   * recreated the local dev DB. Scripts are OK. Still have the problem with Cyrilic letters
   * I'll prepare DML scripts for the rest of the tables for the next time
+
+= 4 May 2012 =
+Krasi:
+  * Implement course admin view - need to make some improvements tomorrow
