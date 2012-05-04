@@ -27,9 +27,9 @@
 				<h:outputText value="#{msg.semester}" />
 				<h:outputText value="#{courseBean.course.semester.semesterName}"
 					rendered="#{sessionBean.userStudent}" />
-				<p:selectOneButton value="#{courseBean.course.semester.semesterId}" rendered="#{sessionBean.userAdmin}">
-					<f:selectItems value="#{courseBean.semesterList}"
-						var="semester"
+				<p:selectOneButton value="#{courseBean.course.semester.semesterId}"
+					rendered="#{sessionBean.userAdmin}">
+					<f:selectItems value="#{courseBean.semesterList}" var="semester"
 						itemValue="#{semester.semesterId}"
 						itemLabel="#{semester.semesterName}">
 					</f:selectItems>
@@ -47,9 +47,9 @@
 						<h:outputText value="#{specialty.specialtyName}"></h:outputText>
 					</h:column>
 				</h:dataTable>
-				<p:selectManyButton value="#{courseBean.course.specialties}" rendered="#{sessionBean.userAdmin}" >
-					<f:selectItems value="#{courseBean.specialtyList}"
-						var="specialty"
+				<p:selectManyButton value="#{courseBean.selectedSpecialties}"
+					rendered="#{sessionBean.userAdmin}">
+					<f:selectItems value="#{courseBean.specialtyList}" var="specialty"
 						itemValue="#{specialty.specialtyId}"
 						itemLabel="#{specialty.specialtyName}">
 					</f:selectItems>
@@ -62,7 +62,13 @@
 						<h:outputText value="#{grade.gradeNumber}" />
 					</h:column>
 				</h:dataTable>
-				<p:inputText rendered="#{sessionBean.userAdmin}" />
+				<p:selectManyButton value="#{courseBean.selectedGrades}"
+					rendered="#{sessionBean.userAdmin}">
+					<!-- the item labes starts with SPACE because of String cast exception -->
+					<f:selectItems value="#{courseBean.gradeList}" var="grade"
+						itemValue="#{grade.gradeId}" itemLabel=" #{grade.gradeNumber}">
+					</f:selectItems>
+				</p:selectManyButton>
 
 				<h:outputText value="#{msg.lecturer_name}" />
 				<h:outputText value="#{courseBean.course.lecturer.lecturerName}"
@@ -72,32 +78,38 @@
 				<h:outputText value="#{msg.course_annotation}" />
 				<h:outputText value="#{courseBean.course.courseAnnotation}"
 					rendered="#{sessionBean.userStudent}" />
-				<p:inputText rendered="#{sessionBean.userAdmin}" />
+				<p:editor value="#{courseBean.course.courseAnnotation}" width="600"
+					rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.preliminary_requirements}" />
 				<h:outputText value="#{courseBean.course.preliminaryRequirements}"
 					rendered="#{sessionBean.userStudent}" />
-				<p:inputText rendered="#{sessionBean.userAdmin}" />
+				<p:editor value="#{courseBean.course.preliminaryRequirements}"
+					width="600" rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.examination_form}" />
 				<h:outputText value="#{courseBean.course.examinationForm}"
 					rendered="#{sessionBean.userStudent}" />
-				<p:inputText rendered="#{sessionBean.userAdmin}" />
+				<p:editor value="#{courseBean.course.examinationForm}" width="600"
+					rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.summary}" />
 				<h:outputText value="#{courseBean.course.summary}"
 					rendered="#{sessionBean.userStudent}" />
-				<p:inputText rendered="#{sessionBean.userAdmin}" />
+				<p:editor value="#{courseBean.course.summary}" width="600"
+					rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.literature}" />
 				<h:outputText value="#{courseBean.course.literature}"
 					rendered="#{sessionBean.userStudent}" />
-				<p:inputText rendered="#{sessionBean.userAdmin}" />
+				<p:editor value="#{courseBean.course.literature}" width="600"
+					rendered="#{sessionBean.userAdmin}" />
 
 			</h:panelGrid>
 
 			<p:commandButton value="#{msg.submit}"
-				actionListener="#{courseBean.saveCourse}" />
+				actionListener="#{courseBean.saveCourse}"
+				rendered="#{sessionBean.userAdmin}" />
 
 		</h:form>
 	</ui:define>
