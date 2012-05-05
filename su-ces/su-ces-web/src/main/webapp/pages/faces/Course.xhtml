@@ -16,18 +16,19 @@
 
 				<h:outputText value="#{msg.course_name}" />
 				<h:outputText value="#{msg.course_name}"
-					rendered="#{sessionBean.userStudent}" />
+					rendered="#{sessionBean.userAdmin == false}" />
 				<p:inputText rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.year}" />
 				<h:outputText value="#{courseBean.course.year}"
-					rendered="#{sessionBean.userStudent}" />
-				<p:inputText rendered="#{sessionBean.userAdmin}" />
+					rendered="#{sessionBean.userAdmin == false}" />
+				<p:inputText value="#{courseBean.course.year}"
+					rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.semester}" />
 				<h:outputText value="#{courseBean.course.semester.semesterName}"
-					rendered="#{sessionBean.userStudent}" />
-				<p:selectOneButton value="#{courseBean.course.semester.semesterId}"
+					rendered="#{sessionBean.userAdmin == false}" />
+				<p:selectOneButton value="#{courseBean.selectedSemesterId}"
 					rendered="#{sessionBean.userAdmin}">
 					<f:selectItems value="#{courseBean.semesterList}" var="semester"
 						itemValue="#{semester.semesterId}"
@@ -37,12 +38,12 @@
 
 				<h:outputText value="#{msg.workload}" />
 				<h:outputText value="#{courseBean.course.workload}"
-					rendered="#{sessionBean.userStudent}" />
-				<p:inputText rendered="#{sessionBean.userAdmin}" />
+					rendered="#{sessionBean.userAdmin == false}" />
+				<p:inputText value="#{courseBean.course.workload}" rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.specialty}" />
 				<h:dataTable value="#{courseBean.course.specialties}"
-					var="specialty" rendered="#{sessionBean.userStudent}">
+					var="specialty" rendered="#{sessionBean.userAdmin == false}">
 					<h:column>
 						<h:outputText value="#{specialty.specialtyName}"></h:outputText>
 					</h:column>
@@ -57,7 +58,7 @@
 
 				<h:outputText value="#{msg.courses}" />
 				<h:dataTable value="#{courseBean.course.grades}" var="grade"
-					rendered="#{sessionBean.userStudent}">
+					rendered="#{sessionBean.userAdmin == false}">
 					<h:column>
 						<h:outputText value="#{grade.gradeNumber}" />
 					</h:column>
@@ -72,36 +73,36 @@
 
 				<h:outputText value="#{msg.lecturer_name}" />
 				<h:outputText value="#{courseBean.course.lecturer.lecturerName}"
-					rendered="#{sessionBean.userStudent}" />
-				<p:inputText rendered="#{sessionBean.userAdmin}" />
+					rendered="#{sessionBean.userAdmin == false}" />
+				<p:inputText value="lecturers are not implemented yet" rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.course_annotation}" />
 				<h:outputText value="#{courseBean.course.courseAnnotation}"
-					rendered="#{sessionBean.userStudent}" />
+					rendered="#{sessionBean.userAdmin == false}" />
 				<p:editor value="#{courseBean.course.courseAnnotation}" width="600"
 					rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.preliminary_requirements}" />
 				<h:outputText value="#{courseBean.course.preliminaryRequirements}"
-					rendered="#{sessionBean.userStudent}" />
+					rendered="#{sessionBean.userAdmin == false}" />
 				<p:editor value="#{courseBean.course.preliminaryRequirements}"
 					width="600" rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.examination_form}" />
 				<h:outputText value="#{courseBean.course.examinationForm}"
-					rendered="#{sessionBean.userStudent}" />
+					rendered="#{sessionBean.userAdmin == false}" />
 				<p:editor value="#{courseBean.course.examinationForm}" width="600"
 					rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.summary}" />
 				<h:outputText value="#{courseBean.course.summary}"
-					rendered="#{sessionBean.userStudent}" />
+					rendered="#{sessionBean.userAdmin == false}" />
 				<p:editor value="#{courseBean.course.summary}" width="600"
 					rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.literature}" />
 				<h:outputText value="#{courseBean.course.literature}"
-					rendered="#{sessionBean.userStudent}" />
+					rendered="#{sessionBean.userAdmin == false}" />
 				<p:editor value="#{courseBean.course.literature}" width="600"
 					rendered="#{sessionBean.userAdmin}" />
 
