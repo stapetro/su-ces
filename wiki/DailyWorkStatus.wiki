@@ -72,3 +72,7 @@ Krasi:
 = 5 May 2012 =
 Staskata:
   * SessionBean - Checking for user roles implemented
+Krasi:
+  * updated DML scripts with data for courses
+  * implemented course administration view
+  * started making navigation to feedback form - I'll finish it tomorrow
