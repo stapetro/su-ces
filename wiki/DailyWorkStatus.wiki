@@ -72,6 +72,7 @@ Krasi:
 = 5 May 2012 =
 Staskata:
   * SessionBean - Checking for user roles implemented
+  * Unit test retrieving course by id in CoursePerristence class
 Krasi:
   * updated DML scripts with data for courses
   * implemented course administration view

@@ -15,6 +15,7 @@ The wiki's goal is to provide reference to useful resources.
  * [http://docs.codehaus.org/display/MAVEN/best+practices+-+version+management+in+multi+project+bu Version mgnt in multi project Best Practices]
  * [http://stackoverflow.com/questions/3697449/retrieve-version-from-maven-pom-xml-in-code Retrieve version from pom.xml in code]
  * [http://maven.apache.org/guides/introduction/introduction-to-profiles.html Intro to build profiles]
+ * [http://maven.apache.org/guides/getting-started/index.html Maven Getting Started]
  
 == MySQL ==
  * [http://starikovs.com/2011/02/20/change-font-mysql-workbench-editor/ Change font in MySql Workbench Editor]
