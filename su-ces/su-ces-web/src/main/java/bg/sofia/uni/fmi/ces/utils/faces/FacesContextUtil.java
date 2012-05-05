@@ -3,7 +3,6 @@ package bg.sofia.uni.fmi.ces.utils.faces;
 import java.util.Iterator;
 
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
 
 public class FacesContextUtil {
 

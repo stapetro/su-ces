@@ -31,12 +31,6 @@ public class SessionUtils {
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, Object> session = externalContext.getSessionMap();
 
-		// TODO remove the session map dump
-		for (Map.Entry<String, Object> entry : session.entrySet()) {
-			System.out.println("-- " + entry.getKey() + " - "
-					+ entry.getValue());
-		}
-
 		Object sessionObject = session.get(name);
 		return sessionObject;
 	}

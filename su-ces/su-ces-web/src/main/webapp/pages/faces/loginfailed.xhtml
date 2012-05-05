@@ -11,7 +11,7 @@
 	</ui:define>
 
 	<ui:define name="pageBody">
-		<h:outputText value="${msg.loginfailed}" />
+		<h:outputText styleClass="negativeMsg" value="${msg.loginfailed}" />
 		<h:form>
 			<h:outputLink value="home.xhtml">
 				<h:outputText value="#{msg.redirect_to_login}" />
