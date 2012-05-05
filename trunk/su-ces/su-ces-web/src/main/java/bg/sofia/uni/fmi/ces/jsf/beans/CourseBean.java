@@ -68,7 +68,7 @@ public class CourseBean implements Serializable {
 
 		// TODO getting course 1...when course searching is implemented this one
 		// should be finished
-		course = coursePersistence.geCourseById(1);
+		course = coursePersistence.getCourseById(1);
 		if (course != null) {
 			for (Specialty specialty : course.getSpecialties()) {
 				selectedSpecialties.add("" + specialty.getSpecialtyId());

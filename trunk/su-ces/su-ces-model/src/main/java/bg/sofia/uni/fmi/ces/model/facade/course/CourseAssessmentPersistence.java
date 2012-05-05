@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-import bg.sofia.uni.fmi.ces.model.course.Course;
 import bg.sofia.uni.fmi.ces.model.course.CourseAssessment;
 import bg.sofia.uni.fmi.ces.model.facade.ModelFacade;
 
@@ -29,7 +28,9 @@ public class CourseAssessmentPersistence extends ModelFacade {
 	
 	/**
 	 * Makes role persistence testable.
-	 * @param entityManagerFactory Entity manager factory to be specified.
+	 * 
+	 * @param entityManagerFactory
+	 *            Entity manager factory to be specified.
 	 */
 	public CourseAssessmentPersistence(EntityManagerFactory entityManagerFactory) {
 		super(entityManagerFactory);
