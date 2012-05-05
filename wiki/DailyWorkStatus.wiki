@@ -68,3 +68,7 @@ Krasi:
 = 4 May 2012 =
 Krasi:
   * Implement course admin view - need to make some improvements tomorrow
+
+= 5 May 2012 =
+Staskata:
+  * SessionBean - Checking for user roles implemented

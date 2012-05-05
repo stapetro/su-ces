@@ -10,7 +10,6 @@
   </parent>
   <artifactId>su-ces-model</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.1-MODEL-SNAPSHOT</version>
   <name>su-ces-model</name>
   <dependencies>
     <dependency>

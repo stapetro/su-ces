@@ -4,7 +4,6 @@
   <artifactId>su-ces-web</artifactId>
   <packaging>war</packaging>
   <name>su-ces-web Maven Webapp</name>
-  <version>0.0.1-WEB-SNAPSHOT</version>
   <dependencies>
 	<dependency>
       <groupId>bg.sofia.uni.fmi.ces</groupId>
