@@ -21,14 +21,15 @@ import bg.sofia.uni.fmi.ces.model.util.MockHelper;
 
 /**
  * Tests course assessment persistence facade.
+ * 
  * @author Staskata
- *
+ * 
  */
 public class CourseAssessmentPersistenceTest {
 
 	private CourseAssessmentPersistence courseAssessmentPersistence;
-	private CourseAssessment courseAssessment;
 	private Query mockedQuery;
+	private EntityManager mockedEntityMgr;
 
 	@Before
 	public void setUP() {
@@ -36,29 +37,15 @@ public class CourseAssessmentPersistenceTest {
 				.getEntityManagerFactory();
 		courseAssessmentPersistence = new CourseAssessmentPersistence(
 				mockedEntityMgrFactory);
-		EntityManager mockedEntityMgr = mockedEntityMgrFactory
-				.createEntityManager();
+		mockedEntityMgr = mockedEntityMgrFactory.createEntityManager();
 		mockedQuery = org.mockito.Mockito.mock(Query.class);
-		when(
-				mockedEntityMgr
-						.createQuery(CourseAssessmentPersistence.SELECT_COURSE_ASSESSMENT_BY_USER_AND_COURSE_ID))
-				.thenReturn(mockedQuery);
-
-		courseAssessment = getCourseAssessment();
-		when(
-				mockedQuery.setParameter("userName",
-						courseAssessment.getUsersUserEmail())).thenReturn(
-				mockedQuery);
-		when(
-				mockedQuery.setParameter("courseId", courseAssessment
-						.getCourse().getCourseId())).thenReturn(mockedQuery);
 	}
 
 	@After
 	public void setDown() {
 		courseAssessmentPersistence = null;
-		courseAssessment = null;
 		mockedQuery = null;
+		mockedEntityMgr = null;
 	}
 
 	/**
@@ -66,6 +53,18 @@ public class CourseAssessmentPersistenceTest {
 	 */
 	@Test
 	public void testGetCourseAssassment() {
+		when(
+				mockedEntityMgr
+						.createQuery(CourseAssessmentPersistence.SELECT_COURSE_ASSESSMENT_BY_USER_AND_COURSE_ID))
+				.thenReturn(mockedQuery);
+		CourseAssessment courseAssessment = getCourseAssessment();
+		when(
+				mockedQuery.setParameter("userName",
+						courseAssessment.getUsersUserEmail())).thenReturn(
+				mockedQuery);
+		when(
+				mockedQuery.setParameter("courseId", courseAssessment
+						.getCourse().getCourseId())).thenReturn(mockedQuery);
 		// case 0: test list that contains one valid course assessment
 		List<CourseAssessment> validList = new ArrayList<>();
 		validList.add(courseAssessment);
@@ -98,6 +97,12 @@ public class CourseAssessmentPersistenceTest {
 				.getCourseAssassment(courseAssessment.getUsersUserEmail(),
 						course.getCourseId());
 		Assert.assertNull(foundCourseAssessment);
+		// case 5: test when query result list is NULL
+		validList = null;
+		foundCourseAssessment = courseAssessmentPersistence
+				.getCourseAssassment(courseAssessment.getUsersUserEmail(),
+						course.getCourseId());
+		Assert.assertNull(foundCourseAssessment);
 	}
 
 	/**
@@ -124,4 +129,5 @@ public class CourseAssessmentPersistenceTest {
 		courseAssessment.setCourse(course);
 		return courseAssessment;
 	}
+
 }

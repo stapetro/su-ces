@@ -3,6 +3,7 @@ package bg.sofia.uni.fmi.ces.model.facade.course;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
 import bg.sofia.uni.fmi.ces.model.course.Course;
@@ -21,7 +22,7 @@ public class CoursePersistence extends ModelFacade implements Serializable {
 	/**
 	 * Select statement for obtaining the <code>Course</code> object by its ID
 	 */
-	private static final String SELECT_COURSE_BY_COURSE_ID = "SELECT c "
+	public static final String SELECT_COURSE_BY_COURSE_ID = "SELECT c "
 			+ "FROM Course c " + "WHERE c.courseId = :courseId";
 
 	private static final String SELECT_SEMESTERS = "SELECT s "
@@ -29,12 +30,21 @@ public class CoursePersistence extends ModelFacade implements Serializable {
 
 	private static final String SELECT_SPECIALTIES = "SELECT s "
 			+ "FROM Specialty s";
-	
-	private static final String SELECT_GRADES = "SELECT g "
-			+ "FROM Grade g";
+
+	private static final String SELECT_GRADES = "SELECT g " + "FROM Grade g";
 
 	public CoursePersistence() {
 		super();
+	}
+
+	/**
+	 * Makes role persistence testable.
+	 * 
+	 * @param entityManagerFactory
+	 *            Entity manager factory to be specified.
+	 */
+	public CoursePersistence(EntityManagerFactory entityManagerFactory) {
+		super(entityManagerFactory);
 	}
 
 	/**
@@ -45,7 +55,7 @@ public class CoursePersistence extends ModelFacade implements Serializable {
 	 * @return the course matching the ID. If no course is present NULL will be
 	 *         returned
 	 */
-	public Course geCourseById(int courseId) {
+	public Course getCourseById(int courseId) {
 		if (courseId < 0) {
 			return null;
 		}
@@ -76,11 +86,11 @@ public class CoursePersistence extends ModelFacade implements Serializable {
 
 		return specialtyList;
 	}
-	
+
 	public List<Grade> getGrades() {
 		Query query = entityManager.createQuery(SELECT_GRADES);
 		List<Grade> gradeList = (List<Grade>) query.getResultList();
-		
+
 		return gradeList;
 	}
 

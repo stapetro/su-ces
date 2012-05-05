@@ -30,6 +30,10 @@ _mvn `<goal>` -DskipTests_ - skip the tests via command line
 
 _mvn `<goal>` -Dmaven.test.skip=true_ - If you absolutely must, you can also use the maven.test.skip property to skip compiling the tests. maven.test.skip is honored by Surefire, Failsafe and the Compiler Plugin.
 
+_mvn surefire-report:report_ - generates unit tests report
+
+_mvn site_ - creates project description site
+
 == Attach source & javadoc to artifacts (jars) ==
 
 Configure m2eclipse Maven plugin for Eclipse with the following steps: Window > Preferences > Maven and checking the "_Download Artifact Sources_" and "_Download Artifact JavaDoc_" options
@@ -52,4 +56,5 @@ _mysqldump --routines --no-data --databases `<db_name>`_ - dumps only DDL
 
 == Maven ==
 
-[http://maven.apache.org/plugins/maven-surefire-plugin/examples/skipping-test.html Skipping Test]
+ * [http://maven.apache.org/plugins/maven-surefire-plugin/examples/skipping-test.html Skipping Test]
+ * [http://maven.apache.org/plugins/maven-surefire-report-plugin/usage.html Generate Surefire Report]
