@@ -39,7 +39,8 @@
 				<h:outputText value="#{msg.workload}" />
 				<h:outputText value="#{courseBean.course.workload}"
 					rendered="#{sessionBean.userAdmin == false}" />
-				<p:inputText value="#{courseBean.course.workload}" rendered="#{sessionBean.userAdmin}" />
+				<p:inputText value="#{courseBean.course.workload}"
+					rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.specialty}" />
 				<h:dataTable value="#{courseBean.course.specialties}"
@@ -74,35 +75,37 @@
 				<h:outputText value="#{msg.lecturer_name}" />
 				<h:outputText value="#{courseBean.course.lecturer.lecturerName}"
 					rendered="#{sessionBean.userAdmin == false}" />
-				<p:inputText value="lecturers are not implemented yet" rendered="#{sessionBean.userAdmin}" />
+				<p:inputText value="lecturers are not implemented yet"
+					rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.course_annotation}" />
-				<h:outputText value="#{courseBean.course.courseAnnotation}"
-					rendered="#{sessionBean.userAdmin == false}" />
+				<p:editor value="#{courseBean.course.courseAnnotation}" width="600"
+					disabled="true" rendered="#{sessionBean.userAdmin == false}" />
 				<p:editor value="#{courseBean.course.courseAnnotation}" width="600"
 					rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.preliminary_requirements}" />
-				<h:outputText value="#{courseBean.course.preliminaryRequirements}"
+				<p:editor value="#{courseBean.course.preliminaryRequirements}"
+					width="600" disabled="true"
 					rendered="#{sessionBean.userAdmin == false}" />
 				<p:editor value="#{courseBean.course.preliminaryRequirements}"
 					width="600" rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.examination_form}" />
-				<h:outputText value="#{courseBean.course.examinationForm}"
-					rendered="#{sessionBean.userAdmin == false}" />
+				<p:editor value="#{courseBean.course.examinationForm}" width="600"
+					disabled="true" rendered="#{sessionBean.userAdmin == false}" />
 				<p:editor value="#{courseBean.course.examinationForm}" width="600"
 					rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.summary}" />
-				<h:outputText value="#{courseBean.course.summary}"
-					rendered="#{sessionBean.userAdmin == false}" />
+				<p:editor value="#{courseBean.course.summary}" width="600"
+					disabled="true" rendered="#{sessionBean.userAdmin == false}" />
 				<p:editor value="#{courseBean.course.summary}" width="600"
 					rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.literature}" />
-				<h:outputText value="#{courseBean.course.literature}"
-					rendered="#{sessionBean.userAdmin == false}" />
+				<p:editor value="#{courseBean.course.literature}" width="600"
+					disabled="true" rendered="#{sessionBean.userAdmin == false}" />
 				<p:editor value="#{courseBean.course.literature}" width="600"
 					rendered="#{sessionBean.userAdmin}" />
 
