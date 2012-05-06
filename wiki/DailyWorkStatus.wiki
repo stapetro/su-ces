@@ -87,4 +87,4 @@ Krasi:
   * finished admin view issue 26
   * made connection from course to feedbackForm
   * fix issue 36 (thanks to Staskata for the help)
-  * completed user story 5 -> issues 5
+  * completed user story 5 -> issue 5
