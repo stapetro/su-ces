@@ -18,6 +18,17 @@ Krasi:
 Plan the next iteration.
   * Courses feedback form finished in its initial form. To be a subject of further changes
 
+= 17 Apr 2012 =
+ * Participants: Stas, Krasi, Kristiyan
+ * Iteration 2 planning
+ * Tasks to implement
+  ** setup jelasting for production deployments (Kristiyan)
+  ** implement users registration module (Staskata)
+  ** implement course information and administration module (Krasi)
+  ** implement menu and breadcrumps navigation (Krasi could take it or the first one who is available)
+ * User Story ID 5 and 6 go to Iteration 2
+ * Start tracking activities in the MeetingMinutes wiki  
+
 = 23 Apr 2012 =
   * Participants: Krasi, Stas, Product Owners
   * Performing Sprint 1 demo

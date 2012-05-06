@@ -4,17 +4,30 @@
 
 This wiki provides general information regarding releases and its interations
 
+= Definition of Done =
+ * User story is fully implemented and integrated into application
+ * There is nothing sush as half-done or partially done stories/tasks
+ * Code complete
+ * Test complete
+ * Reviewed by other team member
+ * Approved by product owner
+
+= Capacity Calculation =
+
+capacity on team member basis = (working days per person) / (sprint duration in days)
+
 = Release 1.0 =
 
 == Iteration 1 ==
 
-Planned velocity: 100 SP
-
-Actual velocity: 34 SP
-
-Start date: 26 Mar 2012
-
-End date: 16 Apr 2012
+ * Planned velocity: 100 SP
+ * Actual velocity: 34 SP
+ * Start date: 26 Mar 2012
+ * End date: 16 Apr 2012
+ * Sprint retrospective notes
+  ** Define & apply coding standards, naming convetions
+  ** Implement unit testing in the project
+  ** MeetingMinutes wiki to be created to track team meetings
 
 || *Task name* || *Status* ||
 || issue 5 || todo ||
@@ -23,13 +36,14 @@ End date: 16 Apr 2012
 
 == Iteration 2 ==
 
-Planned velocity: 61 SP
-
-Actual velocity:
-
-Start date: 17 Apr 2012
-
-End date: 8 May 2012
+ * Planned velocity: 61 SP
+ * Actual velocity:
+ * Start date: 17 Apr 2012
+ * End date: 8 May 2012
+ * Capacity
+  ** Staskata - 65%
+  ** Krasi - 65%
+  ** Kristiyan   - 0%
 
 || *Task name* || *Status* ||
 || issue 10 || todo ||
