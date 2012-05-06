@@ -39,7 +39,7 @@ capacity on team member basis = (working days per person) / (sprint duration in 
  * Planned velocity: 61 SP
  * Actual velocity:
  * Start date: 17 Apr 2012
- * End date: 8 May 2012
+ * End date: 7 May 2012
  * Capacity
   ** Staskata - 65%
   ** Krasi - 65%
