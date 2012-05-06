@@ -82,3 +82,9 @@ Krasi:
 Staskata
   * Scrum mastering - added definition of done and capacity definition, review iteration issues
   * help to Krasi for issue 36
+
+Krasi:
+  * finished admin view issue 26
+  * made connection from course to feedbackForm
+  * fix issue 36 (thanks to Staskata for the help)
+  * completed user story 5 -> issues 5
