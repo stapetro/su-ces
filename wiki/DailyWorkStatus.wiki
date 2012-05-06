@@ -77,3 +77,8 @@ Krasi:
   * updated DML scripts with data for courses
   * implemented course administration view
   * started making navigation to feedback form - I'll finish it tomorrow
+  
+= 6 May 2012 =
+Staskata
+  * Scrum mastering - added definition of done and capacity definition, review iteration issues
+  * help to Krasi for issue 36
