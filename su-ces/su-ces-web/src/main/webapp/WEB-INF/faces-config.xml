@@ -14,21 +14,5 @@
 			<var>msg</var>
 		</resource-bundle>
 	</application>
-<!-- 		
-	<navigation-rule>
-		<navigation-case>
-			<from-outcome>login</from-outcome>
-			<to-view-id>/pages/faces/auth.jsf</to-view-id>
-			<redirect/>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<navigation-case>
-			<from-action>#{SessionBean.logout}</from-action>		
-			<from-outcome>logout</from-outcome>
-			<to-view-id>/pages/faces/home.jsf</to-view-id>
-			<redirect />
-		</navigation-case>
-	</navigation-rule>	
- -->	
+
 </faces-config>

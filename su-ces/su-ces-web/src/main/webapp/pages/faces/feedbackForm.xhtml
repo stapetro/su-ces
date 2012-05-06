@@ -14,7 +14,7 @@
 		<h:form>
 			<h:panelGrid columns="2">
 				<h:outputText value="#{msg.course_presentation}" />
-				<p:selectOneButton value="#{feedbackForm.courseAssessment.coursePresentation}">
+				<p:selectOneButton value="#{feedbackFormBean.courseAssessment.coursePresentation}">
 					<f:selectItem itemLabel="#{msg.grade_0}" itemValue="1" />
 					<f:selectItem itemLabel="#{msg.grade_1}" itemValue="2" />
 					<f:selectItem itemLabel="#{msg.grade_2}" itemValue="3" />
@@ -23,7 +23,7 @@
 				</p:selectOneButton>
 
 				<h:outputText value="#{msg.course_understanding}" />
-				<p:selectOneButton value="#{feedbackForm.courseAssessment.courseUnderstanding}">
+				<p:selectOneButton value="#{feedbackFormBean.courseAssessment.courseUnderstanding}">
 					<f:selectItem itemLabel="#{msg.grade_0}" itemValue="1" />
 					<f:selectItem itemLabel="#{msg.grade_1}" itemValue="2" />
 					<f:selectItem itemLabel="#{msg.grade_2}" itemValue="3" />
@@ -32,7 +32,7 @@
 				</p:selectOneButton>
 
 				<h:outputText value="#{msg.course_attitude}" />
-				<p:selectOneButton value="#{feedbackForm.courseAssessment.courseAttitude}">
+				<p:selectOneButton value="#{feedbackFormBean.courseAssessment.courseAttitude}">
 					<f:selectItem itemLabel="#{msg.grade_0}" itemValue="1" />
 					<f:selectItem itemLabel="#{msg.grade_1}" itemValue="2" />
 					<f:selectItem itemLabel="#{msg.grade_2}" itemValue="3" />
@@ -41,7 +41,7 @@
 				</p:selectOneButton>
 
 				<h:outputText value="#{msg.students_attitude}" />
-				<p:selectOneButton value="#{feedbackForm.courseAssessment.studentsAttitude}">
+				<p:selectOneButton value="#{feedbackFormBean.courseAssessment.studentsAttitude}">
 					<f:selectItem itemLabel="#{msg.grade_0}" itemValue="1" />
 					<f:selectItem itemLabel="#{msg.grade_1}" itemValue="2" />
 					<f:selectItem itemLabel="#{msg.grade_2}" itemValue="3" />
@@ -50,7 +50,7 @@
 				</p:selectOneButton>
 
 				<h:outputText value="#{msg.assessment_correctness}" />
-				<p:selectOneButton value="#{feedbackForm.courseAssessment.assessmentCorrectness}">
+				<p:selectOneButton value="#{feedbackFormBean.courseAssessment.assessmentCorrectness}">
 					<f:selectItem itemLabel="#{msg.grade_0}" itemValue="1" />
 					<f:selectItem itemLabel="#{msg.grade_1}" itemValue="2" />
 					<f:selectItem itemLabel="#{msg.grade_2}" itemValue="3" />
@@ -59,7 +59,7 @@
 				</p:selectOneButton>
 
 				<h:outputText value="#{msg.course_organization}" />
-				<p:selectOneButton value="#{feedbackForm.courseAssessment.courseOrganization}">
+				<p:selectOneButton value="#{feedbackFormBean.courseAssessment.courseOrganization}">
 					<f:selectItem itemLabel="#{msg.grade_0}" itemValue="1" />
 					<f:selectItem itemLabel="#{msg.grade_1}" itemValue="2" />
 					<f:selectItem itemLabel="#{msg.grade_2}" itemValue="3" />
@@ -68,7 +68,7 @@
 				</p:selectOneButton>
 
 				<h:outputText value="#{msg.course_usefullness}" />
-				<p:selectOneButton value="#{feedbackForm.courseAssessment.courseUsefullness}">
+				<p:selectOneButton value="#{feedbackFormBean.courseAssessment.courseUsefullness}">
 					<f:selectItem itemLabel="#{msg.grade_0}" itemValue="1" />
 					<f:selectItem itemLabel="#{msg.grade_1}" itemValue="2" />
 					<f:selectItem itemLabel="#{msg.grade_2}" itemValue="3" />
@@ -77,7 +77,7 @@
 				</p:selectOneButton>
 
 				<h:outputText value="#{msg.course_in_plan}" />
-				<p:selectOneButton value="#{feedbackForm.courseAssessment.courseInPlan}">
+				<p:selectOneButton value="#{feedbackFormBean.courseAssessment.courseInPlan}">
 					<f:selectItem itemLabel="#{msg.grade_0}" itemValue="1" />
 					<f:selectItem itemLabel="#{msg.grade_1}" itemValue="2" />
 					<f:selectItem itemLabel="#{msg.grade_2}" itemValue="3" />
@@ -86,7 +86,7 @@
 				</p:selectOneButton>
 
 				<h:outputText value="#{msg.course_difficulty}" />
-				<p:selectOneButton value="#{feedbackForm.courseAssessment.courseDifficulty}">
+				<p:selectOneButton value="#{feedbackFormBean.courseAssessment.courseDifficulty}">
 					<f:selectItem itemLabel="#{msg.grade_0}" itemValue="1" />
 					<f:selectItem itemLabel="#{msg.grade_1}" itemValue="2" />
 					<f:selectItem itemLabel="#{msg.grade_2}" itemValue="3" />
@@ -95,7 +95,7 @@
 				</p:selectOneButton>
 
 				<h:outputText value="#{msg.course_engagements}" />
-				<p:selectOneButton value="#{feedbackForm.courseAssessment.courseEngagements}">
+				<p:selectOneButton value="#{feedbackFormBean.courseAssessment.courseEngagements}">
 					<f:selectItem itemLabel="#{msg.grade_0}" itemValue="1" />
 					<f:selectItem itemLabel="#{msg.grade_1}" itemValue="2" />
 					<f:selectItem itemLabel="#{msg.grade_2}" itemValue="3" />
@@ -106,7 +106,7 @@
 			</h:panelGrid>
 
 			<p:commandButton value="#{msg.submit}"
-				actionListener="#{feedbackForm.saveCourseFeedbackForm}" />
+				actionListener="#{feedbackFormBean.saveCourseFeedbackForm}" type="submit" ajax="false" />
 		</h:form>
 	</ui:define>
 

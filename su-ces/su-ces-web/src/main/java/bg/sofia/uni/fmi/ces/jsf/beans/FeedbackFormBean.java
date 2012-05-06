@@ -2,62 +2,63 @@ package bg.sofia.uni.fmi.ces.jsf.beans;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import bg.sofia.uni.fmi.ces.model.course.Course;
 import bg.sofia.uni.fmi.ces.model.course.CourseAssessment;
 import bg.sofia.uni.fmi.ces.model.facade.course.CourseAssessmentPersistence;
+import bg.sofia.uni.fmi.ces.model.facade.course.CoursePersistence;
 import bg.sofia.uni.fmi.ces.utils.session.SessionUtils;
 
 /**
  * This is the backing bean of the FeedbackForm. It provided the basic
  * functionality to operate with course assessment.F
  */
-@ManagedBean(name = "feedbackForm")
+@ManagedBean(name = "feedbackFormBean")
 @ViewScoped
-public class FeedbackForm implements Serializable {
+public class FeedbackFormBean implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -9168652297544014276L;
-	/**
-	 * For internal use only!!! Determine if the local
-	 * <code>courseAssessment</code> is an existing record in the database or a
-	 * newly created one
-	 */
-	private boolean isNewCourseAssessment;
+
 	private CourseAssessment courseAssessment;
 
 	private CourseAssessmentPersistence courseAssessmentFacade;
-
-	public FeedbackForm() {
+	
+	private CoursePersistence coursePersistence;
+	
+	@PostConstruct
+	public void init(){
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		String courseIdAsString = externalContext.getRequestParameterMap().get("courseId");
+		
+		int courseId = 0;
+		if(courseIdAsString != null){
+			courseId = Integer.parseInt(courseIdAsString);
+		}
+		
 		courseAssessmentFacade = new CourseAssessmentPersistence();
-		courseAssessmentFacade.beginTransaction();
-		initCourseAssessment();
-	}
-
-	private void initCourseAssessment() {
-		isNewCourseAssessment = false;
-
-		// TODO should be set when the course page is implemented. the Course
-		// Object will be access through the session
-		Course course = new Course();
-		course.setCourseId(1);
-
+		coursePersistence = new CoursePersistence();
+		
 		String userName = SessionUtils.getLoggedUserName();
 		courseAssessment = courseAssessmentFacade.getCourseAssassment(userName,
-				course.getCourseId());
+				courseId);
 
 		if (courseAssessment == null) {
+			Course course = coursePersistence.getCourseById(courseId);
 			courseAssessment = new CourseAssessment();
 			courseAssessment.setCourse(course);
 
 			courseAssessment.setUsersUserEmail(userName);
-
-			isNewCourseAssessment = true;
 		}
+		
 	}
 
 	public CourseAssessment getCourseAssessment() {
@@ -66,11 +67,6 @@ public class FeedbackForm implements Serializable {
 
 	public void setCourseAssessment(CourseAssessment courseAssessment) {
 		this.courseAssessment = courseAssessment;
-
-		// TODO fix when course form is implemented
-		Course course = new Course();
-		course.setCourseId(1);
-		courseAssessment.setCourse(course);
 	}
 
 	/**
@@ -79,14 +75,8 @@ public class FeedbackForm implements Serializable {
 	 * @param event
 	 */
 	public void saveCourseFeedbackForm(ActionEvent event) {
-		if (isNewCourseAssessment == true) {
-			courseAssessmentFacade.persist(courseAssessment);
-			initCourseAssessment();
-		}
-
-		courseAssessmentFacade.commitTransaction();
-		// start a new transaction in case of further changes
 		courseAssessmentFacade.beginTransaction();
+		courseAssessmentFacade.persist(courseAssessment);
+		courseAssessmentFacade.commitTransaction();
 	}
-
 }

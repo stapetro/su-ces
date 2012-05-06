@@ -115,6 +115,10 @@
 				actionListener="#{courseBean.saveCourse}"
 				rendered="#{sessionBean.userAdmin}" />
 
+			<p:commandButton value="#{msg.assessCourse}"
+				action="#{courseBean.assessCourse}"
+				rendered="#{sessionBean.userStudent}" />
+
 		</h:form>
 	</ui:define>
 
