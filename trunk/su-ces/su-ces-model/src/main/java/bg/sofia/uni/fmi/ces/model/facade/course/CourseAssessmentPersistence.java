@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.ces.model.facade.course;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
@@ -12,8 +13,12 @@ import bg.sofia.uni.fmi.ces.model.facade.ModelFacade;
  * Provide a common interface for working with course assessment specific
  * operations.
  */
-public class CourseAssessmentPersistence extends ModelFacade {
+public class CourseAssessmentPersistence extends ModelFacade implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3091201718196438473L;
 	/**
 	 * Query for selecting the course assessment results.
 	 */

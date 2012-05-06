@@ -41,7 +41,6 @@ public class Course implements Serializable {
 
 	public Course() {
 	}
-		
 
 	@Id
 	@SequenceGenerator(name = "COURSES_COURSEID_GENERATOR")
@@ -201,25 +200,28 @@ public class Course implements Serializable {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		int hashCode = this.courseId^this.year^this.workload;
-		if(this.summary != null && this.summary.isEmpty() == false) {
+		int hashCode = this.courseId ^ this.year ^ this.workload;
+		if (this.summary != null && this.summary.isEmpty() == false) {
 			hashCode &= this.summary.hashCode();
 		}
-		if(this.examinationForm != null && this.examinationForm.isEmpty() == false) {
+		if (this.examinationForm != null
+				&& this.examinationForm.isEmpty() == false) {
 			hashCode &= this.examinationForm.hashCode();
 		}
-		if(this.courseAnnotation != null && this.courseAnnotation.isEmpty() == false) {
+		if (this.courseAnnotation != null
+				&& this.courseAnnotation.isEmpty() == false) {
 			hashCode &= this.courseAnnotation.hashCode();
 		}
-		if(this.preliminaryRequirements != null && this.preliminaryRequirements.isEmpty() == false) {
+		if (this.preliminaryRequirements != null
+				&& this.preliminaryRequirements.isEmpty() == false) {
 			hashCode &= this.preliminaryRequirements.hashCode();
 		}
-		if(this.literature != null && this.literature.isEmpty() == false) {
+		if (this.literature != null && this.literature.isEmpty() == false) {
 			hashCode &= this.literature.hashCode();
-		}		
+		}
 		return hashCode;
 	}
 

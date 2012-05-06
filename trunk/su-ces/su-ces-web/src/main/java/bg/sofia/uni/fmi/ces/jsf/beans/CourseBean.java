@@ -1,12 +1,18 @@
 package bg.sofia.uni.fmi.ces.jsf.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import bg.sofia.uni.fmi.ces.model.course.Course;
 import bg.sofia.uni.fmi.ces.model.course.Grade;
@@ -20,6 +26,7 @@ public class CourseBean implements Serializable {
 
 	private static final long serialVersionUID = -1373151780844385607L;
 
+	private transient Logger logger;
 	/**
 	 * Course reference object for working with course data
 	 */
@@ -61,6 +68,7 @@ public class CourseBean implements Serializable {
 	 */
 	private CoursePersistence coursePersistence;
 
+	//TODO move to @PostConstruct in iteration 3
 	public CourseBean() {
 		selectedSpecialties = new LinkedList<String>();
 		selectedGrades = new LinkedList<String>();
@@ -100,8 +108,19 @@ public class CourseBean implements Serializable {
 		coursePersistence.beginTransaction();
 		coursePersistence.persist(course);
 		coursePersistence.commitTransaction();
+	}
 
-		// course = coursePersistence.geCourseById(1);
+	public void assessCourse() {
+		FacesContext currContext = FacesContext.getCurrentInstance();
+		ExternalContext externalCxt = currContext.getExternalContext();
+
+		int courseId = course.getCourseId();
+		try {
+			externalCxt.redirect(String.format("feedbackForm.xhtml?courseId=%d",
+					courseId));
+		} catch (IOException e) {
+			getLogger().error(e);
+		}
 	}
 
 	/**
@@ -217,5 +236,12 @@ public class CourseBean implements Serializable {
 
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+
+	private Logger getLogger() {
+		if (logger == null) {
+			logger = LogManager.getLogger(this.getClass());
+		}
+		return logger;
 	}
 }
