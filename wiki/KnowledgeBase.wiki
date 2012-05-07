@@ -11,6 +11,9 @@ The wiki's goal is to provide reference to useful resources.
 == JEE ==
  * [https://svn.java.net/svn/javaeetutorial~svn/trunk/examples/ Java EE 6 tutorial + examples] - SVN download it
 
+== Web ==
+ * [https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet XSS Prevention]
+
 == Maven ==
  * [http://docs.codehaus.org/display/MAVEN/best+practices+-+version+management+in+multi+project+bu Version mgnt in multi project Best Practices]
  * [http://stackoverflow.com/questions/3697449/retrieve-version-from-maven-pom-xml-in-code Retrieve version from pom.xml in code]
