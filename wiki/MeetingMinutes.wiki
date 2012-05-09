@@ -33,3 +33,8 @@ Plan the next iteration.
   * Participants: Krasi, Stas, Product Owners
   * Performing Sprint 1 demo
 
+= 7 May 2012 =
+  * Participants: Krasi, Stas, Product Owners
+  * Performing Sprint 2 demo
+  * Demonstrated stories: issue 5, issue 6
+  * Set goals for sprint 3 - demonstrate one full use case for finding and assessing a course
