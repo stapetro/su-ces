@@ -37,7 +37,7 @@ capacity on team member basis = (working days per person) / (sprint duration in 
 == Iteration 2 ==
 
  * Planned velocity: 61 SP
- * Actual velocity:
+ * Actual velocity: 68 SP
  * Start date: 17 Apr 2012
  * End date: 7 May 2012
  * Capacity
@@ -56,7 +56,7 @@ capacity on team member basis = (working days per person) / (sprint duration in 
 == Iteration 3 ==
 
  * Planned velocity: 47 SP
- * Actual velocity:
+ * Actual velocity: 
  * Start date: 9 May 2012
  * End date: 29 May 2012
  * Capacity
