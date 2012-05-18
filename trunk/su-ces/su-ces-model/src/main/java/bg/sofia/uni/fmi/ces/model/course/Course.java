@@ -33,6 +33,7 @@ public class Course implements Serializable {
 	private String summary;
 	private int workload;
 	private int year;
+	private String courseName;
 	private Semester semester;
 	private Lecturer lecturer;
 	private List<Grade> grades;
@@ -52,6 +53,15 @@ public class Course implements Serializable {
 
 	public void setCourseId(int courseId) {
 		this.courseId = courseId;
+	}
+
+	@Column(name = "course_name", unique = true, nullable = false)
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 
 	@Lob()
@@ -180,6 +190,9 @@ public class Course implements Serializable {
 		if (courseObj instanceof Course) {
 			Course course = (Course) courseObj;
 			return this.courseId == course.courseId
+					&& ((this.courseName == null && course.courseName == null) || (this.courseName != null
+							&& course.courseName != null && this.courseName
+								.equals(course.courseName)))
 					&& this.year == course.year
 					&& this.workload == course.workload
 					&& ((this.summary == null && course.summary == null) || (this.summary != null
@@ -204,6 +217,9 @@ public class Course implements Serializable {
 	@Override
 	public int hashCode() {
 		int hashCode = this.courseId ^ this.year ^ this.workload;
+		if (this.courseName != null && this.courseName.isEmpty() == false) {
+			hashCode &= this.courseName.hashCode();
+		}
 		if (this.summary != null && this.summary.isEmpty() == false) {
 			hashCode &= this.summary.hashCode();
 		}

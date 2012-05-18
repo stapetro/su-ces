@@ -31,6 +31,7 @@ public class CourseAssessment implements Serializable {
 	private int coursePresentation;
 	private int courseUsefullness;
 	private int studentsAttitude;
+	private int courseOverall;
 	private String usersUserEmail;
 	private Course course;
 
@@ -50,6 +51,7 @@ public class CourseAssessment implements Serializable {
 		this.studentsAttitude = otherCourseAssessment.studentsAttitude;
 		this.usersUserEmail = otherCourseAssessment.usersUserEmail;
 		this.course = otherCourseAssessment.course;
+		this.courseOverall = otherCourseAssessment.courseOverall;
 	}
 
 	@Id
@@ -152,6 +154,15 @@ public class CourseAssessment implements Serializable {
 
 	public void setStudentsAttitude(int studentsAttitude) {
 		this.studentsAttitude = studentsAttitude;
+	}
+	
+	@Column(name = "course_overall")
+	public int getCourseOverall() {
+		return courseOverall;
+	}
+
+	public void setCourseOverall(int courseOverall) {
+		this.courseOverall = courseOverall;
 	}
 
 	@Column(name = "users_user_email", nullable = false, length = 64)

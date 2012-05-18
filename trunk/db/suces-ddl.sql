@@ -19,7 +19,7 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 DROP SCHEMA IF EXISTS `suces` ;
-CREATE SCHEMA IF NOT EXISTS `suces` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `suces` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
 SHOW WARNINGS;
 USE `suces` ;
 
@@ -138,6 +138,7 @@ CREATE  TABLE IF NOT EXISTS `suces`.`courses` (
   `examination_form` MEDIUMTEXT NULL ,
   `summary` MEDIUMTEXT NULL ,
   `literature` MEDIUMTEXT NULL ,
+  `course_name` VARCHAR(255) NOT NULL ,
   PRIMARY KEY (`course_id`) ,
   CONSTRAINT `fk_courses_semester1`
     FOREIGN KEY (`semester_semester_id` )
@@ -158,6 +159,9 @@ SHOW WARNINGS;
 CREATE INDEX `fk_courses_lecturer1` ON `suces`.`courses` (`lecturer_lecturer_id` ASC) ;
 
 SHOW WARNINGS;
+CREATE UNIQUE INDEX `course_name_UNIQUE` ON `suces`.`courses` (`course_name` ASC) ;
+
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `suces`.`course_assessment`
@@ -176,6 +180,7 @@ CREATE  TABLE IF NOT EXISTS `suces`.`course_assessment` (
   `course_engagements` INT NULL DEFAULT NULL ,
   `courses_course_id` INT NOT NULL ,
   `users_user_email` VARCHAR(64) NOT NULL ,
+  `course_overall` INT NULL ,
   PRIMARY KEY (`course_assessment_id`) ,
   CONSTRAINT `fk_course_assessment_courses1`
     FOREIGN KEY (`courses_course_id` )

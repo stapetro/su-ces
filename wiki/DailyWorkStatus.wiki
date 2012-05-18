@@ -88,3 +88,10 @@ Krasi:
   * made connection from course to feedbackForm
   * fix issue 36 (thanks to Staskata for the help)
   * completed user story 5 -> issue 5
+  
+= 6 May 2012 =
+Staskata
+  * Data model changes - course name, course overall assessment added.
+  * Changing encoding in MySQL server & DB.
+  * Course profile page works with a course name.
+  * NOTE: Execute DML script through MySQL workbench or other client (not through command prompt)
