@@ -15,9 +15,10 @@
 			<h:panelGrid columns="2">
 
 				<h:outputText value="#{msg.course_name}" />
-				<h:outputText value="#{msg.course_name}"
+				<h:outputText value="#{courseBean.course.courseName}"
 					rendered="#{sessionBean.userAdmin == false}" />
-				<p:inputText rendered="#{sessionBean.userAdmin}" />
+				<p:inputText value="#{courseBean.course.courseName}"
+					rendered="#{sessionBean.userAdmin}" />
 
 				<h:outputText value="#{msg.year}" />
 				<h:outputText value="#{courseBean.course.year}"

@@ -68,6 +68,7 @@ public class CoursePersistenceTest {
 		// case 1: course list contains more than one course.
 		Course secondCourse = new Course();
 		secondCourse.setCourseId(2);
+		secondCourse.setCourseName("Project Management");
 		secondCourse.setCourseAnnotation("course 2 annotation");
 		secondCourse.setExaminationForm("written & tests 2");
 		secondCourse.setLiterature("Web Services 2");
@@ -91,6 +92,7 @@ public class CoursePersistenceTest {
 	private Course getCourse() {
 		Course course = new Course();
 		course.setCourseId(1);
+		course.setCourseName("Service Oriented Architecture");
 		course.setCourseAnnotation("course annotation");
 		course.setExaminationForm("written & tests");
 		course.setLiterature("Web Services");
