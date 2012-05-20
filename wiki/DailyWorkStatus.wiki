@@ -95,3 +95,9 @@ Staskata
   * Changing encoding in MySQL server & DB.
   * Course profile page works with a course name.
   * NOTE: Execute DML script through MySQL workbench or other client (not through command prompt)
+
+= 20 May 2012 =
+Krasi
+  * Updated new DB model
+  * created course search page view
+  * made link between selected course and the preview page for it
