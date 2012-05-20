@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
@@ -68,15 +69,17 @@ public class CourseBean implements Serializable {
 	 */
 	private CoursePersistence coursePersistence;
 
-	//TODO move to @PostConstruct in iteration 3
-	public CourseBean() {
+	@PostConstruct
+	public void init(){
 		selectedSpecialties = new LinkedList<String>();
 		selectedGrades = new LinkedList<String>();
 		coursePersistence = new CoursePersistence();
 
 		// TODO getting course 1...when course searching is implemented this one
 		// should be finished
-		course = coursePersistence.getCourseById(1);
+		// Done - need to be tested and remove the comments
+		int courseId = getInitialCourseId();
+		course = coursePersistence.getCourseById(courseId);
 		if (course != null) {
 			for (Specialty specialty : course.getSpecialties()) {
 				selectedSpecialties.add("" + specialty.getSpecialtyId());
@@ -88,6 +91,19 @@ public class CourseBean implements Serializable {
 
 			selectedSemesterId = course.getSemester().getSemesterId();
 		}
+	}
+	
+	private int getInitialCourseId(){
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		String courseIdAsString = externalContext.getRequestParameterMap().get("courseId");
+		
+		int courseId = 0;
+		if(courseIdAsString != null){
+			courseId = Integer.parseInt(courseIdAsString);
+		}
+		
+		return courseId;
 	}
 
 	/**

@@ -33,6 +33,9 @@ public class CoursePersistence extends ModelFacade implements Serializable {
 
 	private static final String SELECT_GRADES = "SELECT g " + "FROM Grade g";
 
+	private static final String SELECT_ALL_COURSES = "SELECT c "
+			+ "FROM Course c ";
+
 	public CoursePersistence() {
 		super();
 	}
@@ -90,6 +93,13 @@ public class CoursePersistence extends ModelFacade implements Serializable {
 	public List<Grade> getGrades() {
 		Query query = entityManager.createQuery(SELECT_GRADES);
 		List<Grade> gradeList = (List<Grade>) query.getResultList();
+
+		return gradeList;
+	}
+
+	public List<Course> getAllCourses() {
+		Query query = entityManager.createQuery(SELECT_ALL_COURSES);
+		List<Course> gradeList = (List<Course>) query.getResultList();
 
 		return gradeList;
 	}
