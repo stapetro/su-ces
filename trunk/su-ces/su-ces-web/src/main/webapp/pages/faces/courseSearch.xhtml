@@ -1,0 +1,34 @@
+<ui:composition template="/pages/faces/ui/layout/ces_template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+	<ui:define name="pageTitle">
+		<h:outputText value="#{msg.courses_title}" />
+	</ui:define>
+
+	<ui:define name="pageBody">
+		<h:form>
+
+			<h:panelGrid columns="2">
+
+				<h:outputText value="#{msg.coursesList}" />
+				<p:selectOneListbox value="#{courseSearchBean.selectedCourseId}"> 
+					<f:selectItems value="#{courseSearchBean.coursesList}" var="course"
+						itemValue="#{course.courseId}"
+						itemLabel="#{course.courseName}">
+					</f:selectItems>
+				</p:selectOneListbox>
+
+			</h:panelGrid>
+			
+			<p:commandButton value="#{msg.coursePreview}"
+				action="#{courseSearchBean.viewCourse}" />
+				
+		</h:form>
+	</ui:define>
+
+</ui:composition>
