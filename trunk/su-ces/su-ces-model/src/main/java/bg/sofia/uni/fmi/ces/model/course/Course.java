@@ -34,6 +34,8 @@ public class Course implements Serializable {
 	private int workload;
 	private int year;
 	private String courseName;
+	private double rating;
+	private int ratingCounter;
 	private Semester semester;
 	private Lecturer lecturer;
 	private List<Grade> grades;
@@ -62,6 +64,27 @@ public class Course implements Serializable {
 
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
+	}
+
+	public double getRating() {
+		return rating;
+	}
+
+	public void setRating(double rating) {
+		if (rating > 0 && rating <= 6) {
+			this.rating = rating;
+		}
+	}
+
+	@Column(name = "rating_counter", nullable = false)
+	public int getRatingCounter() {
+		return ratingCounter;
+	}
+
+	public void setRatingCounter(int ratingCounter) {
+		if (ratingCounter >= 0) {
+			this.ratingCounter = ratingCounter;
+		}
 	}
 
 	@Lob()
@@ -195,6 +218,8 @@ public class Course implements Serializable {
 								.equals(course.courseName)))
 					&& this.year == course.year
 					&& this.workload == course.workload
+					&& this.rating == course.rating
+					&& this.ratingCounter == course.ratingCounter
 					&& ((this.summary == null && course.summary == null) || (this.summary != null
 							&& course.summary != null && this.summary
 								.equals(course.summary)))
@@ -216,7 +241,8 @@ public class Course implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hashCode = this.courseId ^ this.year ^ this.workload;
+		int hashCode = this.courseId ^ this.year ^ this.workload
+				^ Double.valueOf(this.rating).hashCode() ^ this.ratingCounter;
 		if (this.courseName != null && this.courseName.isEmpty() == false) {
 			hashCode &= this.courseName.hashCode();
 		}

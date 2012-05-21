@@ -101,3 +101,10 @@ Krasi
   * Updated new DB model
   * created course search page view
   * made link between selected course and the preview page for it
+  
+= 21 May 2012 =
+Staskata
+  * DB model updated - course rating properties added
+  * NOTE: Dev DB should be recreated
+  * Rating functionality implemented in course profile page (course.xhtml)
+  

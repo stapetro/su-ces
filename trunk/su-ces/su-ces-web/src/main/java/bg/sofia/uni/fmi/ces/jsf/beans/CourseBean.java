@@ -7,22 +7,26 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.persistence.EntityManager;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import bg.sofia.uni.fmi.ces.model.course.Course;
+import bg.sofia.uni.fmi.ces.model.course.CourseAssessment;
 import bg.sofia.uni.fmi.ces.model.course.Grade;
 import bg.sofia.uni.fmi.ces.model.course.Semester;
 import bg.sofia.uni.fmi.ces.model.course.Specialty;
+import bg.sofia.uni.fmi.ces.model.facade.course.CourseAssessmentPersistence;
 import bg.sofia.uni.fmi.ces.model.facade.course.CoursePersistence;
+import bg.sofia.uni.fmi.ces.utils.session.SessionUtils;
 
 @ManagedBean(name = "courseBean")
-@RequestScoped
+@ViewScoped
 public class CourseBean implements Serializable {
 
 	private static final long serialVersionUID = -1373151780844385607L;
@@ -69,8 +73,22 @@ public class CourseBean implements Serializable {
 	 */
 	private CoursePersistence coursePersistence;
 
+	private CourseAssessmentPersistence courseAssessmentFacade;
+
+	private CourseAssessment courseAssessment;
+
+	/**
+	 * Stores rating value for a course.
+	 */
+	private double rating;
+
+	/**
+	 * Stores number of people who rated for a course.
+	 */
+	private int ratingCounter;
+
 	@PostConstruct
-	public void init(){
+	public void init() {
 		selectedSpecialties = new LinkedList<String>();
 		selectedGrades = new LinkedList<String>();
 		coursePersistence = new CoursePersistence();
@@ -90,19 +108,41 @@ public class CourseBean implements Serializable {
 			}
 
 			selectedSemesterId = course.getSemester().getSemesterId();
+			this.rating = course.getRating();
+			this.ratingCounter = course.getRatingCounter();
+
+			this.courseAssessmentFacade = new CourseAssessmentPersistence();
+			// TODO Look for possible improvements in persistence model for
+			// better utilization of the same entity mgr
+
+			// Course assessment persistence should use exactly the same entity
+			// manager as course persistence.
+			EntityManager coursePersistenceEntityMgr = coursePersistence
+					.getEntityManager();
+			this.courseAssessmentFacade
+					.setEntityManager(coursePersistenceEntityMgr);
+			String userName = SessionUtils.getLoggedUserName();
+			this.courseAssessment = courseAssessmentFacade.getCourseAssassment(
+					userName, courseId);
+			if (courseAssessment == null) {
+				courseAssessment = new CourseAssessment();
+				courseAssessment.setCourse(course);
+				courseAssessment.setUsersUserEmail(userName);
+			}
 		}
 	}
-	
-	private int getInitialCourseId(){
+
+	private int getInitialCourseId() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
-		String courseIdAsString = externalContext.getRequestParameterMap().get("courseId");
-		
+		String courseIdAsString = externalContext.getRequestParameterMap().get(
+				"courseId");
+
 		int courseId = 0;
-		if(courseIdAsString != null){
+		if (courseIdAsString != null) {
 			courseId = Integer.parseInt(courseIdAsString);
 		}
-		
+
 		return courseId;
 	}
 
@@ -120,7 +160,6 @@ public class CourseBean implements Serializable {
 
 		Semester selectedSemester = getSemesterById(selectedSemesterId);
 		course.setSemester(selectedSemester);
-
 		coursePersistence.beginTransaction();
 		coursePersistence.persist(course);
 		coursePersistence.commitTransaction();
@@ -130,12 +169,30 @@ public class CourseBean implements Serializable {
 		FacesContext currContext = FacesContext.getCurrentInstance();
 		ExternalContext externalCxt = currContext.getExternalContext();
 
+		saveCourseRating();
 		int courseId = course.getCourseId();
 		try {
-			externalCxt.redirect(String.format("feedbackForm.xhtml?courseId=%d",
-					courseId));
+			externalCxt.redirect(String.format(
+					"feedbackForm.xhtml?courseId=%d", courseId));
 		} catch (IOException e) {
 			getLogger().error(e);
+		}
+	}
+
+	private void saveCourseRating() {
+		double rating = getRating();
+		if ((rating > 0D) && (isCourseRated() == false)) {
+			if (course != null && courseAssessment != null) {
+				double newRating = course.getRating() + rating;
+				int ratingCounter = getRatingCounter() + 1;
+				course.setRatingCounter(ratingCounter);
+				course.setRating(newRating / ratingCounter);
+				courseAssessment.setCourseRated(true);
+				courseAssessment.setCourse(course);
+				courseAssessmentFacade.beginTransaction();
+				courseAssessmentFacade.persist(courseAssessment);
+				courseAssessmentFacade.commitTransaction();
+			}
 		}
 	}
 
@@ -252,6 +309,27 @@ public class CourseBean implements Serializable {
 
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+
+	public double getRating() {
+		return rating;
+	}
+
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+
+	public int getRatingCounter() {
+		return ratingCounter;
+	}
+
+	public void setRatingCounter(int ratingCounter) {
+		this.ratingCounter = ratingCounter;
+	}
+
+	public boolean isCourseRated() {
+		return (this.courseAssessment != null && this.courseAssessment
+				.isCourseRated());
 	}
 
 	private Logger getLogger() {

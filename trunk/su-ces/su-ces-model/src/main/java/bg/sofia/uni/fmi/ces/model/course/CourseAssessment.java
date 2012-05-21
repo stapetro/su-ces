@@ -31,7 +31,7 @@ public class CourseAssessment implements Serializable {
 	private int coursePresentation;
 	private int courseUsefullness;
 	private int studentsAttitude;
-	private int courseOverall;
+	private boolean courseRated;
 	private String usersUserEmail;
 	private Course course;
 
@@ -49,9 +49,9 @@ public class CourseAssessment implements Serializable {
 		this.coursePresentation = otherCourseAssessment.coursePresentation;
 		this.courseUsefullness = otherCourseAssessment.courseUsefullness;
 		this.studentsAttitude = otherCourseAssessment.studentsAttitude;
+		this.courseRated = otherCourseAssessment.courseRated;
 		this.usersUserEmail = otherCourseAssessment.usersUserEmail;
 		this.course = otherCourseAssessment.course;
-		this.courseOverall = otherCourseAssessment.courseOverall;
 	}
 
 	@Id
@@ -155,14 +155,14 @@ public class CourseAssessment implements Serializable {
 	public void setStudentsAttitude(int studentsAttitude) {
 		this.studentsAttitude = studentsAttitude;
 	}
-	
-	@Column(name = "course_overall")
-	public int getCourseOverall() {
-		return courseOverall;
+
+	@Column(name = "course_rated", nullable = false)
+	public boolean isCourseRated() {
+		return courseRated;
 	}
 
-	public void setCourseOverall(int courseOverall) {
-		this.courseOverall = courseOverall;
+	public void setCourseRated(boolean courseRated) {
+		this.courseRated = courseRated;
 	}
 
 	@Column(name = "users_user_email", nullable = false, length = 64)
@@ -203,6 +203,7 @@ public class CourseAssessment implements Serializable {
 					&& this.coursePresentation == courseAssessment.coursePresentation
 					&& this.courseUsefullness == courseAssessment.courseUsefullness
 					&& this.studentsAttitude == courseAssessment.studentsAttitude
+					&& this.courseRated == courseAssessment.courseRated
 					&& ((this.usersUserEmail == null && courseAssessment.usersUserEmail == null) || (this.usersUserEmail != null
 							&& courseAssessment.usersUserEmail != null && this.usersUserEmail
 								.equals(courseAssessment.usersUserEmail)))
@@ -218,7 +219,8 @@ public class CourseAssessment implements Serializable {
 		int hashCode = courseAssessmentId ^ assessmentCorrectness
 				^ courseAttitude ^ courseDifficulty ^ courseEngagements
 				^ courseUnderstanding ^ courseInPlan ^ courseOrganization
-				^ coursePresentation ^ courseUsefullness ^ studentsAttitude;
+				^ coursePresentation ^ courseUsefullness ^ studentsAttitude
+				^ Boolean.valueOf(this.courseRated).hashCode();
 		if (usersUserEmail != null && usersUserEmail.isEmpty() == false) {
 			hashCode &= usersUserEmail.hashCode();
 		}

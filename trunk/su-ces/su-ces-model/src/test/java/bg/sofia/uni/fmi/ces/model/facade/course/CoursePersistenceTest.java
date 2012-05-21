@@ -76,6 +76,8 @@ public class CoursePersistenceTest {
 		secondCourse.setSummary("Course summary 2");
 		secondCourse.setWorkload(2);
 		secondCourse.setYear(2013);
+		secondCourse.setRating(3D);
+		secondCourse.setRatingCounter(34);
 		courses.add(secondCourse);
 		actualCourse = coursePersistence.getCourseById(courseId);
 		Assert.assertNull(actualCourse);
@@ -100,6 +102,8 @@ public class CoursePersistenceTest {
 		course.setSummary("Course summary");
 		course.setWorkload(1);
 		course.setYear(2015);
+		course.setRating(4D);
+		course.setRatingCounter(12);
 		return course;
 	}
 }
