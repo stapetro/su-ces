@@ -110,6 +110,13 @@
 				<p:editor value="#{courseBean.course.literature}" width="600"
 					rendered="#{sessionBean.userAdmin}" />
 
+				<h:outputText value="#{msg.course_rating}" />
+				<p:rating value="#{courseBean.rating}" stars="6"
+					disabled="#{sessionBean.userAdmin || courseBean.courseRated}" />
+
+				<h:outputText value="#{msg.course_ratingCounter}" />
+				<h:outputText value="#{courseBean.ratingCounter}" />
+
 			</h:panelGrid>
 
 			<p:commandButton value="#{msg.submit}"

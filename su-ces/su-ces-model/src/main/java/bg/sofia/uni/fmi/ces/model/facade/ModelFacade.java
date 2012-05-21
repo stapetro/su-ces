@@ -68,6 +68,14 @@ public abstract class ModelFacade implements IModelFacade {
 		transaction.rollback();
 	}
 
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
 	protected Logger getLogger() {
 		if (logger == null) {
 			logger = LogManager.getLogger(this.getClass());

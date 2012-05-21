@@ -50,7 +50,6 @@ public class FeedbackFormBean implements Serializable {
 		String userName = SessionUtils.getLoggedUserName();
 		courseAssessment = courseAssessmentFacade.getCourseAssassment(userName,
 				courseId);
-
 		if (courseAssessment == null) {
 			Course course = coursePersistence.getCourseById(courseId);
 			courseAssessment = new CourseAssessment();
@@ -58,7 +57,6 @@ public class FeedbackFormBean implements Serializable {
 
 			courseAssessment.setUsersUserEmail(userName);
 		}
-		
 	}
 
 	public CourseAssessment getCourseAssessment() {

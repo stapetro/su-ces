@@ -139,6 +139,8 @@ CREATE  TABLE IF NOT EXISTS `suces`.`courses` (
   `summary` MEDIUMTEXT NULL ,
   `literature` MEDIUMTEXT NULL ,
   `course_name` VARCHAR(255) NOT NULL ,
+  `rating` DOUBLE NULL ,
+  `rating_counter` INT NOT NULL DEFAULT 0 ,  
   PRIMARY KEY (`course_id`) ,
   CONSTRAINT `fk_courses_semester1`
     FOREIGN KEY (`semester_semester_id` )
@@ -178,9 +180,9 @@ CREATE  TABLE IF NOT EXISTS `suces`.`course_assessment` (
   `course_in_plan` INT NULL DEFAULT NULL ,
   `course_difficulty` INT NULL DEFAULT NULL ,
   `course_engagements` INT NULL DEFAULT NULL ,
+  `course_rated` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Stores if user has rated a course' ,  
   `courses_course_id` INT NOT NULL ,
   `users_user_email` VARCHAR(64) NOT NULL ,
-  `course_overall` INT NULL ,
   PRIMARY KEY (`course_assessment_id`) ,
   CONSTRAINT `fk_course_assessment_courses1`
     FOREIGN KEY (`courses_course_id` )
