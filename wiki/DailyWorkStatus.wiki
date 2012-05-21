@@ -106,5 +106,6 @@ Krasi
 Staskata
   * DB model updated - course rating properties added
   * NOTE: Dev DB should be recreated
+  * NOTE: Cannot commit DB model because Google Code reject it. Try to commit it later.
   * Rating functionality implemented in course profile page (course.xhtml)
   
