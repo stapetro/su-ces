@@ -19,10 +19,12 @@ import org.apache.log4j.Logger;
 import bg.sofia.uni.fmi.ces.model.course.Course;
 import bg.sofia.uni.fmi.ces.model.course.CourseAssessment;
 import bg.sofia.uni.fmi.ces.model.course.Grade;
+import bg.sofia.uni.fmi.ces.model.course.Lecturer;
 import bg.sofia.uni.fmi.ces.model.course.Semester;
 import bg.sofia.uni.fmi.ces.model.course.Specialty;
 import bg.sofia.uni.fmi.ces.model.facade.course.CourseAssessmentPersistence;
 import bg.sofia.uni.fmi.ces.model.facade.course.CoursePersistence;
+import bg.sofia.uni.fmi.ces.model.facade.lecturer.LecturerPersistence;
 import bg.sofia.uni.fmi.ces.utils.session.SessionUtils;
 
 @ManagedBean(name = "courseBean")
@@ -53,6 +55,11 @@ public class CourseBean implements Serializable {
 	private List<Grade> gradeList;
 
 	/**
+	 * List of all available lecturers
+	 */
+	private List<Lecturer> lecturerList;
+
+	/**
 	 * List of the ID values for the selected specialties
 	 */
 	private List<String> selectedSpecialties;
@@ -73,6 +80,8 @@ public class CourseBean implements Serializable {
 	 */
 	private CoursePersistence coursePersistence;
 
+	private LecturerPersistence lecturerPersistence;
+
 	private CourseAssessmentPersistence courseAssessmentFacade;
 
 	private CourseAssessment courseAssessment;
@@ -92,6 +101,7 @@ public class CourseBean implements Serializable {
 		selectedSpecialties = new LinkedList<String>();
 		selectedGrades = new LinkedList<String>();
 		coursePersistence = new CoursePersistence();
+		lecturerPersistence = new LecturerPersistence();
 
 		// TODO getting course 1...when course searching is implemented this one
 		// should be finished
@@ -108,27 +118,30 @@ public class CourseBean implements Serializable {
 			}
 
 			selectedSemesterId = course.getSemester().getSemesterId();
-			this.rating = course.getRating();
-			this.ratingCounter = course.getRatingCounter();
+		} else {
+			this.course = new Course();
+		}
 
-			this.courseAssessmentFacade = new CourseAssessmentPersistence();
-			// TODO Look for possible improvements in persistence model for
-			// better utilization of the same entity mgr
+		this.rating = course.getRating();
+		this.ratingCounter = course.getRatingCounter();
 
-			// Course assessment persistence should use exactly the same entity
-			// manager as course persistence.
-			EntityManager coursePersistenceEntityMgr = coursePersistence
-					.getEntityManager();
-			this.courseAssessmentFacade
-					.setEntityManager(coursePersistenceEntityMgr);
-			String userName = SessionUtils.getLoggedUserName();
-			this.courseAssessment = courseAssessmentFacade.getCourseAssassment(
-					userName, courseId);
-			if (courseAssessment == null) {
-				courseAssessment = new CourseAssessment();
-				courseAssessment.setCourse(course);
-				courseAssessment.setUsersUserEmail(userName);
-			}
+		this.courseAssessmentFacade = new CourseAssessmentPersistence();
+		// TODO Look for possible improvements in persistence model for
+		// better utilization of the same entity mgr
+
+		// Course assessment persistence should use exactly the same entity
+		// manager as course persistence.
+		EntityManager coursePersistenceEntityMgr = coursePersistence
+				.getEntityManager();
+		this.courseAssessmentFacade
+				.setEntityManager(coursePersistenceEntityMgr);
+		String userName = SessionUtils.getLoggedUserName();
+		this.courseAssessment = courseAssessmentFacade.getCourseAssassment(
+				userName, courseId);
+		if (courseAssessment == null) {
+			courseAssessment = new CourseAssessment();
+			courseAssessment.setCourse(course);
+			courseAssessment.setUsersUserEmail(userName);
 		}
 	}
 
@@ -160,6 +173,9 @@ public class CourseBean implements Serializable {
 
 		Semester selectedSemester = getSemesterById(selectedSemesterId);
 		course.setSemester(selectedSemester);
+		
+		//TODO getLecturerById....и това ще го допиша утре може би:)
+		
 		coursePersistence.beginTransaction();
 		coursePersistence.persist(course);
 		coursePersistence.commitTransaction();
@@ -262,21 +278,35 @@ public class CourseBean implements Serializable {
 	// ================ PROPERTY GETTERS AND SETTERS ===================
 
 	public List<Semester> getSemesterList() {
-		semesterList = coursePersistence.getSemesters();
+		if (semesterList == null) {
+			semesterList = coursePersistence.getSemesters();
+		}
 
 		return semesterList;
 	}
 
 	public List<Specialty> getSpecialtyList() {
-		specialtyList = coursePersistence.getSpecialties();
+		if (specialtyList == null) {
+			specialtyList = coursePersistence.getSpecialties();
+		}
 
 		return specialtyList;
 	}
 
 	public List<Grade> getGradeList() {
-		gradeList = coursePersistence.getGrades();
+		if (gradeList == null) {
+			gradeList = coursePersistence.getGrades();
+		}
 
 		return gradeList;
+	}
+
+	public List<Lecturer> getLecturerList() {
+		if (lecturerList == null) {
+			lecturerList = lecturerPersistence.getAllLecturers();
+		}
+
+		return lecturerList;
 	}
 
 	public List<String> getSelectedSpecialties() {

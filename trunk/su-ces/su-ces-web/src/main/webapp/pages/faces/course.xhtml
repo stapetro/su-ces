@@ -76,8 +76,13 @@
 				<h:outputText value="#{msg.lecturer_name}" />
 				<h:outputText value="#{courseBean.course.lecturer.lecturerName}"
 					rendered="#{sessionBean.userAdmin == false}" />
-				<p:inputText value="lecturers are not implemented yet"
-					rendered="#{sessionBean.userAdmin}" />
+				<p:selectOneMenu value="#{courseBean.course.lecturer.lecturerId}"
+					rendered="#{sessionBean.userAdmin}">
+					<f:selectItems value="#{courseBean.lecturerList}" var="lecturer"
+						itemValue="#{lecturer.lecturerId}"
+						itemLabel=" #{lecturer.lecturerName}">
+					</f:selectItems>
+				</p:selectOneMenu>
 
 				<h:outputText value="#{msg.course_annotation}" />
 				<p:editor value="#{courseBean.course.courseAnnotation}" width="600"
