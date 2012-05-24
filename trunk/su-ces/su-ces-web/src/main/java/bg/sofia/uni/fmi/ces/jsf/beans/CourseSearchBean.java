@@ -1,6 +1,7 @@
 package bg.sofia.uni.fmi.ces.jsf.beans;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -8,18 +9,18 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import bg.sofia.uni.fmi.ces.model.course.Course;
 import bg.sofia.uni.fmi.ces.model.facade.course.CoursePersistence;
 
 @ManagedBean(name = "courseSearchBean")
 @RequestScoped
-public class CourseSearchBean {
+public class CourseSearchBean extends SucesBean implements Serializable {
 
-	private transient Logger logger;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8100419846989013656L;
+
 	private int selectedCourseId;
 	
 	private List<Course> coursesList;
@@ -65,12 +66,4 @@ public class CourseSearchBean {
 	public void setCoursesList(List<Course> coursesList) {
 		this.coursesList = coursesList;
 	}
-	
-	private Logger getLogger() {
-		if (logger == null) {
-			logger = LogManager.getLogger(this.getClass());
-		}
-		return logger;
-	}
-
 }

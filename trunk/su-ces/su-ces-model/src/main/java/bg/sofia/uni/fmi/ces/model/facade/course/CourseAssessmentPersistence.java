@@ -13,7 +13,8 @@ import bg.sofia.uni.fmi.ces.model.facade.ModelFacade;
  * Provide a common interface for working with course assessment specific
  * operations.
  */
-public class CourseAssessmentPersistence extends ModelFacade implements Serializable{
+public class CourseAssessmentPersistence extends ModelFacade implements
+		Serializable {
 
 	/**
 	 * 
@@ -27,10 +28,14 @@ public class CourseAssessmentPersistence extends ModelFacade implements Serializ
 			+ "WHERE ca.usersUserEmail = :userName "
 			+ "AND ca.course.courseId = :courseId";
 
+	public static final String SELECT_COURSE_ASSESSMENT_BY_COURSE_ID = "SELECT ca "
+			+ "FROM CourseAssessment ca "
+			+ "WHERE ca.course.courseId = :courseId";
+
 	public CourseAssessmentPersistence() {
 		super();
 	}
-	
+
 	/**
 	 * Makes role persistence testable.
 	 * 
@@ -70,10 +75,19 @@ public class CourseAssessmentPersistence extends ModelFacade implements Serializ
 			// the result set is expected to contain a single record or no
 			// records at all
 			// otherwise something wrong has happened with the DB restrictions
-			//entityManager.getTransaction().begin();
+			// entityManager.getTransaction().begin();
 			courseAssessment = resultList.get(0);
 		}
 
 		return courseAssessment;
+	}
+
+	public List<CourseAssessment> getCourseAssessments(int courseId) {
+		Query query = entityManager
+				.createQuery(SELECT_COURSE_ASSESSMENT_BY_COURSE_ID);
+		query.setParameter("courseId", courseId);
+		List<CourseAssessment> resultList = (List<CourseAssessment>) query
+				.getResultList();
+		return resultList;
 	}
 }

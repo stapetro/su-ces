@@ -13,9 +13,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import bg.sofia.uni.fmi.ces.model.course.Course;
 import bg.sofia.uni.fmi.ces.model.course.CourseAssessment;
 import bg.sofia.uni.fmi.ces.model.course.Grade;
@@ -29,11 +26,10 @@ import bg.sofia.uni.fmi.ces.utils.session.SessionUtils;
 
 @ManagedBean(name = "courseBean")
 @ViewScoped
-public class CourseBean implements Serializable {
+public class CourseBean extends SucesBean implements Serializable {
 
 	private static final long serialVersionUID = -1373151780844385607L;
 
-	private transient Logger logger;
 	/**
 	 * Course reference object for working with course data
 	 */
@@ -82,19 +78,11 @@ public class CourseBean implements Serializable {
 
 	private LecturerPersistence lecturerPersistence;
 
-	private CourseAssessmentPersistence courseAssessmentFacade;
+	private CourseAssessmentPersistence courseAssessmentPersistence;
 
 	private CourseAssessment courseAssessment;
 
-	/**
-	 * Stores rating value for a course.
-	 */
-	private double rating;
-
-	/**
-	 * Stores number of people who rated for a course.
-	 */
-	private int ratingCounter;
+	private double courseUserRating;
 
 	@PostConstruct
 	public void init() {
@@ -122,10 +110,7 @@ public class CourseBean implements Serializable {
 			this.course = new Course();
 		}
 
-		this.rating = course.getRating();
-		this.ratingCounter = course.getRatingCounter();
-
-		this.courseAssessmentFacade = new CourseAssessmentPersistence();
+		this.courseAssessmentPersistence = new CourseAssessmentPersistence();
 		// TODO Look for possible improvements in persistence model for
 		// better utilization of the same entity mgr
 
@@ -133,16 +118,17 @@ public class CourseBean implements Serializable {
 		// manager as course persistence.
 		EntityManager coursePersistenceEntityMgr = coursePersistence
 				.getEntityManager();
-		this.courseAssessmentFacade
+		this.courseAssessmentPersistence
 				.setEntityManager(coursePersistenceEntityMgr);
 		String userName = SessionUtils.getLoggedUserName();
-		this.courseAssessment = courseAssessmentFacade.getCourseAssassment(
-				userName, courseId);
+		this.courseAssessment = courseAssessmentPersistence
+				.getCourseAssassment(userName, courseId);
 		if (courseAssessment == null) {
 			courseAssessment = new CourseAssessment();
 			courseAssessment.setCourse(course);
 			courseAssessment.setUsersUserEmail(userName);
 		}
+		this.courseUserRating = courseAssessment.getCourseRating();
 	}
 
 	private int getInitialCourseId() {
@@ -173,9 +159,9 @@ public class CourseBean implements Serializable {
 
 		Semester selectedSemester = getSemesterById(selectedSemesterId);
 		course.setSemester(selectedSemester);
-		
-		//TODO getLecturerById....и това ще го допиша утре може би:)
-		
+
+		// TODO getLecturerById....и това ще го допиша утре може би:)
+
 		coursePersistence.beginTransaction();
 		coursePersistence.persist(course);
 		coursePersistence.commitTransaction();
@@ -196,19 +182,74 @@ public class CourseBean implements Serializable {
 	}
 
 	private void saveCourseRating() {
-		double rating = getRating();
-		if ((rating > 0D) && (isCourseRated() == false)) {
-			if (course != null && courseAssessment != null) {
-				double newRating = course.getRating() + rating;
-				int ratingCounter = getRatingCounter() + 1;
-				course.setRatingCounter(ratingCounter);
-				course.setRating(newRating / ratingCounter);
-				courseAssessment.setCourseRated(true);
-				courseAssessment.setCourse(course);
-				courseAssessmentFacade.beginTransaction();
-				courseAssessmentFacade.persist(courseAssessment);
-				courseAssessmentFacade.commitTransaction();
+		if (course != null && courseAssessment != null) {
+			boolean isRated = isCourseRated();
+			double newUserRating = getUserRating();
+			if (isRated == false && newUserRating == 0D) {
+				return;
 			}
+			double oldUserRating = courseAssessment.getCourseRating();
+			int ratingCounter = getRatingCounter();
+			double courseRating = getRating();
+			double newCourseRating = 0D;
+			if (courseRating == 0D) {
+				newCourseRating = (newUserRating - oldUserRating);
+				ratingCounter = 1;
+				isRated = true;
+			} else if (courseRating > 0D) {
+				List<CourseAssessment> courseAssessments = courseAssessmentPersistence
+						.getCourseAssessments(course.getCourseId());
+				if (courseAssessments == null || courseAssessments.isEmpty()) {
+					getLogger()
+							.fatal("Course with rating '"
+									+ courseRating
+									+ "' should have assessments related to it!");
+					return;
+				}
+				double sum = 0D;
+				ratingCounter = 0;
+				for (CourseAssessment currAssessment : courseAssessments) {
+					if (currAssessment.getCourseAssessmentId() == courseAssessment
+							.getCourseAssessmentId()) {
+						sum += newCourseRating;
+					} else {
+						sum += currAssessment.getCourseRating();
+					}
+					ratingCounter++;
+				}
+				if (isRated == false) {
+					sum += newCourseRating;
+					ratingCounter++;
+					isRated = true;
+				} else if (newUserRating == 0D) {
+					ratingCounter--;
+					isRated = false;
+				}
+				newCourseRating = sum / (double) ratingCounter;
+			}
+			course.setRating(newCourseRating);
+			if (course.getRating() != newCourseRating) {
+				// TODO Throw error message
+				getLogger()
+						.error("Invalid course rating value '"
+								+ newCourseRating + "'");
+				return;
+			}
+			course.setRatingCounter(ratingCounter);
+			if (course.getRatingCounter() != ratingCounter) {
+				// TODO Throw error message
+				getLogger().error(
+						"Invalid course rating users counter'" + ratingCounter
+								+ "'");
+				return;
+			}
+			courseAssessment.setCourseRated(isRated);
+			courseAssessment.setCourseRating(newUserRating);
+			courseAssessment.setCourse(course);
+			courseAssessmentPersistence.beginTransaction();
+			coursePersistence.persist(course);
+			courseAssessmentPersistence.persist(courseAssessment);
+			courseAssessmentPersistence.commitTransaction();
 		}
 	}
 
@@ -342,19 +383,19 @@ public class CourseBean implements Serializable {
 	}
 
 	public double getRating() {
-		return rating;
+		return this.course.getRating();
 	}
 
 	public void setRating(double rating) {
-		this.rating = rating;
+		this.course.setRating(rating);
 	}
 
 	public int getRatingCounter() {
-		return ratingCounter;
+		return this.course.getRatingCounter();
 	}
 
 	public void setRatingCounter(int ratingCounter) {
-		this.ratingCounter = ratingCounter;
+		this.course.setRatingCounter(ratingCounter);
 	}
 
 	public boolean isCourseRated() {
@@ -362,10 +403,11 @@ public class CourseBean implements Serializable {
 				.isCourseRated());
 	}
 
-	private Logger getLogger() {
-		if (logger == null) {
-			logger = LogManager.getLogger(this.getClass());
-		}
-		return logger;
+	public double getUserRating() {
+		return this.courseUserRating;
+	}
+
+	public void setUserRating(double rating) {
+		this.courseUserRating = rating;
 	}
 }

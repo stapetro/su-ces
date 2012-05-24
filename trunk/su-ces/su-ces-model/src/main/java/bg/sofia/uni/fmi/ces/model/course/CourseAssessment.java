@@ -32,6 +32,7 @@ public class CourseAssessment implements Serializable {
 	private int courseUsefullness;
 	private int studentsAttitude;
 	private boolean courseRated;
+	private double courseRating;
 	private String usersUserEmail;
 	private Course course;
 
@@ -163,6 +164,15 @@ public class CourseAssessment implements Serializable {
 
 	public void setCourseRated(boolean courseRated) {
 		this.courseRated = courseRated;
+	}
+	
+	@Column(name = "course_rating")
+	public double getCourseRating() {
+		return courseRating;
+	}
+
+	public void setCourseRating(double courseRating) {
+		this.courseRating = courseRating;
 	}
 
 	@Column(name = "users_user_email", nullable = false, length = 64)

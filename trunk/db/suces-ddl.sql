@@ -181,6 +181,7 @@ CREATE  TABLE IF NOT EXISTS `suces`.`course_assessment` (
   `course_difficulty` INT NULL DEFAULT NULL ,
   `course_engagements` INT NULL DEFAULT NULL ,
   `course_rated` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Stores if user has rated a course' ,  
+  `course_rating` DOUBLE NULL ,  
   `courses_course_id` INT NOT NULL ,
   `users_user_email` VARCHAR(64) NOT NULL ,
   PRIMARY KEY (`course_assessment_id`) ,
