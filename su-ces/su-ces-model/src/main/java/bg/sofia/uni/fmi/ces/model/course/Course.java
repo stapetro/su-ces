@@ -71,7 +71,8 @@ public class Course implements Serializable {
 	}
 
 	public void setRating(double rating) {
-		if (rating > 0 && rating <= 6) {
+		//TODO Use constant for max value of rating
+		if (rating >= 0 && rating <= 6) {
 			this.rating = rating;
 		}
 	}

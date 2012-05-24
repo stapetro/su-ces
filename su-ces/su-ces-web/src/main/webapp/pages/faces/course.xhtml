@@ -115,9 +115,16 @@
 				<p:editor value="#{courseBean.course.literature}" width="600"
 					rendered="#{sessionBean.userAdmin}" />
 
+				<h:outputText value="#{msg.course_user_rating}" />
+				<p:rating value="#{courseBean.userRating}" stars="6"
+					disabled="#{sessionBean.userAdmin}" />
+					
 				<h:outputText value="#{msg.course_rating}" />
 				<p:rating value="#{courseBean.rating}" stars="6"
-					disabled="#{sessionBean.userAdmin || courseBean.courseRated}" />
+					disabled="true" />
+					
+				<h:outputText value="#{msg.course_rating}" />
+				<h:outputText value="#{courseBean.rating}" />							
 
 				<h:outputText value="#{msg.course_ratingCounter}" />
 				<h:outputText value="#{courseBean.ratingCounter}" />

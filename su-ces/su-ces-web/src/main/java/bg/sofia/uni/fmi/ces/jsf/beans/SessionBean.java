@@ -9,14 +9,9 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 @ManagedBean
 @SessionScoped
-public class SessionBean implements Serializable {
-
-	private Logger logger;
+public class SessionBean extends SucesBean implements Serializable {
 
 	/**
 	 * 
@@ -75,9 +70,9 @@ public class SessionBean implements Serializable {
 	public boolean isUserAdmin() {
 		return isUserInRole("admin");
 	}
-	
+
 	private boolean isUserInRole(String roleName) {
-		if(roleName == null || roleName.isEmpty()) {
+		if (roleName == null || roleName.isEmpty()) {
 			return false;
 		}
 		if (isLoggedIn()) {
@@ -85,14 +80,6 @@ public class SessionBean implements Serializable {
 			ExternalContext externalContext = facesContext.getExternalContext();
 			return externalContext.isUserInRole(roleName);
 		}
-		return false;		
+		return false;
 	}
-
-	private Logger getLogger() {
-		if (this.logger == null) {
-			this.logger = LogManager.getLogger(SessionBean.class);
-		}
-		return this.logger;
-	}
-
 }

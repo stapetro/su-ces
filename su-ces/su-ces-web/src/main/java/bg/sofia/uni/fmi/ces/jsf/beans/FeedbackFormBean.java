@@ -21,7 +21,7 @@ import bg.sofia.uni.fmi.ces.utils.session.SessionUtils;
  */
 @ManagedBean(name = "feedbackFormBean")
 @ViewScoped
-public class FeedbackFormBean implements Serializable {
+public class FeedbackFormBean extends SucesBean implements Serializable {
 	/**
 	 * 
 	 */
@@ -30,23 +30,24 @@ public class FeedbackFormBean implements Serializable {
 	private CourseAssessment courseAssessment;
 
 	private CourseAssessmentPersistence courseAssessmentFacade;
-	
+
 	private CoursePersistence coursePersistence;
-	
+
 	@PostConstruct
-	public void init(){
+	public void init() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
-		String courseIdAsString = externalContext.getRequestParameterMap().get("courseId");
-		
+		String courseIdAsString = externalContext.getRequestParameterMap().get(
+				"courseId");
+
 		int courseId = 0;
-		if(courseIdAsString != null){
+		if (courseIdAsString != null) {
 			courseId = Integer.parseInt(courseIdAsString);
 		}
-		
+
 		courseAssessmentFacade = new CourseAssessmentPersistence();
 		coursePersistence = new CoursePersistence();
-		
+
 		String userName = SessionUtils.getLoggedUserName();
 		courseAssessment = courseAssessmentFacade.getCourseAssassment(userName,
 				courseId);
