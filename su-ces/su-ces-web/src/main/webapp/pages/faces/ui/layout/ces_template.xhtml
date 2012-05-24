@@ -9,50 +9,58 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet library="styles" name="suces.css"  />
+	<h:outputStylesheet library="styles" name="suces.css" />
 	<title><ui:insert name="pageTitle" /></title>
 </h:head>
 
 <h:body>
- 	<div class="page">
-        <div class="header">
-            <div class="title">
-                <h1>Suces</h1>
-            </div>
-            <div class="loginDisplay">
-            	<h:form>
-            		<h:link outcome="home" rendered="#{!sessionBean.loggedIn}">
-            			<h:outputText value="#{msg.login}" />
-            		</h:link>
-            		<h:outputText value="&nbsp;/&nbsp;" rendered="#{!sessionBean.loggedIn}" />
-            		<h:link outcome="register" rendered="#{!sessionBean.loggedIn}">
-            			<h:outputText value="#{msg.register}" />
-            		</h:link>            		
-            		<h:outputLabel rendered="#{sessionBean.loggedIn}">
-	            		<h:outputFormat value="#{msg.welcome}">
-	            			<f:param value="#{sessionBean.userName}" />
-	            		</h:outputFormat>
-	            		<h:outputText value=" " escape="false" />
-	            		<p:commandLink value="#{msg.logout}" ajax="false" action="#{sessionBean.logout}" />
-            		</h:outputLabel>
-            	</h:form>             
-            </div>       
-            <div class="clear hideSkiplink">
-				<!-- Here is the menu -->
-            </div>
-        </div>
-        <div class="nav-path">			
-            <!-- Here are breadcrumbs -->            
+	<div class="page">
+		<div class="header">
+			<div class="title">
+				<h1>Suces</h1>
+			</div>
+			<h:form>
+				<div class="loginDisplay">
+					<h:link outcome="home" rendered="#{!sessionBean.loggedIn}">
+						<h:outputText value="#{msg.login}" />
+					</h:link>
+					<h:outputText value="&nbsp;/&nbsp;"
+						rendered="#{!sessionBean.loggedIn}" />
+					<h:link outcome="register" rendered="#{!sessionBean.loggedIn}">
+						<h:outputText value="#{msg.register}" />
+					</h:link>
+					<h:outputLabel rendered="#{sessionBean.loggedIn}">
+						<h:outputFormat value="#{msg.welcome}">
+							<f:param value="#{sessionBean.userName}" />
+						</h:outputFormat>
+						<h:outputText value=" " escape="false" />
+						<p:commandLink value="#{msg.logout}" ajax="false"
+							action="#{sessionBean.logout}" />
+					</h:outputLabel>
+				</div>
+				<div class="clear hideSkiplink">
+					<p:menubar id="sucesNavMenu" model="#{navBean.sucesMenuModel}" />
+				</div>
+			</h:form>
 		</div>
-
-        <div class="main">
-    		<ui:insert name="pageBody" />        
-        </div>
-        <div class="clear"></div>
-    </div>
-    <div id="footer">
-        <span>&copy; 2012 Copyright <a href="http://www.fmi.uni-sofia.bg/" target="_blank">SU "St. Kliment Ohridski"</a> All rights reserved.</span>
-		<span><a href="#_self">Contact</a> | <a href="#_self">Site Map</a></span>
-    </div>	
+		<div class="nav-path">
+			<!-- Here are breadcrumbs -->
+			<h:form>
+				<p:breadCrumb id="sucesNavBreadcrumbs"
+					model="#{navBean.breadCrumbsModel}" />
+			</h:form>
+		</div>
+		<div class="main">
+			<ui:insert name="pageBody" />
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div id="footer">
+		<span>&copy; 2012 Copyright <a
+			href="http://www.fmi.uni-sofia.bg/" target="_blank">SU "St.
+				Kliment Ohridski"</a> All rights reserved.
+		</span> <span><a href="#_self">Contact</a> | <a href="#_self">Site
+				Map</a></span>
+	</div>
 </h:body>
 </html>

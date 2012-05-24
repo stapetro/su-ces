@@ -8,8 +8,13 @@ public class FacesContextUtil {
 
 	/**
 	 * Finds component with the given id
+	 * 
+	 * @param component
+	 *            Parent UI component to be specified.
+	 * @param id
+	 *            Child UI component client id to be specified.
 	 */
-	//TODO Make it use instance.
+	// TODO Make it use instance.
 	public static UIComponent findComponent(UIComponent component, String id) {
 		if (id.equals(component.getId())) {
 			return component;
