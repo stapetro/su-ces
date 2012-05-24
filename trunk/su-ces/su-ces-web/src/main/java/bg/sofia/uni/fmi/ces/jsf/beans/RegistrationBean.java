@@ -17,8 +17,6 @@ import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 
 import org.apache.catalina.realm.RealmBase;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
 import bg.sofia.uni.fmi.ces.constants.Messages;
 import bg.sofia.uni.fmi.ces.model.facade.user.RolePersistence;
@@ -30,7 +28,7 @@ import bg.sofia.uni.fmi.ces.utils.msg.MessageUtil;
 
 @ManagedBean(name = "registrationBean")
 @ViewScoped
-public class RegistrationBean implements Serializable {
+public class RegistrationBean extends SucesBean implements Serializable {
 
 	private static final long serialVersionUID = -1018989257462312837L;
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
@@ -38,7 +36,6 @@ public class RegistrationBean implements Serializable {
 	private static final String EMAIL_UNIQUE_ERROR_MSG = "reg_email_unique_error";
 	private static final String PASSWORD_MATCH_ERROR_MSG = "reg_password_match_error";
 
-	private transient Logger logger;
 	private RolePersistence rolePersistence;
 	private UserPersistence userPersistence;
 	private Pattern pattern;
@@ -223,12 +220,5 @@ public class RegistrationBean implements Serializable {
 			}
 		}
 		return passwordValue;
-	}
-
-	private Logger getLogger() {
-		if (logger == null) {
-			logger = LogManager.getLogger(this.getClass());
-		}
-		return logger;
 	}
 }
