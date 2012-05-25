@@ -71,6 +71,11 @@ public class CourseBean extends SucesBean implements Serializable {
 	private int selectedSemesterId;
 
 	/**
+	 * ID of the value for the selected lecturer
+	 */
+	private int selectedLecturerId;
+
+	/**
 	 * Reference to the course persistence object used to managed work with the
 	 * persistence entities and DB
 	 */
@@ -94,9 +99,6 @@ public class CourseBean extends SucesBean implements Serializable {
 		coursePersistence = new CoursePersistence();
 		lecturerPersistence = new LecturerPersistence();
 
-		// TODO getting course 1...when course searching is implemented this one
-		// should be finished
-		// Done - need to be tested and remove the comments
 		int courseId = getInitialCourseId();
 		course = coursePersistence.getCourseById(courseId);
 		if (course != null) {
@@ -109,6 +111,7 @@ public class CourseBean extends SucesBean implements Serializable {
 			}
 
 			selectedSemesterId = course.getSemester().getSemesterId();
+			selectedLecturerId = course.getLecturer().getLecturerId();
 		} else {
 			this.course = new Course();
 		}
@@ -123,6 +126,8 @@ public class CourseBean extends SucesBean implements Serializable {
 				.getEntityManager();
 		this.courseAssessmentPersistence
 				.setEntityManager(coursePersistenceEntityMgr);
+		this.lecturerPersistence.setEntityManager(coursePersistenceEntityMgr);
+		
 		String userName = SessionUtils.getLoggedUserName();
 		this.courseAssessment = courseAssessmentPersistence
 				.getCourseAssassment(userName, courseId);
@@ -163,7 +168,8 @@ public class CourseBean extends SucesBean implements Serializable {
 		Semester selectedSemester = getSemesterById(selectedSemesterId);
 		course.setSemester(selectedSemester);
 
-		// TODO getLecturerById....и това ще го допиша утре може би:)
+		Lecturer selectedLecturer = getlecturerById(selectedLecturerId);
+		course.setLecturer(selectedLecturer);
 
 		coursePersistence.beginTransaction();
 		coursePersistence.persist(course);
@@ -331,9 +337,6 @@ public class CourseBean extends SucesBean implements Serializable {
 		} catch (Exception ex) {
 			courseAssessmentPersistence.rollbackTransaction();
 			getLogger().error(ex);
-		} finally {
-			courseAssessmentPersistence.close();
-			coursePersistence.close();
 		}
 	}
 
@@ -400,6 +403,23 @@ public class CourseBean extends SucesBean implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Provide the Lecturer object that refers to the id of the selected one
+	 * 
+	 * @param id
+	 *            ID of the selected lecturer
+	 * @return the corresponding Lecturer object
+	 */
+	private Lecturer getlecturerById(int id) {
+		for (Lecturer lecturer : lecturerList) {
+			if (id == lecturer.getLecturerId()) {
+				return lecturer;
+			}
+		}
+
+		return null;
+	}
+
 	// ================ PROPERTY GETTERS AND SETTERS ===================
 
 	public List<Semester> getSemesterList() {
@@ -456,6 +476,14 @@ public class CourseBean extends SucesBean implements Serializable {
 
 	public void setSelectedSemesterId(int selectedSemesterId) {
 		this.selectedSemesterId = selectedSemesterId;
+	}
+
+	public int getSelectedLecturerId() {
+		return selectedLecturerId;
+	}
+
+	public void setSelectedLecturerId(int selectedLecturerId) {
+		this.selectedLecturerId = selectedLecturerId;
 	}
 
 	public Course getCourse() {
