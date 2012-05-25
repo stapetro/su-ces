@@ -86,6 +86,7 @@ public class CourseBean extends SucesBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		getLogger().debug("Postconstruct called");
 		selectedSpecialties = new LinkedList<String>();
 		selectedGrades = new LinkedList<String>();
 		coursePersistence = new CoursePersistence();
@@ -185,72 +186,125 @@ public class CourseBean extends SucesBean implements Serializable {
 		if (course != null && courseAssessment != null) {
 			boolean isRated = isCourseRated();
 			double newUserRating = getUserRating();
-			if (isRated == false && newUserRating == 0D) {
-				return;
-			}
-			double oldUserRating = courseAssessment.getCourseRating();
-			int ratingCounter = getRatingCounter();
-			double courseRating = getRating();
-			double newCourseRating = 0D;
-			if (courseRating == 0D) {
-				newCourseRating = (newUserRating - oldUserRating);
-				ratingCounter = 1;
-				isRated = true;
-			} else if (courseRating > 0D) {
-				List<CourseAssessment> courseAssessments = courseAssessmentPersistence
-						.getCourseAssessments(course.getCourseId());
-				if (courseAssessments == null || courseAssessments.isEmpty()) {
-					getLogger()
-							.fatal("Course with rating '"
-									+ courseRating
-									+ "' should have assessments related to it!");
-					return;
-				}
-				double sum = 0D;
-				ratingCounter = 0;
-				for (CourseAssessment currAssessment : courseAssessments) {
-					if (currAssessment.getCourseAssessmentId() == courseAssessment
-							.getCourseAssessmentId()) {
-						sum += newCourseRating;
-					} else {
-						sum += currAssessment.getCourseRating();
-					}
-					ratingCounter++;
-				}
+			boolean cancelRating = (newUserRating == 0D || newUserRating == Double.NaN);
+			if (cancelRating) {
 				if (isRated == false) {
-					sum += newCourseRating;
-					ratingCounter++;
-					isRated = true;
-				} else if (newUserRating == 0D) {
-					ratingCounter--;
-					isRated = false;
+					return;
+				} else {
+					cancelUserCourseRating();
 				}
-				newCourseRating = sum / (double) ratingCounter;
+			} else {
+				double courseRating = getRating();
+				if (courseRating == 0D) {
+					if (isRated == false) {
+						persistCourseRatingInfo(true, newUserRating,
+								newUserRating, 1);
+						getLogger().debug("Initial rating");
+					} else {
+						getLogger()
+								.fatal("When course rating is zero, there is no one rated for the course");
+						return;
+					}
+				} else if (courseRating > 0D) {
+					updateUserCourseRating(isRated, newUserRating);
+				}
 			}
-			course.setRating(newCourseRating);
-			if (course.getRating() != newCourseRating) {
-				// TODO Throw error message
-				getLogger()
-						.error("Invalid course rating value '"
-								+ newCourseRating + "'");
-				return;
-			}
-			course.setRatingCounter(ratingCounter);
-			if (course.getRatingCounter() != ratingCounter) {
-				// TODO Throw error message
-				getLogger().error(
-						"Invalid course rating users counter'" + ratingCounter
-								+ "'");
-				return;
-			}
-			courseAssessment.setCourseRated(isRated);
-			courseAssessment.setCourseRating(newUserRating);
-			courseAssessment.setCourse(course);
-			courseAssessmentPersistence.beginTransaction();
-			coursePersistence.persist(course);
-			courseAssessmentPersistence.persist(courseAssessment);
-			courseAssessmentPersistence.commitTransaction();
 		}
+	}
+
+	private void updateUserCourseRating(boolean isRated, double userCourseRating) {
+		List<CourseAssessment> courseAssessments = courseAssessmentPersistence
+				.getCourseAssessments(course.getCourseId());
+		if (courseAssessments == null || courseAssessments.isEmpty()) {
+			getLogger()
+					.fatal("Course with rating should have assessments related to it!");
+			return;
+		}
+		double sum = 0D;
+		int ratingCounter = 0;
+		for (CourseAssessment currAssessment : courseAssessments) {
+			if (isRated
+					&& currAssessment.getCourseAssessmentId() == courseAssessment
+							.getCourseAssessmentId()) {
+				getLogger().debug(
+						"Adding the updated rating '" + userCourseRating + "'");
+				sum += userCourseRating;
+			} else {
+				sum += currAssessment.getCourseRating();
+			}
+			ratingCounter++;
+		}
+		if (isRated == false) {
+			sum += userCourseRating;
+			ratingCounter++;
+			isRated = true;
+			getLogger().debug(
+					"This user rates for the first time '" + userCourseRating
+							+ "'");
+		}
+		double courseRating = sum / (double) ratingCounter;
+		persistCourseRatingInfo(isRated, userCourseRating, courseRating,
+				ratingCounter);
+	}
+
+	private void cancelUserCourseRating() {
+		double courseRating = getRating();
+		if (courseRating <= 0D) {
+			getLogger().fatal(
+					"Course rating should be > 0, but it is '" + courseRating
+							+ "'");
+			return;
+		}
+		List<CourseAssessment> courseAssessments = courseAssessmentPersistence
+				.getCourseAssessments(course.getCourseId());
+		if (courseAssessments == null || courseAssessments.isEmpty()) {
+			getLogger().fatal(
+					"Course with rating '" + courseRating
+							+ "' should have assessments related to it!");
+			return;
+		}
+		double sum = 0D;
+		int ratingCounter = 0;
+		for (CourseAssessment currAssessment : courseAssessments) {
+			if (currAssessment.getCourseAssessmentId() != courseAssessment
+					.getCourseAssessmentId()) {
+				sum += currAssessment.getCourseRating();
+				ratingCounter++;
+			}
+		}
+		double newCourseRating = (ratingCounter != 0) ? (sum / (double) ratingCounter)
+				: 0D;
+		getLogger().debug(
+				"Calculated new course rating '" + newCourseRating
+						+ "' from sum='" + sum + "', ratingCounter='"
+						+ (double) ratingCounter + "'");
+		persistCourseRatingInfo(false, 0D, newCourseRating, ratingCounter);
+	}
+
+	private void persistCourseRatingInfo(boolean isRated, double userRating,
+			double courseRating, int ratingCounter) {
+		course.setRating(courseRating);
+		if (course.getRating() != courseRating) {
+			// TODO Throw error message
+			getLogger().error(
+					"Invalid course rating value '" + courseRating + "'");
+			return;
+		}
+		course.setRatingCounter(ratingCounter);
+		if (course.getRatingCounter() != ratingCounter) {
+			// TODO Throw error message
+			getLogger().error(
+					"Invalid course rating users counter'" + ratingCounter
+							+ "'");
+			return;
+		}
+		courseAssessment.setCourseRated(isRated);
+		courseAssessment.setCourseRating(userRating);
+		courseAssessment.setCourse(course);
+		courseAssessmentPersistence.beginTransaction();
+		coursePersistence.persist(course);
+		courseAssessmentPersistence.persist(courseAssessment);
+		courseAssessmentPersistence.commitTransaction();
 	}
 
 	/**
