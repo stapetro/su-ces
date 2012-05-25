@@ -121,3 +121,5 @@ Krasi
 Staskata  
   * issue 8: done
   * NOTE: Recreate dev DB
+Krasi
+  * issue 18: user story implemented
