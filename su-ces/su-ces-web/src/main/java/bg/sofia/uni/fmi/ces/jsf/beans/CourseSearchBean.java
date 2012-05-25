@@ -22,35 +22,46 @@ public class CourseSearchBean extends SucesBean implements Serializable {
 	private static final long serialVersionUID = -8100419846989013656L;
 
 	private int selectedCourseId;
-	
+
 	private List<Course> coursesList;
-	
+
 	/**
 	 * Reference to the course persistence object used to managed work with the
 	 * persistence entities and DB
 	 */
 	private CoursePersistence coursePersistence;
-	
-	public CourseSearchBean(){
+
+	public CourseSearchBean() {
 		coursePersistence = new CoursePersistence();
-		
+
 		this.coursesList = coursePersistence.getAllCourses();
 	}
 
-	public void viewCourse(){
+	public void viewCourse() {
+		this.redirectToCoursePage(false);
+	}
+
+	public void createNewCourse() {
+		this.redirectToCoursePage(true);
+	}
+
+	private void redirectToCoursePage(boolean isNewCourse) {
 		FacesContext currContext = FacesContext.getCurrentInstance();
 		ExternalContext externalCxt = currContext.getExternalContext();
 
 		try {
-			externalCxt.redirect(String.format("course.xhtml?courseId=%d",
-					selectedCourseId));
+			String redirectUri = "course.xhtml";
+			if (isNewCourse == false) {
+				redirectUri += "?courseId=" + selectedCourseId;
+			}
+			externalCxt.redirect(redirectUri);
 		} catch (IOException e) {
 			getLogger().error(e);
 		}
 	}
-	
+
 	// ================ PROPERTY GETTERS AND SETTERS ===================
-	
+
 	public int getSelectedCourseId() {
 		return selectedCourseId;
 	}

@@ -76,7 +76,7 @@
 				<h:outputText value="#{msg.lecturer_name}" />
 				<h:outputText value="#{courseBean.course.lecturer.lecturerName}"
 					rendered="#{sessionBean.userAdmin == false}" />
-				<p:selectOneMenu value="#{courseBean.course.lecturer.lecturerId}"
+				<p:selectOneMenu value="#{courseBean.selectedLecturerId}"
 					rendered="#{sessionBean.userAdmin}">
 					<f:selectItems value="#{courseBean.lecturerList}" var="lecturer"
 						itemValue="#{lecturer.lecturerId}"

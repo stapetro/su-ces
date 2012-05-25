@@ -16,18 +16,21 @@
 			<h:panelGrid columns="2">
 
 				<h:outputText value="#{msg.coursesList}" />
-				<p:selectOneListbox value="#{courseSearchBean.selectedCourseId}"> 
+				<p:selectOneListbox value="#{courseSearchBean.selectedCourseId}" style="width: 400px;">
 					<f:selectItems value="#{courseSearchBean.coursesList}" var="course"
-						itemValue="#{course.courseId}"
-						itemLabel="#{course.courseName}">
+						itemValue="#{course.courseId}" itemLabel="#{course.courseName}">
 					</f:selectItems>
 				</p:selectOneListbox>
 
 			</h:panelGrid>
-			
+
 			<p:commandButton value="#{msg.coursePreview}"
 				action="#{courseSearchBean.viewCourse}" />
-				
+
+			<p:commandButton value="#{msg.createNewCourse}"
+				action="#{courseSearchBean.createNewCourse}"
+				rendered="#{sessionBean.userAdmin}" />
+
 		</h:form>
 	</ui:define>
 
