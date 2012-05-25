@@ -124,7 +124,9 @@
 					disabled="true" />
 					
 				<h:outputText value="#{msg.course_rating}" />
-				<h:outputText value="#{courseBean.rating}" />							
+				<h:outputText value="#{courseBean.rating}" >
+					<f:convertNumber maxFractionDigits="2" />
+				</h:outputText>							
 
 				<h:outputText value="#{msg.course_ratingCounter}" />
 				<h:outputText value="#{courseBean.ratingCounter}" />
