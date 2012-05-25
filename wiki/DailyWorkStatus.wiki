@@ -123,3 +123,4 @@ Staskata
   * NOTE: Recreate dev DB
 Krasi
   * issue 18: user story implemented
+  * update DML with two additional lecturer names
