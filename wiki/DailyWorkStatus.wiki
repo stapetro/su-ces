@@ -114,6 +114,9 @@ Staskata
   * issue 30: Navigation implemented
   * issue 8: Course rating start reimplementing - particular user can change or cancel their course rating
 
+Krasi
+  * issue 18: fix problems with lecturer information
+
 = 25 May 2012 =
 Staskata  
   * issue 8: done
