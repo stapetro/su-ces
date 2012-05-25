@@ -109,3 +109,12 @@ Staskata
   * NOTE: Cannot commit DB model because Google Code reject it. Try to commit it later.
   * Rating functionality implemented in course profile page (course.xhtml)
   
+= 24 May 2012 =
+Staskata
+  * issue 30: Navigation implemented
+  * issue 8: Course rating start reimplementing - particular user can change or cancel their course rating
+
+= 25 May 2012 =
+Staskata  
+  * issue 8: done
+  * NOTE: Recreate dev DB
