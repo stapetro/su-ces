@@ -82,11 +82,13 @@ public class CourseBean extends SucesBean implements Serializable {
 
 	private CourseAssessment courseAssessment;
 
+	/**
+	 * Stores course rating value for the current user.
+	 */
 	private double courseUserRating;
 
 	@PostConstruct
 	public void init() {
-		getLogger().debug("Postconstruct called");
 		selectedSpecialties = new LinkedList<String>();
 		selectedGrades = new LinkedList<String>();
 		coursePersistence = new CoursePersistence();
@@ -171,7 +173,6 @@ public class CourseBean extends SucesBean implements Serializable {
 	public void assessCourse() {
 		FacesContext currContext = FacesContext.getCurrentInstance();
 		ExternalContext externalCxt = currContext.getExternalContext();
-
 		saveCourseRating();
 		int courseId = course.getCourseId();
 		try {
@@ -199,7 +200,6 @@ public class CourseBean extends SucesBean implements Serializable {
 					if (isRated == false) {
 						persistCourseRatingInfo(true, newUserRating,
 								newUserRating, 1);
-						getLogger().debug("Initial rating");
 					} else {
 						getLogger()
 								.fatal("When course rating is zero, there is no one rated for the course");
@@ -207,11 +207,25 @@ public class CourseBean extends SucesBean implements Serializable {
 					}
 				} else if (courseRating > 0D) {
 					updateUserCourseRating(isRated, newUserRating);
+				} else {
+					getLogger().fatal(
+							"Course rating invalid value '" + courseRating
+									+ "'");
+					return;
 				}
 			}
 		}
 	}
 
+	/**
+	 * Updates course rating info for the current user. Assumes that user had
+	 * given valid course rating value.
+	 * 
+	 * @param isRated
+	 *            Specify value if user has rated a particular course.
+	 * @param userCourseRating
+	 *            Course rating value which current user had given.
+	 */
 	private void updateUserCourseRating(boolean isRated, double userCourseRating) {
 		List<CourseAssessment> courseAssessments = courseAssessmentPersistence
 				.getCourseAssessments(course.getCourseId());
@@ -226,27 +240,26 @@ public class CourseBean extends SucesBean implements Serializable {
 			if (isRated
 					&& currAssessment.getCourseAssessmentId() == courseAssessment
 							.getCourseAssessmentId()) {
-				getLogger().debug(
-						"Adding the updated rating '" + userCourseRating + "'");
 				sum += userCourseRating;
-			} else {
+				ratingCounter++;
+			} else if (currAssessment.isCourseRated()) {
 				sum += currAssessment.getCourseRating();
+				ratingCounter++;
 			}
-			ratingCounter++;
 		}
 		if (isRated == false) {
 			sum += userCourseRating;
 			ratingCounter++;
 			isRated = true;
-			getLogger().debug(
-					"This user rates for the first time '" + userCourseRating
-							+ "'");
 		}
 		double courseRating = sum / (double) ratingCounter;
 		persistCourseRatingInfo(isRated, userCourseRating, courseRating,
 				ratingCounter);
 	}
 
+	/**
+	 * Current user cancels/removes their rating.
+	 */
 	private void cancelUserCourseRating() {
 		double courseRating = getRating();
 		if (courseRating <= 0D) {
@@ -266,21 +279,30 @@ public class CourseBean extends SucesBean implements Serializable {
 		double sum = 0D;
 		int ratingCounter = 0;
 		for (CourseAssessment currAssessment : courseAssessments) {
-			if (currAssessment.getCourseAssessmentId() != courseAssessment
-					.getCourseAssessmentId()) {
+			if (currAssessment.isCourseRated()
+					&& currAssessment.getCourseAssessmentId() != courseAssessment
+							.getCourseAssessmentId()) {
 				sum += currAssessment.getCourseRating();
 				ratingCounter++;
 			}
 		}
 		double newCourseRating = (ratingCounter != 0) ? (sum / (double) ratingCounter)
 				: 0D;
-		getLogger().debug(
-				"Calculated new course rating '" + newCourseRating
-						+ "' from sum='" + sum + "', ratingCounter='"
-						+ (double) ratingCounter + "'");
 		persistCourseRatingInfo(false, 0D, newCourseRating, ratingCounter);
 	}
 
+	/**
+	 * Saves course rating info.
+	 * 
+	 * @param isRated
+	 *            Specify value if user has rated a particular course.
+	 * @param userRating
+	 *            Course rating value which current user had given.
+	 * @param courseRating
+	 *            Overall/Summarized course rating value.
+	 * @param ratingCounter
+	 *            How many people rated the current course.
+	 */
 	private void persistCourseRatingInfo(boolean isRated, double userRating,
 			double courseRating, int ratingCounter) {
 		course.setRating(courseRating);
