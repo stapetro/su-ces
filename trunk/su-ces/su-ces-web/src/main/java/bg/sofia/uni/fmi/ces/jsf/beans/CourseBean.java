@@ -320,13 +320,21 @@ public class CourseBean extends SucesBean implements Serializable {
 							+ "'");
 			return;
 		}
-		courseAssessment.setCourseRated(isRated);
-		courseAssessment.setCourseRating(userRating);
-		courseAssessment.setCourse(course);
-		courseAssessmentPersistence.beginTransaction();
-		coursePersistence.persist(course);
-		courseAssessmentPersistence.persist(courseAssessment);
-		courseAssessmentPersistence.commitTransaction();
+		try {
+			courseAssessment.setCourseRated(isRated);
+			courseAssessment.setCourseRating(userRating);
+			courseAssessment.setCourse(course);
+			courseAssessmentPersistence.beginTransaction();
+			coursePersistence.persist(course);
+			courseAssessmentPersistence.persist(courseAssessment);
+			courseAssessmentPersistence.commitTransaction();
+		} catch (Exception ex) {
+			courseAssessmentPersistence.rollbackTransaction();
+			getLogger().error(ex);
+		} finally {
+			courseAssessmentPersistence.close();
+			coursePersistence.close();
+		}
 	}
 
 	/**
