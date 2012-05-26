@@ -86,10 +86,10 @@ CREATE  TABLE IF NOT EXISTS `suces`.`users_roles` (
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_urole_users` ON `suces`.`users_roles` (`user_email` ASC) ;
+CREATE INDEX `i_urole_users` ON `suces`.`users_roles` (`user_email` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_urole_roles` ON `suces`.`users_roles` (`role_name` ASC) ;
+CREATE INDEX `i_urole_roles` ON `suces`.`users_roles` (`role_name` ASC) ;
 
 SHOW WARNINGS;
 
@@ -155,10 +155,10 @@ CREATE  TABLE IF NOT EXISTS `suces`.`courses` (
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_courses_semester1` ON `suces`.`courses` (`semester_semester_id` ASC) ;
+CREATE INDEX `i_courses_semester1` ON `suces`.`courses` (`semester_semester_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_courses_lecturer1` ON `suces`.`courses` (`lecturer_lecturer_id` ASC) ;
+CREATE INDEX `i_courses_lecturer1` ON `suces`.`courses` (`lecturer_lecturer_id` ASC) ;
 
 SHOW WARNINGS;
 CREATE UNIQUE INDEX `course_name_UNIQUE` ON `suces`.`courses` (`course_name` ASC) ;
@@ -198,10 +198,10 @@ CREATE  TABLE IF NOT EXISTS `suces`.`course_assessment` (
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_course_assessment_courses1` ON `suces`.`course_assessment` (`courses_course_id` ASC) ;
+CREATE INDEX `i_course_assessment_courses1` ON `suces`.`course_assessment` (`courses_course_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_course_assessment_users1` ON `suces`.`course_assessment` (`users_user_email` ASC) ;
+CREATE INDEX `i_course_assessment_users1` ON `suces`.`course_assessment` (`users_user_email` ASC) ;
 
 SHOW WARNINGS;
 
@@ -240,10 +240,10 @@ CREATE  TABLE IF NOT EXISTS `suces`.`courses_specialty` (
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_courses_has_specialty_specialty1` ON `suces`.`courses_specialty` (`specialty_specialty_id` ASC) ;
+CREATE INDEX `i_courses_has_specialty_specialty1` ON `suces`.`courses_specialty` (`specialty_specialty_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_courses_has_specialty_courses1` ON `suces`.`courses_specialty` (`courses_course_id` ASC) ;
+CREATE INDEX `i_courses_has_specialty_courses1` ON `suces`.`courses_specialty` (`courses_course_id` ASC) ;
 
 SHOW WARNINGS;
 
@@ -282,10 +282,10 @@ CREATE  TABLE IF NOT EXISTS `suces`.`courses_grade` (
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_courses_has_grade_grade1` ON `suces`.`courses_grade` (`grade_grade_id` ASC) ;
+CREATE INDEX `i_courses_has_grade_grade1` ON `suces`.`courses_grade` (`grade_grade_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_courses_has_grade_courses1` ON `suces`.`courses_grade` (`courses_course_id` ASC) ;
+CREATE INDEX `i_courses_has_grade_courses1` ON `suces`.`courses_grade` (`courses_course_id` ASC) ;
 
 SHOW WARNINGS;
 
