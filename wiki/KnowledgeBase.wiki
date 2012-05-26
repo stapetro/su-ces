@@ -22,4 +22,4 @@ The wiki's goal is to provide reference to useful resources.
  
 == MySQL ==
  * [http://starikovs.com/2011/02/20/change-font-mysql-workbench-editor/ Change font in MySql Workbench Editor]
- * [1051 Unknown table '<table_name>' http://gramsmith.hubpages.com/hub/Fixing-Unknown-Table-Error-post-MySQL-database-corruption] - [http://dev.mysql.com/doc/refman/4.1/en/forcing-innodb-recovery.html Forcing InnoDB Recovery]
+ * [http://gramsmith.hubpages.com/hub/Fixing-Unknown-Table-Error-post-MySQL-database-corruption 1051 Unknown table `<table_name>`] - [http://dev.mysql.com/doc/refman/4.1/en/forcing-innodb-recovery.html Forcing InnoDB Recovery]
