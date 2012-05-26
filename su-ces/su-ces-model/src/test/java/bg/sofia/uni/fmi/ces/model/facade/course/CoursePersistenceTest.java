@@ -91,6 +91,22 @@ public class CoursePersistenceTest {
 		Assert.assertNull(actualCourse);
 	}
 
+	public void testGetAllCourses() {
+		// TODO To be implemented
+	}
+
+	public void testGetSemesters() {
+		// TODO To be implemented
+	}
+
+	public void testGetSpecialties() {
+		// TODO To be implemented
+	}
+
+	public void testGetGrades() {
+		// TODO To be implemented
+	}
+
 	private Course getCourse() {
 		Course course = new Course();
 		course.setCourseId(1);
