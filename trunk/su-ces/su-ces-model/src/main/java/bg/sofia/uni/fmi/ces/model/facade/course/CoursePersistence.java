@@ -25,15 +25,15 @@ public class CoursePersistence extends ModelFacade implements Serializable {
 	public static final String SELECT_COURSE_BY_COURSE_ID = "SELECT c "
 			+ "FROM Course c " + "WHERE c.courseId = :courseId";
 
-	private static final String SELECT_SEMESTERS = "SELECT s "
+	public static final String SELECT_SEMESTERS = "SELECT s "
 			+ "FROM Semester s ";
 
-	private static final String SELECT_SPECIALTIES = "SELECT s "
+	public static final String SELECT_SPECIALTIES = "SELECT s "
 			+ "FROM Specialty s";
 
-	private static final String SELECT_GRADES = "SELECT g " + "FROM Grade g";
+	public static final String SELECT_GRADES = "SELECT g " + "FROM Grade g";
 
-	private static final String SELECT_ALL_COURSES = "SELECT c "
+	public static final String SELECT_ALL_COURSES = "SELECT c "
 			+ "FROM Course c ";
 
 	public CoursePersistence() {

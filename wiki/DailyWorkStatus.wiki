@@ -125,7 +125,11 @@ Krasi
   * issue 18: user story implemented
   * update DML with two additional lecturer names
  
-= 25 May 2012 =
+= 26 May 2012 =
 Staskata  
   * Implementing unit test for CourseAssessmentPersistence
   * Index and constrants duplicate names are fixed in _suces_ DB
+  
+= 27 May 2012 =
+Staskata  
+  * Implementing unit tests for CoursePersistence
