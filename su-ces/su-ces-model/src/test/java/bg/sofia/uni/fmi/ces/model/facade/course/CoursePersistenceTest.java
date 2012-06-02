@@ -53,7 +53,7 @@ public class CoursePersistenceTest {
 	}
 
 	@After
-	public void setDown() {
+	public void tearDown() {
 		coursePersistence = null;
 		mockedQuery = null;
 		mockedEntityMgr = null;
