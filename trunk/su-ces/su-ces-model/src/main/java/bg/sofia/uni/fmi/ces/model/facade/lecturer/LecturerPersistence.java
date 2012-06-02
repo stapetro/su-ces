@@ -16,21 +16,20 @@ public class LecturerPersistence extends ModelFacade implements Serializable {
 	 */
 	private static final long serialVersionUID = 6089915796603828443L;
 
-	private static final String SELECT_ALL_LECTURERS = "SELECT l "
-			+ "FROM Lecturer l";
-	
-	public LecturerPersistence(){
+	public static final String SELECT_ALL_LECTURERS = "SELECT l FROM Lecturer l";
+
+	public LecturerPersistence() {
 		super();
 	}
-	
-	public LecturerPersistence(EntityManagerFactory entityManagerFactory){
+
+	public LecturerPersistence(EntityManagerFactory entityManagerFactory) {
 		super(entityManagerFactory);
 	}
-	
-	public List<Lecturer> getAllLecturers(){
+
+	public List<Lecturer> getAllLecturers() {
 		Query query = entityManager.createQuery(SELECT_ALL_LECTURERS);
 		List<Lecturer> lecturersList = (List<Lecturer>) query.getResultList();
-	
+
 		return lecturersList;
 	}
 
