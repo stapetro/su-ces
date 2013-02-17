@@ -46,11 +46,11 @@ _mysqladmin -u `<user>` -p shutdown_ - stops mysql server, where _<user>_ is a p
 
 _mysql -u root -p --force < `<sqlscript>`_ - executes SQL script, where _<sqlscript>_ is SQL scripts file
 
-_mysqldump --routines --databases `<db_name>`_ - dumps MySQL DB to file, where _<db_name>_ is DB instance name
+_mysqldump --routines --databases `<db_name>` --result-file=`<filePath>`_ - dumps MySQL DB to file, where _<db_name>_ is DB instance name, _<filePath>_ is absolute path to a file.
 
-_mysqldump --skip-triggers --compact --no-create-info --databases `<db_name>`_ - dumps only data (DML)
+_mysqldump --skip-triggers --compact --no-create-info --databases `<db_name>` --result-file=`<filePath>`_ - dumps only data (DML)
 
-_mysqldump --routines --no-data --databases `<db_name>`_ - dumps only DDL
+_mysqldump --routines --no-data --databases `<db_name>` --result-file=`<filePath>`_ - dumps only DDL
 
 = References =
 
