@@ -1,0 +1,1 @@
+Every student can assess course/lecturer through the system. SU CES provides detailed and structured information about courses, lecturers and assessments, given from other students. The project is for EDUCATION purposes only.
